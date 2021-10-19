@@ -19,5 +19,8 @@ const server = app.listen(port, (error) => {
 });
 
 process.on('uncaughtException', (error, promise) => {
-    
+    if(error) {
+        server.close();
+        return process.exit(1);
+    }
 });
