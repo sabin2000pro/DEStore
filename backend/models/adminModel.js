@@ -16,7 +16,8 @@ const adminSchema = new mongoose.Schema({
     },
 
     password: {
-        type: String
+        type: String,
+        required: [true, 'You must specify the Admin Password']
     },
 
     passwordResetToken: String, // The password reset token for the admin.
