@@ -22,13 +22,40 @@ module.exports.register = async (request, response, next) => { // Register a new
     catch(error) {
 
         if(error) {
-
+            return response.status(500).json({message: error.toString()});
         }
 
     }
 };
 
 module.exports.login = async (request, response, next) => { // Function to login an Admin
+    try {
+        const {email, password} = request.body;
+
+        if(!email || !password) {
+            return response.status(404).json({message: "Please provide your e-mail and password before logging in"});
+        }
+
+        const admin = await Admin.findOne({email}).select('+password');
+
+        if(!admin) {
+            return response.status(404).json({message: 'No admin found with that e-mail address'});
+        }
+
+        const isPasswordMatch = await admin.comparePasswords(password);
+
+        if(!isPasswordMatch) {
+            return response.status(404).json({message: "Passwords do not match. Check your entries"});
+        }
+
+        return sendToken(admin, ok, response);
+    } 
+    
+    catch(error) {
+        if(error) {
+            return response.status(500).json({message: error.toString()});
+        }
+    }
 
 };
 
