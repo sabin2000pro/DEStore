@@ -5,26 +5,22 @@ const badRequest = 400;
 const notFound = 404;
 const serverError = 500;
 
-module.exports.checkBody = (request, response, next) => {
+module.exports.verifyBody = (request, response, next) => {
     const {} = request.body;
 
     return next();
 };
 
-module.exports.verifyQuantity = (request, response, next) => {
+module.exports.verifyQuantity = (request, response, next) => { // Verifies the product quantity before sending e-mail if stock is low.
 
     return next();
 }
 
 module.exports.getAllProducts = async (request, response, next) => { // Returns all of the products
     try {
-        let productsRetrieved = false;
         const products = await Product.find();
-        productsRetrieved = true;
-
-        if(productsRetrieved) {
-
-        }
+        const length = products.length;
+        console.log(length);
 
         return response.status(ok).json(products);
     } 

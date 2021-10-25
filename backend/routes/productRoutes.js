@@ -2,7 +2,7 @@ const express = require('express');
 const productRoutes = express.Router();
 const productController = require('../controllers/productsController');
 
-productRoutes.param('/', productController.checkBody);
+productRoutes.param('/', productController.verifyBody);
 productRoutes.param('/', productController.verifyQuantity);
 
 productRoutes.route('/').get(productController.getAllProducts).post(productController.createProduct)
