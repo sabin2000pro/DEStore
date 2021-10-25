@@ -32,5 +32,9 @@ adminSchema.pre('save', async function(next) { // Hash Admin Password before sav
     this.password = await bcrypt.hash(this.password, salt); // hash the password
 });
 
+adminSchema.methods.getSignedToken = function() { // Sign a JSON web token for the admin
+
+}
+
 const Admin = mongoose.model('Admin', adminSchema);
 module.exports = Admin; // Export the Admin Model
