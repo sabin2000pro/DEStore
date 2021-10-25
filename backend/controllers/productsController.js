@@ -38,9 +38,11 @@ module.exports.verifyQuantity = async (request, response, next) => { // Verifies
     } 
     
     catch(error) {
+
         if(error) {
             return response.status(404).json("An error processing the quantity")
         }
+        
     }
 
     return next();
@@ -61,7 +63,7 @@ module.exports.validateQuantity = async (request, response, next) => { // Middle
         if(error) {
             return response.status(404).json("An error validting the quantity")
         }
-        
+
     }
 
     return next();

@@ -56,7 +56,7 @@ module.exports.login = async (request, response, next) => { // Function to login
         if(error) {
             return response.status(500).json({message: error.toString()});
         }
-        
+
     }
 
 };
@@ -97,7 +97,7 @@ module.exports.resetPassword = async (request, response, next) => {
 
 }
 
-const sendToken = (admin, statusCode, response) => {
-    const token = admin.getSignedToken();
+const sendToken = (admin, statusCode, response) => { // Sends back the JSON Web Token
+    const token = admin.getSignedToken(); // Get the signed token from the admin model
     return response.status(statusCode).json({success: true, token});
 }
