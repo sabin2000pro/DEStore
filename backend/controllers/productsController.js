@@ -128,15 +128,15 @@ module.exports.deleteProduct = async (request, response, next) => {
         const id = request.params.id;
         const product = await Product.findByIdAndRemove(id).exec();
         let {quantity} = product;
-        quantity = 0;
+        quantity -= 1;
 
-        return response.send(`Product Deleted - Quantity of this product is now ${quantity}`);
+        return response.status(204).send(`Product Deleted - Quantity of this product is now ${quantity}`);
     } 
     
     catch(error) {
 
         if(error) {
-            return response.status(serverError).json({message: 'Request Failed', error});
+            return response.status(serverError).json({message: 'Request Failed', error: error.toString()});
         }
 
     }
