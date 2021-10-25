@@ -42,7 +42,7 @@ module.exports.verifyQuantity = async (request, response, next) => { // Verifies
         if(error) {
             return response.status(404).json("An error processing the quantity")
         }
-        
+
     }
 
     return next();
@@ -96,8 +96,6 @@ module.exports.getProduct = async (request, response, next) => {
         if(error) {
             return response.status(serverError).json({message: 'Request Failed', error});
         }
-
-
     }
 };
 
