@@ -15,14 +15,14 @@ module.exports.verifyBody = (request, response, next) => {
     return next();
 };
 
-module.exports.verifyQuantity = (request, response, next) => { // Verifies the product quantity before sending e-mail if stock is low.
+module.exports.verifyQuantity = (request, response, next) => { // Verifies the product quantity before sending e-mail if stock is low. Middleware function before creating and retrieving a new product
     const {quantity} = request.body; // The quantity
 
     if(quantity <= 3) {
+        // Send E-mail
         return response.status(200).json("Low Stock - E-mail will be sent");
     }
 
-    
     return next();
 }
 
