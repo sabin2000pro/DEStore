@@ -5,16 +5,36 @@ const badRequest = 400;
 const notFound = 404;
 const serverError = 500;
 
+module.exports.checkBody = (request, response, next) => {
+    const {} = request.body;
+
+    return next();
+};
+
+module.exports.verifyQuantity = (request, response, next) => {
+
+    return next();
+}
+
 module.exports.getAllProducts = async (request, response, next) => { // Returns all of the products
     try {
+        let productsRetrieved = false;
         const products = await Product.find();
+        productsRetrieved = true;
+
+        if(productsRetrieved) {
+
+        }
+
         return response.status(ok).json(products);
     } 
     
     catch(error) {
+
         if(error) {
             return response.status(serverError).json({message: 'Request Failed', error});
         }
+
     }
 };
 
@@ -26,9 +46,11 @@ module.exports.getProduct = async (request, response, next) => {
     }
     
     catch(error) {
+        
         if(error) {
             return response.status(serverError).json({message: 'Request Failed', error});
         }
+
     }
 };
 
