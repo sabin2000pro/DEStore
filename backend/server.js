@@ -14,7 +14,7 @@ app.use(morgan('dev'));
 connectDB();
 
 app.use('/api/v1/products', productRoutes);
-app.use('/api/v1/auth/register', authRoutes);
+app.use('/api/v1/auth', authRoutes);
 
 const server = app.listen(port, (error) => { // Creates the Server
     if(!error) {

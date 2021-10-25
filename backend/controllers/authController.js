@@ -5,7 +5,7 @@ const deleted = 204;
 const badRequest = 400;
 const serverError = 500;
 
-module.exports.register = async (request, response, next) => {
+module.exports.register = async (request, response, next) => { // Register a new Admin
     try {
         const {username, email, password} = request.body;
 
@@ -17,8 +17,6 @@ module.exports.register = async (request, response, next) => {
         await newAdmin.save();
 
         return sendToken(newAdmin, created, response);
-
-
     } 
     
     catch(error) {
@@ -30,7 +28,7 @@ module.exports.register = async (request, response, next) => {
     }
 };
 
-module.exports.login = async (request, response, next) => {
+module.exports.login = async (request, response, next) => { // Function to login an Admin
 
 };
 
