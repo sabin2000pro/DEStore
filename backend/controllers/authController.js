@@ -101,18 +101,34 @@ module.exports.forgotPassword = async (request, response, next) => { // Forgot P
 }
 
 module.exports.resetPassword = async (request, response, next) => {
+    try {
 
+    } 
+    
+    catch(error) {
+
+    }
 }
 
 module.exports.editAdmin = async (request, response, next) => {
+    try {
 
+    } catch(error) {
+
+    }
 }
 
-module.exports.getSingleAdmin = async (request, response, next) => {
+module.exports.getSingleAdmin = async (request, response, next) => { // Middleware function to get a single admin
+    try {
+        const id = request.params.id;
+    } 
+    
+    catch(error) {
 
+    }
 }
 
-module.exports.deleteAdmin = async (request, response, next) => {
+module.exports.deleteAdmin = async (request, response, next) => { // Middleware function to delete a single admin
 
 }
 
