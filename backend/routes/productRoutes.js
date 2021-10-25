@@ -1,5 +1,6 @@
 const express = require('express');
 const productRoutes = express.Router();
+const ip = require('ip');
 const productController = require('../controllers/productsController');
 
 const rateLimit = require('express-rate-limit');
