@@ -7,6 +7,11 @@ const productSchema = new mongoose.Schema({
         unique: true
     },
 
+    image: {
+        type: String,
+        required: [true, 'You must provide an Image URL for the product']
+    },
+
     description: {
         type: String,
         required: [true, 'You must specify a description for the product'],
