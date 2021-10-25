@@ -5,9 +5,13 @@ const deleted = 204;
 const badRequest = 400;
 const serverError = 500;
 
+// Author: Sabin Constantin Lungu
+// Code Written: 25/10/2021
+
+
 module.exports.register = async (request, response, next) => { // Register a new Admin
     try {
-        const {username, email, password} = request.body;
+        const {username, email, password} = request.body; //
 
         if(!username || !email || !password) {
             return response.status(404).json({message: 'Please make sure you provide the correct details before registering'});
@@ -87,9 +91,11 @@ module.exports.forgotPassword = async (request, response, next) => { // Forgot P
     } 
     
     catch(error) {
-        if(error) {
 
+        if(error) {
+        
         }
+
     }
 }
 
