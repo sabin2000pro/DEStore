@@ -1,3 +1,8 @@
+// Code Author: Sabin Constantin Lungu
+// Code Written on: 25/10/2021
+// Last Modified Date: 25/10/2021 @ 21:54
+// Bugs? N/A
+
 const express = require('express');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
