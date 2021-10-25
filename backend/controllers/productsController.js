@@ -48,7 +48,7 @@ module.exports.validateQuantity = async (request, response, next) => { // Middle
         if(quantity >= 5) {
             return response.status(badRequest).json("You cannot create more than 5 products at once");
         }
-        
+
     } 
     
     catch(error) {
@@ -107,29 +107,37 @@ module.exports.createProduct = async (request, response, next) => {
     }
 };
 
-module.exports.editProduct = async (request, response, next) => {
+module.exports.editProduct = async (request, response, next) => { // Modifies a Product such as the price, description, URL
     try {
         const id = request.params.id;
-        const updatedProduct = await Product.findByIdAndUpdate
+        const updatedProduct = await Product.findByIdAndUpdate(id, request.body);
     } 
     
     catch(error) {
+
         if(error) {
             return response.status(serverError).json({message: 'Request Failed', error});
         }
+
+
     }
 };
 
 module.exports.deleteProduct = async (request, response, next) => {
     try {
         const id = request.params.id;
-        await Product.findByIdAndRemove(id).exec();
-        return response.send("Product Deleted");
+        const product = await Product.findByIdAndRemove(id).exec();
+        let {quantity} = product;
+        quantity = 0;
+
+        return response.send(`Product Deleted - Quantity of this product is now ${quantity}`);
     } 
     
     catch(error) {
+
         if(error) {
             return response.status(serverError).json({message: 'Request Failed', error});
         }
+
     }
 };
