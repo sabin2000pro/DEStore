@@ -1,7 +1,7 @@
 const Admin = require('../models/adminModel');
 const jwt = require('jsonwebtoken');
 
-module.exports.protectProducts = async (request, response, next) => {
+module.exports.protectProducts = async (request, response, next) => { // Middleware function to only grant registered admins the right to create, update and delete products
     let token;
     const headers = request.headers.authorization; // Get the auth headers;
 
@@ -13,5 +13,5 @@ module.exports.protectProducts = async (request, response, next) => {
 
     }
 
-    
+
 };
