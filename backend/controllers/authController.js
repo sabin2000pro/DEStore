@@ -52,6 +52,7 @@ module.exports.login = async (request, response, next) => { // Function to login
     } 
     
     catch(error) {
+
         if(error) {
             return response.status(500).json({message: error.toString()});
         }
@@ -69,14 +70,20 @@ module.exports.forgotPassword = async (request, response, next) => {
         }
 
         // Get the reset token
-        const resetToken = admin.getResetPasswordToken();
+        const resetToken = admin.getResetPasswordToken(); // Extract the password reset token
         await admin.save();
 
-        const resetPasswordURL = ``
+        const resetURL = `http://localhost:3000/passwordreset/${resetToken}`; // The Reset Password URL LINK
+
+        const resetMessage = `<h1> You have requested a new password reset</h1>
+            <p> Please go to this link to reset your password </p>
+            <a href = ${resetPasswordURL} clicktracking = off>${resetURL}</a>`
     } 
     
     catch(error) {
-
+        if(error) {
+            
+        }
     }
 }
 
