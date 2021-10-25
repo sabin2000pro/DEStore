@@ -111,6 +111,9 @@ module.exports.editProduct = async (request, response, next) => { // Modifies a 
     try {
         const id = request.params.id;
         const updatedProduct = await Product.findByIdAndUpdate(id, request.body);
+
+        // Send back response
+        return response.status(ok).json(updatedProduct);
     } 
     
     catch(error) {
@@ -118,7 +121,6 @@ module.exports.editProduct = async (request, response, next) => { // Modifies a 
         if(error) {
             return response.status(serverError).json({message: 'Request Failed', error});
         }
-
 
     }
 };

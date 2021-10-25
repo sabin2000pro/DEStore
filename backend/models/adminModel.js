@@ -33,7 +33,7 @@ adminSchema.pre('save', async function(next) { // Hash Admin Password before sav
 });
 
 adminSchema.methods.getSignedToken = function() { // Sign a JSON web token for the admin
-
+    return jwt.sign({id: this._id}, process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXPIRES_IN});
 }
 
 const Admin = mongoose.model('Admin', adminSchema);
