@@ -6,7 +6,7 @@ const notFound = 404;
 const serverError = 500;
 
 module.exports.verifyBody = (request, response, next) => {
-    const {name, image, description, price, saleOffer} = request.body;
+    const {name, image, description, price, quantity, saleOffer} = request.body;
 
     if(!name || !image || !description || !price || !saleOffer) {
         return response.status(notFound).json("Please check your product creation entries again");
@@ -62,7 +62,17 @@ module.exports.getProduct = async (request, response, next) => {
 
 module.exports.createProduct = async (request, response, next) => {
     try {
+        const {name, image, description, price, quantity, saleOffer} = request.body;
+        const newProduct = new Product({name, image, description, price, quantity, saleOffer});
+        await newProduct.save(doc => {
+            return console.log(doc);
+        }).catch(err => {
+            
+            if(err) {
+                return console.log(err);
+            }
 
+        })
     } 
     
     catch(error) {
