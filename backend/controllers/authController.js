@@ -12,16 +12,16 @@ const serverError = 500;
 
 module.exports.register = async (request, response, next) => { // Register a new Admin
     try {
-        const {username, email, password} = request.body; //
+        const {username, email, password} = request.body; // Extract Username, Email and Password From the body
 
-        if(!username || !email || !password) {
+        if(!username || !email || !password) { // If there is no username, email or password provided
             return response.status(404).json({message: 'Please make sure you provide the correct details before registering'});
         }
 
-        const newAdmin = new Admin({username, email, password});
-        await newAdmin.save();
+        const newAdmin = new Admin({username, email, password}); // Create a new admin
+        await newAdmin.save(); // Save it to the database
 
-        return sendToken(newAdmin, created, response);
+        return sendToken(newAdmin, created, response); // Generate and send JWT
     } 
     
     catch(error) {
@@ -113,7 +113,7 @@ module.exports.getSingleAdmin = async (request, response, next) => {
 }
 
 module.exports.deleteAdmin = async (request, response, next) => {
-    
+
 }
 
 const sendToken = (admin, statusCode, response) => { // Sends back the JSON Web Token
