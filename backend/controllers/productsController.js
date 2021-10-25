@@ -1,6 +1,7 @@
 const Product = require('../models/productModel');
 const ok = 200;
 const created = 201;
+const deleted = 204;
 const badRequest = 400;
 const notFound = 404;
 const serverError = 500;
@@ -17,18 +18,17 @@ module.exports.verifyBody = (request, response, next) => {
 
 module.exports.verifyQuantity = async (request, response, next) => { // Verifies the product quantity before sending e-mail if stock is low. Middleware function before creating and retrieving a new product
     try {
-        const method = request.method;
+        const method = request.method; // The method being requested
 
         if(method === 'GET') {
             const id = request.params.id;
             const product = await Product.findById(id); 
-            const {quantity, name} = product;
+            const {quantity, name} = product; // Extract the quantity and the name of the product
 
             if(quantity <= 3) {
                 console.log(`LOW STOCK The product ${name} has a quantity of ${quantity}`);
                 // Send E-mail
             }   
-        
         }    
     } 
     
@@ -91,8 +91,9 @@ module.exports.getProduct = async (request, response, next) => {
     }
 };
 
-module.exports.createProduct = async (request, response, next) => {
+module.exports.createProduct = async (request, response, next) => { // Middleware function to create a product
     try {
+
         const {name, image, description, price, quantity, saleOffer} = request.body;
         const newProduct = new Product({name, image, description, price, quantity, saleOffer});
         await newProduct.save();
@@ -134,7 +135,7 @@ module.exports.deleteProduct = async (request, response, next) => {
         let {quantity} = product;
         quantity -= 1;
 
-        return response.status(204).send(`Product Deleted - Quantity of this product is now ${quantity}`);
+        return response.status(deleted).send(`Product Deleted - Quantity of this product is now ${quantity}`);
     } 
     
     catch(error) {
