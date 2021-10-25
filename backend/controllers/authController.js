@@ -56,6 +56,7 @@ module.exports.login = async (request, response, next) => { // Function to login
         if(error) {
             return response.status(500).json({message: error.toString()});
         }
+        
     }
 
 };
@@ -78,11 +79,16 @@ module.exports.forgotPassword = async (request, response, next) => {
         const resetMessage = `<h1> You have requested a new password reset</h1>
             <p> Please go to this link to reset your password </p>
             <a href = ${resetPasswordURL} clicktracking = off>${resetURL}</a>`
+
+        
+        // Send E-mail using Nodemailer
+
+        return response.status(ok).json({success: true, data: "E-mail sent"});
     } 
     
     catch(error) {
         if(error) {
-            
+
         }
     }
 }
