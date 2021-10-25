@@ -12,3 +12,11 @@ module.exports.register = async (request, response, next) => {
 module.exports.login = async (request, response, next) => {
 
 };
+
+module.exports.forgotPassword = async (request, response, next) => {
+
+}
+
+module.exports.resetPassword = async (request, response, next) => {
+    
+}
