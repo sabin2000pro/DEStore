@@ -3,7 +3,18 @@ const DB_URI = process.env.DB_URI;
 
 const connectDB = async () => { 
     try {
-        return await mongoose.connect()
+        return await mongoose.connect(DB_URI, {
+
+        }).then(conn => {
+            if(conn.connection) {
+                return console.log(`Successfully connected to Database`);
+            }
+
+        }).catch(err => {
+            if(err) {
+                return console.log(err);
+            }
+        })
     } 
     
     catch(error) {
@@ -11,4 +22,6 @@ const connectDB = async () => {
             return console.log(error.toString());
         }
     }
-}
+};
+
+module.exports = connectDB;
