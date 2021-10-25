@@ -11,7 +11,7 @@ app.use(morgan('dev'));
 
 connectDB();
 
-const server = app.listen(port, (error) => {
+const server = app.listen(port, (error) => { // Creates the Server
     if(!error) {
         return console.log(`Listening for requests on port ${port}`);
     }
