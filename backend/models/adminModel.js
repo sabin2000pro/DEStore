@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const adminSchema = new mongoose.Schema({
     username: {
@@ -26,7 +28,8 @@ adminSchema.pre('save', async function(next) { // Hash Admin Password before sav
         return next();
     }
 
-    // Generate Salt
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt); // hash the password
 });
 
 const Admin = mongoose.model('Admin', adminSchema);
