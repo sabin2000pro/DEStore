@@ -56,6 +56,8 @@ module.exports.validateQuantity = async (request, response, next) => { // Middle
             return response.status(404).json("An error validting the quantity")
         }
     }
+
+    return next();
 }
 
 module.exports.getAllProducts = async (request, response, next) => { // Returns all of the products
