@@ -7,12 +7,14 @@ const connectDB = require('./database/db.js');
 const app = express();
 
 const productRoutes = require('./routes/productRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 app.use(express.json());
 app.use(morgan('dev'));
 connectDB();
 
 app.use('/api/v1/products', productRoutes);
+app.use('/api/v1/auth/register', authRoutes);
 
 const server = app.listen(port, (error) => { // Creates the Server
     if(!error) {
