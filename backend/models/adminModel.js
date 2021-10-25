@@ -33,7 +33,7 @@ adminSchema.pre('save', async function(next) { // Hash Admin Password before sav
     this.password = await bcrypt.hash(this.password, salt); // hash the password
 });
 
-adminSchema.methods.comparePasswords = async function(password) {
+adminSchema.methods.comparePasswords = async function(password) { // Method to compare passwords before signing in
     return await bcrypt.compare(password, this.password); // Returns true or false if the passwords match
 }
 
