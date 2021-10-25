@@ -28,7 +28,12 @@ module.exports.verifyQuantity = async (request, response, next) => { // Verifies
             if(quantity <= 3) {
                 console.log(`LOW STOCK The product ${name} has a quantity of ${quantity}`);
                 // Send E-mail
-            }   
+            }  
+            
+            if(quantity === 0) { // If there is no stock
+                console.log(`Out of stock. Product is going to be ordered`);
+                // Send E-mail for re-stock
+            }
         }    
     } 
     
