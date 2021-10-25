@@ -20,8 +20,7 @@ const connectDB = async () => { // Function that connects to the database
             if(err) {
                 return console.log(err);
             }
-
-        })
+        });
     } 
     
     catch(error) {
@@ -33,4 +32,4 @@ const connectDB = async () => { // Function that connects to the database
     }
 };
 
-module.exports = connectDB;
+module.exports = connectDB; // Export the function to connect to the database
