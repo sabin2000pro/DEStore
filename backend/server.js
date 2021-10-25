@@ -8,7 +8,6 @@ const app = express();
 
 app.use(express.json());
 app.use(morgan('dev'));
-
 connectDB();
 
 const server = app.listen(port, (error) => { // Creates the Server
