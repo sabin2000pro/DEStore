@@ -16,20 +16,51 @@ module.exports.verifyBody = (request, response, next) => {
 };
 
 module.exports.verifyQuantity = async (request, response, next) => { // Verifies the product quantity before sending e-mail if stock is low. Middleware function before creating and retrieving a new product
-    
-    const product = await Product.find();    
+    try {
+        const method = request.method;
 
-    if(quantity <= 3) {
-        return response.status(200).json("Low Stock - E-mail will be sent");
+        if(method === 'GET') {
+            const id = request.params.id;
+            const product = await Product.findById(id); 
+            const {quantity, name} = product;
+
+            if(quantity <= 3) {
+                console.log(`LOW STOCK The product ${name} has a quantity of ${quantity}`);
+                // Send E-mail
+            }   
+        
+        }    
+    } 
+    
+    catch(error) {
+        if(error) {
+            return response.status(404).json("An error processing the quantity")
+        }
     }
 
     return next();
 }
 
+module.exports.validateQuantity = async (request, response, next) => { // Middleware function to be added before creating a product. Admin cannot add more than 5 quantities
+    try {
+        const {quantity} = request.body;
+
+        if(quantity >= 5) {
+            return response.status(badRequest).json("You cannot create more than 5 products at once");
+        }
+        
+    } 
+    
+    catch(error) {
+        if(error) {
+            return response.status(404).json("An error validting the quantity")
+        }
+    }
+}
+
 module.exports.getAllProducts = async (request, response, next) => { // Returns all of the products
     try {
         const products = await Product.find();
-        const length = products.length;
         return response.status(ok).json(products);
     } 
     
@@ -44,7 +75,7 @@ module.exports.getAllProducts = async (request, response, next) => { // Returns 
 
 module.exports.getProduct = async (request, response, next) => {
     try {
-        const id = request.params.id * 1;
+        const id = request.params.id;
         const product = await Product.findById(id);
         return response.status(ok).json(product);
     }
@@ -64,7 +95,7 @@ module.exports.createProduct = async (request, response, next) => {
         const newProduct = new Product({name, image, description, price, quantity, saleOffer});
         await newProduct.save();
 
-        return response.status()
+        return response.status(created).json("Product Created");
     } 
     
     catch(error) {
@@ -78,7 +109,8 @@ module.exports.createProduct = async (request, response, next) => {
 
 module.exports.editProduct = async (request, response, next) => {
     try {
-
+        const id = request.params.id;
+        const updatedProduct = await Product.findByIdAndUpdate
     } 
     
     catch(error) {
