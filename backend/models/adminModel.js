@@ -19,8 +19,8 @@ const adminSchema = new mongoose.Schema({
         type: String
     },
 
-    passwordResetToken: String,
-    passwordResetExpires: Date
+    passwordResetToken: String, // The password reset token for the admin.
+    passwordResetExpires: Date // Expiry date for the password
 });
 
 adminSchema.pre('save', async function(next) { // Hash Admin Password before saving to the database
@@ -31,6 +31,10 @@ adminSchema.pre('save', async function(next) { // Hash Admin Password before sav
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt); // hash the password
 });
+
+adminSchema.methods.comparePasswords = async function(password) {
+    return await bcrypt.compare(password, this.password); // Returns true or false if the passwords match
+}
 
 adminSchema.methods.getSignedToken = function() { // Sign a JSON web token for the admin
     return jwt.sign({id: this._id}, process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXPIRES_IN});
