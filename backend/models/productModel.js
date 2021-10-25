@@ -24,7 +24,7 @@ const productSchema = new mongoose.Schema({
     },
 
     quantity: {
-        type: String,
+        type: Number,
         required: [true, 'Admin - You must specify the amount of products you would like there to be in stock']
     },
 

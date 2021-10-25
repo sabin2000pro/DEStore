@@ -15,11 +15,11 @@ module.exports.verifyBody = (request, response, next) => {
     return next();
 };
 
-module.exports.verifyQuantity = (request, response, next) => { // Verifies the product quantity before sending e-mail if stock is low. Middleware function before creating and retrieving a new product
-    const {quantity} = request.body; // The quantity
+module.exports.verifyQuantity = async (request, response, next) => { // Verifies the product quantity before sending e-mail if stock is low. Middleware function before creating and retrieving a new product
+    
+    const product = await Product.find();    
 
     if(quantity <= 3) {
-        // Send E-mail
         return response.status(200).json("Low Stock - E-mail will be sent");
     }
 
@@ -30,8 +30,6 @@ module.exports.getAllProducts = async (request, response, next) => { // Returns 
     try {
         const products = await Product.find();
         const length = products.length;
-        console.log(length);
-
         return response.status(ok).json(products);
     } 
     
@@ -65,6 +63,8 @@ module.exports.createProduct = async (request, response, next) => {
         const {name, image, description, price, quantity, saleOffer} = request.body;
         const newProduct = new Product({name, image, description, price, quantity, saleOffer});
         await newProduct.save();
+
+        return response.status()
     } 
     
     catch(error) {
@@ -90,7 +90,9 @@ module.exports.editProduct = async (request, response, next) => {
 
 module.exports.deleteProduct = async (request, response, next) => {
     try {
-
+        const id = request.params.id;
+        await Product.findByIdAndRemove(id).exec();
+        return response.send("Product Deleted");
     } 
     
     catch(error) {
