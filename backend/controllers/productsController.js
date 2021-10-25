@@ -8,7 +8,7 @@ const serverError = 500;
 module.exports.verifyBody = (request, response, next) => {
     const {name, image, description, price, quantity, saleOffer} = request.body;
 
-    if(!name || !image || !description || !price || !saleOffer) {
+    if(!name || !image || !description || !price || !saleOffer || !quantity) {
         return response.status(notFound).json("Please check your product creation entries again");
     }
 
