@@ -18,8 +18,12 @@ const adminSchema = new mongoose.Schema({
 });
 
 adminSchema.pre('save', async function(next) { // Hash Admin Password before saving to the database
+    if(!this.isModified('password')) {
+        return next();
+    }
 
+    // Generate Salt
 });
 
 const Admin = mongoose.model('Admin', adminSchema);
-module.exports = Admin;
+module.exports = Admin; // Export the Admin Model
