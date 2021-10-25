@@ -10,8 +10,9 @@ const productRoutes = require('./routes/productRoutes');
 
 app.use(express.json());
 app.use(morgan('dev'));
-app.use('/api/v1/products', productRoutes);
 connectDB();
+
+app.use('/api/v1/products', productRoutes);
 
 const server = app.listen(port, (error) => { // Creates the Server
     if(!error) {
