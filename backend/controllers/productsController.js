@@ -64,21 +64,15 @@ module.exports.createProduct = async (request, response, next) => {
     try {
         const {name, image, description, price, quantity, saleOffer} = request.body;
         const newProduct = new Product({name, image, description, price, quantity, saleOffer});
-        await newProduct.save(doc => {
-            return console.log(doc);
-        }).catch(err => {
-            
-            if(err) {
-                return console.log(err);
-            }
-
-        })
+        await newProduct.save();
     } 
     
     catch(error) {
+
         if(error) {
-            return response.status(serverError).json({message: 'Request Failed', error});
+            return response.status(serverError).json({message: 'Request Failed', cause: error.toString()});
         }
+
     }
 };
 
