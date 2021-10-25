@@ -60,7 +60,24 @@ module.exports.login = async (request, response, next) => { // Function to login
 };
 
 module.exports.forgotPassword = async (request, response, next) => {
+    try {
+        const {email} = request.body;
+        const admin = await Admin.findOne({email}); // Find an admin by the e-mail address
 
+        if(!email) {
+            return response.status(404).json({message: 'E-mail could not be sent. No admin found with that e-mail address'});
+        }
+
+        // Get the reset token
+        const resetToken = admin.getResetPasswordToken();
+        await admin.save();
+
+        const resetPasswordURL = ``
+    } 
+    
+    catch(error) {
+
+    }
 }
 
 module.exports.resetPassword = async (request, response, next) => {
