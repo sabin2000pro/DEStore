@@ -6,6 +6,8 @@ const port = process.env.PORT;
 const connectDB = require('./database/db.js');
 const app = express();
 
+const productRoutes = require('./routes/productRoutes');
+
 app.use(express.json());
 app.use(morgan('dev'));
 connectDB();
