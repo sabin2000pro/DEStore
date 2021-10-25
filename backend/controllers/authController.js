@@ -61,7 +61,7 @@ module.exports.login = async (request, response, next) => { // Function to login
 
 };
 
-module.exports.forgotPassword = async (request, response, next) => {
+module.exports.forgotPassword = async (request, response, next) => { // Forgot Password Function
     try {
         const {email} = request.body;
         const admin = await Admin.findOne({email}); // Find an admin by the e-mail address
