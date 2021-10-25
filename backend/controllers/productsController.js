@@ -57,9 +57,11 @@ module.exports.validateQuantity = async (request, response, next) => { // Middle
     } 
     
     catch(error) {
+
         if(error) {
             return response.status(404).json("An error validting the quantity")
         }
+        
     }
 
     return next();
@@ -92,6 +94,7 @@ module.exports.getProduct = async (request, response, next) => {
         if(error) {
             return response.status(serverError).json({message: 'Request Failed', error});
         }
+
 
     }
 };

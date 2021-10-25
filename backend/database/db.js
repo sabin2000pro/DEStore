@@ -11,16 +11,20 @@ const connectDB = async () => { // Function that connects to the database
             }
 
         }).catch(err => {
+
             if(err) {
                 return console.log(err);
             }
+
         })
     } 
     
     catch(error) {
+
         if(error) {
             return console.log(error.toString());
         }
+        
     }
 };
 
