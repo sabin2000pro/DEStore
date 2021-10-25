@@ -19,4 +19,7 @@ const limiter = rateLimit({ // Options for rate limiting
 authRoutes.route('/register').post(limiter, authController.register);
 authRoutes.route('/login').post(limiter, authController.login);
 
-module.exports = authRoutes;
+authRoutes.route('/forgotpassword').post(authController.forgotPassword);
+authRoutes.route('/resetpassword/:resetToken', authController.resetPassword);
+
+module.exports = authRoutes; // Export authentication routes
