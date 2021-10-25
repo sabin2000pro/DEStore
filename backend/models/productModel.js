@@ -18,12 +18,12 @@ const productSchema = new mongoose.Schema({
         unique: true
     },
 
-    price: {
+    price: { // The price of the product
         type: Number,
         required: [true, 'You must specify the price of the product']
     },
 
-    quantity: {
+    quantity: { // The quantity of the product
         type: Number,
         required: [true, 'Admin - You must specify the amount of products you would like there to be in stock']
     },
