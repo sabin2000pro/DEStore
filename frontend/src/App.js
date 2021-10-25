@@ -1,9 +1,10 @@
 import './App.css';
+import Homepage from './pages/Homepage';
 
 const App = () => {
   return (
       <div>
-        <h1>DE-Store App</h1>
+         <Homepage />
       </div>
   )
 }
