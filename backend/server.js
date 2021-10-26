@@ -2,6 +2,7 @@
 // Code Written on: 25/10/2021
 // Last Modified Date: 25/10/2021 @ 21:54
 // Bugs? N/A
+// Purpose of File: server.js => Used to connect to the server
 
 const express = require('express');
 const morgan = require('morgan');
