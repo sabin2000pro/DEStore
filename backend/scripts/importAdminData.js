@@ -69,10 +69,38 @@ const deleteData = async () => {
     }
 };
 
+const importProducts = async () => {
+    try {
+
+    } 
+    
+    catch(error) {
+
+    }
+};
+
+const deleteProducts = async () => {
+    try {
+
+    } 
+    
+    catch(error) {
+
+    }
+}
+
 if(process.argv[2] === '--import') { // Import the data from the database and write it to the file
     return importData();
 };
 
 if(process.argv[2] === '--delete') {
     return deleteData();
+}
+
+if(process.argv[2] === '--importproducts') {
+    return importProducts();
+}
+
+if(process.argv[2] === '--deleteproducts') {
+    return deleteProducts();
 }

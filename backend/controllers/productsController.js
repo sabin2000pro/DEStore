@@ -75,9 +75,9 @@ module.exports.verifyQuantity = async (request, response, next) => { // Verifies
 /**
  * 
  * @param {*} request - Receives client request
- * @param {*} response - Server responds
+ * @param {*} response - Server responds with a status code
  * @param {*} next 
- * @function verifyBody()
+ * @function validateQuantity -> Determines if the quality is > 5 then send back JSON.
  * @description: This function verifies the request body before submitting the data
   * @returns next middleware function
  */
@@ -97,7 +97,6 @@ module.exports.validateQuantity = async (request, response, next) => { // Middle
         if(error) {
             return response.status(404).json("An error validting the quantity")
         }
-
     }
 
     return next();
@@ -108,8 +107,8 @@ module.exports.validateQuantity = async (request, response, next) => { // Middle
  * @param {*} request - Receives client request
  * @param {*} response - Server responds
  * @param {*} next 
- * @function verifyBody()
- * @description: This function verifies the request body before submitting the data
+ * @function getAllProducts() -> Retrieves all products from the database
+ * @description: This function is used to retrieve all of the stored products in the database
   * @returns next middleware function
  */
 
@@ -117,9 +116,10 @@ module.exports.getAllProducts = async (request, response, next) => { // Returns 
     try {
         // PAGINATION CODE HERE
         const PAGE_SIZE = 3;
-        const page = parseInt(request.query.page || "0"); // Parse the Page
-        const total = await Product.countDocuments({});
-        const products = await Product.find({}).limit(PAGE_SIZE).skip(PAGE_SIZE * page);
+        const page = parseInt(request.query.page || "0");
+
+        const total = await Product.countDocuments({}); // Count the number of documents
+        const products = await Product.find({}).limit(PAGE_SIZE).skip(PAGE_SIZE * page); // Find all the products by limiting them
 
         return response.status(ok).json({products, total: Math.ceil(total / PAGE_SIZE)});
     } 
