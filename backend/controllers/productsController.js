@@ -6,7 +6,7 @@ const badRequest = 400;
 const notFound = 404;
 const serverError = 500;
 
-module.exports.verifyBody = (request, response, next) => {
+module.exports.verifyBody = (request, response, next) => { // Verify the body before creating a product
     const {name, image, description, price, quantity, saleOffer} = request.body;
 
     if(!name || !image || !description || !price || !saleOffer || !quantity) {
@@ -136,7 +136,7 @@ module.exports.editProduct = async (request, response, next) => { // Modifies a 
     }
 };
 
-module.exports.deleteProduct = async (request, response, next) => {
+module.exports.deleteProduct = async (request, response, next) => { // Function that deletes a product
     try {
         const id = request.params.id;
         const product = await Product.findByIdAndRemove(id).exec();

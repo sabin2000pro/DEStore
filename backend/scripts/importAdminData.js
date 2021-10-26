@@ -4,13 +4,26 @@ const Admin = require('../models/adminModel');
 
 const importData = async () => { // Import Data from the database and write it to the file
     try {
+        const admins = await Admin.find().exec().then(docs => {}).catch(err => {});
+        console.log(admins);
 
+
+        if(admins.length > 0) { // If there are admins in the database
+            // Write to the file
+            fs.writeFileSync(`${__dirname}/data/admins.json`, JSON.stringify(admins), (err) => {
+
+                if(err) {
+                    console.log(err);
+                }
+
+            })
+        }
     } 
     
     catch(error) {
 
         if(error) {
-            
+            return console.log(`Error: ${error.toString()}`);
         }
     }
 };
