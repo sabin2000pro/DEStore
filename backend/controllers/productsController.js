@@ -40,7 +40,7 @@ module.exports.verifyQuantity = async (request, response, next) => { // Verifies
     catch(error) {
 
         if(error) {
-            return response.status(404).json("An error processing the quantity")
+            return response.status(notFound).json("An error processing the quantity")
         }
 
     }

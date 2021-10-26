@@ -8,8 +8,9 @@ const importData = async () => { // Import Data from the database and write it t
     } 
     
     catch(error) {
-        if(error) {
 
+        if(error) {
+            
         }
     }
 };
