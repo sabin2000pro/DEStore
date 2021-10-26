@@ -42,8 +42,10 @@ const Homepage = () => {
                 <button onClick = {() => setPageNumber(pageIndex)} >{pageIndex + 1}</button>
         ))}
             
-            <button onClick = {() => setDisplay(true)}>View Products</button>
-            <button onClick = {() => setDisplay(false)}>Hide Products</button>
+            <div className = "button__group">
+                <button className = "btn" onClick = {() => setDisplay(true)}>View Products</button>
+                <button className = "btn" onClick = {() => setDisplay(false)}>Hide Products</button>
+            </div>
 
         </div>
     )
