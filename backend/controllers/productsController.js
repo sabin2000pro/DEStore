@@ -8,13 +8,14 @@ const serverError = 500;
 
 /**
  * 
- * @param {*} request 
- * @param {*} response
+ * @param {*} request - Receives client request
+ * @param {*} response - Server responds
  * @param {*} next 
  * @function verifyBody()
  * @description: This function verifies the request body before submitting the data
   * @returns next middleware function
  */
+
 module.exports.verifyBody = (request, response, next) => { // Verify the body before creating a product
     const {name, image, description, price, quantity, saleOffer} = request.body;
 
@@ -24,6 +25,16 @@ module.exports.verifyBody = (request, response, next) => { // Verify the body be
 
     return next();
 };
+
+/**
+ * 
+ * @param {*} request - Receives client request
+ * @param {*} response - Server responds
+ * @param {*} next 
+ * @function verifyBody()
+ * @description: This function verifies the request body before submitting the data
+  * @returns next middleware function
+ */
 
 module.exports.verifyQuantity = async (request, response, next) => { // Verifies the product quantity before sending e-mail if stock is low. Middleware function before creating and retrieving a new product
     try {

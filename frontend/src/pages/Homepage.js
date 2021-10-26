@@ -10,6 +10,7 @@ const Homepage = () => {
     const [pageNumber, setPageNumber] = useState(0); // The Current Page Number
     const [numberOfPages, setNumberOfPages] = useState(0); // Number of Pages Variable
     const [products, setProducts] = useState([]); // Product State
+    const [displayed, setDisplay] = useState(false);
 
     const pages = new Array(numberOfPages).fill(null).map((v, i) => i); // Create an array of pages
 
@@ -27,18 +28,22 @@ const Homepage = () => {
         <div className = "App">
             <h3>Page {pageNumber + 1}</h3>
 
-            {products.map((product, key) => (
-
+            {displayed ? products.map((product, key) => (
                 <div className = "products" key = {key}>
                     <h4>{product.name}</h4>
                     <p>{product.description}</p>
-                   
-                </div>
-            ))}
 
-            {pages.map((pageIndex) => (
+                 </div>
+        
+            ))
+        : null}
+
+         {pages.map((pageIndex) => (
                 <button onClick = {() => setPageNumber(pageIndex)} >{pageIndex + 1}</button>
-            ))}
+        ))}
+            
+            <button onClick = {() => setDisplay(true)}>View Products</button>
+            <button onClick = {() => setDisplay(false)}>Hide Products</button>
 
         </div>
     )
