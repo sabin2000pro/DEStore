@@ -42,8 +42,9 @@ const Homepage = () => {
                 <div className = "products" key = {key}>
                     <h4>Product Name: {product.name}</h4>
                     <p>Product Description: {product.description}</p>
-                    <h4>Quantity: {product.quantity}</h4>
                     <a className = "purchase__btn" href = "/">Purchase</a>
+                    <h4>Quantity: {product.quantity}</h4>
+                    <img src = {product.image} className = "product__img"></img>
                  </div>
         
             )) : null}

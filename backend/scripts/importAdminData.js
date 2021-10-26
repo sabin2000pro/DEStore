@@ -79,7 +79,7 @@ const importProducts = async () => {
     }
 };
 
-const deleteProducts = async () => {
+const deleteProducts = async () => { // Delete products from the file
     try {
 
     } 
