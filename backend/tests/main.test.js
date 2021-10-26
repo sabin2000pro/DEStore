@@ -4,6 +4,7 @@ const server = require('../server');
 const Admin = require('../models/adminModel');
 const Product = require('../models/productModel');
 
+// BUG: Needs to be sorted before other tests
 beforeAll(async() => { // Test DB connection
  const url = 'mongodb+srv://sabin2000:123mini123@cluster0.sjkmj.mongodb.net/destore?retryWrites=true&w=majority';
  return await mongoose.connect(url);
@@ -18,3 +19,11 @@ describe('GET /products', () => {
         })
     })
 });
+
+describe('GET /admins', () => { // Returns all of the admins - TEST SHOULD PASS as the expected HTTP status code should be 200
+    describe('Should return all of the Admins in the database', () => {
+        test('Admin Test - Should response with a 200 status code', async () => {
+            const admins = await request(server).get('/')
+        })
+    })
+})

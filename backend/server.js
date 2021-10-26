@@ -5,6 +5,7 @@
 // Purpose of File: server.js => Used to connect to the server
 
 const express = require('express');
+const cors = require('cors');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
 dotenv.config({path: 'config.env'});
@@ -16,6 +17,7 @@ const productRoutes = require('./routes/productRoutes');
 const authRoutes = require('./routes/authRoutes');
 
 app.use(express.json());
+app.use(cors());
 app.use(morgan('dev'));
 connectDB();
 

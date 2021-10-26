@@ -71,10 +71,13 @@ module.exports.validateQuantity = async (request, response, next) => { // Middle
 
 module.exports.getAllProducts = async (request, response, next) => { // Returns all of the products
     try {
+        // PAGINATION CODE HERE
+        const PAGE_SIZE = 3;
+        const page = parseInt(request.query.page || "0"); // Parse the Page
+        const total = await Product.countDocuments({});
+        const products = await Product.find({}).limit(PAGE_SIZE).skip(PAGE_SIZE * page);
 
-        // Implement Sorting, Filtering and Paginating Here
-        const products = await Product.find();
-        return response.status(ok).json(products);
+        return response.status(ok).json({products, total: Math.ceil(total / PAGE_SIZE)});
     } 
     
     catch(error) {
@@ -104,8 +107,8 @@ module.exports.getProduct = async (request, response, next) => {
 module.exports.createProduct = async (request, response, next) => { // Middleware function to create a product
     try {
 
-        const {name, image, description, price, quantity, saleOffer} = request.body;
-        const newProduct = new Product({name, image, description, price, quantity, saleOffer});
+        const {name, image, description, price, quantity, saleOffer, colour} = request.body;
+        const newProduct = new Product({name, image, description, price, quantity, saleOffer, colour});
         await newProduct.save();
 
         return response.status(created).json("Product Created");
