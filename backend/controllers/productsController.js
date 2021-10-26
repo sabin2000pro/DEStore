@@ -71,6 +71,8 @@ module.exports.validateQuantity = async (request, response, next) => { // Middle
 
 module.exports.getAllProducts = async (request, response, next) => { // Returns all of the products
     try {
+
+        // Implement Pagination Here
         const products = await Product.find();
         return response.status(ok).json(products);
     } 
