@@ -4,11 +4,14 @@ const mongoose = require('mongoose');
 
 const paymentSchema = new mongoose.Schema({ // Create payment schema
     cardholderName: {
-        
+        type: String,
+        required: [true, 'You must specify the name of the Cardholder']
     },
     
     cardType: {
-
+        type: String,
+        required: [true, 'You must specify the card type'],
+        enum: ['VISA', 'Mastercard']
     },
 
     cardNumber: { //  Card Number
@@ -31,8 +34,7 @@ const paymentSchema = new mongoose.Schema({ // Create payment schema
         default: 1750.00
     },
 
-
 });
 
 const Payment = mongoose.model('Payment', paymentSchema);
-module.exports = Payment;
+module.exports = Payment; // Export the payment model

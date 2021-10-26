@@ -34,8 +34,7 @@ connectDB();
 const importData = async () => { // Import Data from the database and write it to the file
     try {
         let dataWritten = false;
-        const admins = await Admin.find();
-        console.log(admins);
+        const admins = await Admin.find(); // Find all admins from the db
 
         if(admins.length > 0) { // If there are admins in the database
             // Write to the file
