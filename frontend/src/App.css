@@ -9,9 +9,10 @@ body {
 }
 
 .products {
-  background-color: gray;
+  background-color: lightblue;
   width: 500px;
   height: 150px;
+  color: black;
   padding: 12px 20px;
   margin-bottom: 50px;
   margin: 0 auto;
@@ -27,4 +28,10 @@ body {
 .btn {
   padding: 1rem;
   margin: 2rem;
+}
+
+.search__input {
+  margin-left: 75rem;
+  padding: 5px;
+  width: 15%;
 }

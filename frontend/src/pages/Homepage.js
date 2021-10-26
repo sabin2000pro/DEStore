@@ -5,18 +5,18 @@ import {useEffect, useState} from 'react';
 // Code Written on: 25/10/2021
 // Last Modified Date: 25/10/2021 @ 21:54
 // Bugs? N/A
+// File Purpose: Homepage
 
 const Homepage = () => {
     const [pageNumber, setPageNumber] = useState(0); // The Current Page Number
     const [numberOfPages, setNumberOfPages] = useState(0); // Number of Pages Variable
     const [products, setProducts] = useState([]); // Product State
     const [displayed, setDisplay] = useState(false);
-    const [searchTerm, setSearchTerm] = useState("");
+    const [searchTerm, setSearchTerm] = useState(""); // The Search Term Stored here
 
     const pages = new Array(numberOfPages).fill(null).map((v, i) => i); // Create an array of pages
 
-    useEffect(() => {
-
+    useEffect(() => { // useEffect hook to retrieve all the products
         return fetch(`http://localhost:5950/api/v1/products?page=${pageNumber}`).then((response) => response.json()).then(({total, products}) => {
             setProducts(products);
             setNumberOfPages(total);
@@ -26,27 +26,19 @@ const Homepage = () => {
 
     return (
         <div className = "App">
+            <input className = "search__input" type = "text" placeholder = "Search Product" onChange = {(event) => setSearchTerm(event.target.value)}/>
             <h3>Page {pageNumber + 1}</h3>
-            <input type = "text" placeholder = "Search Product" onChange = {(event) => setSearchTerm(event.target.value)}/>
 
-            {products.filter((value) => {
-                if(searchTerm === "") {
-                    return value;
+            {displayed ? products.filter((value) => { // Filter the products
+                if(searchTerm === "") { // if there is no search term
+                    return value; // Return value
                 }
 
                 else if(value.name.toLowerCase().includes(searchTerm.toLowerCase())) {
                     return value;
                 }
 
-            }).map((value, key) => {
-                return (
-                    <div key = {key}>
-                        <p>{value.name}</p>
-                    </div>
-                )
-            })}
-            
-            {displayed ? products.map((product, key) => (
+            }).map((product, key) => (
                 <div className = "products" key = {key}>
                     <h4>Product Name: {product.name}</h4>
                     <p>Product Description: {product.description}</p>
@@ -54,8 +46,8 @@ const Homepage = () => {
                     <a className = "purchase__btn" href = "/">Purchase</a>
                  </div>
         
-            ))
-        : null}
+            )) : null}
+            
          {pages.map((pageIndex) => (
                  <button onClick = {() => setPageNumber(pageIndex)} >{pageIndex + 1}</button>
         ))}
