@@ -1,3 +1,8 @@
+// Code Author: Sabin Constantin Lungu
+// Code Written on: 25/10/2021
+// Last Modified Date: 25/10/2021 @ 21:54
+// Bugs? N/A
+
 const Product = require('../models/productModel');
 const ok = 200;
 const created = 201;
