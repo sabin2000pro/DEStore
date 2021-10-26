@@ -100,7 +100,7 @@ module.exports.forgotPassword = async (request, response, next) => { // Forgot P
     }
 }
 
-module.exports.resetPassword = async (request, response, next) => {
+module.exports.resetPassword = async (request, response, next) => { // Middleware function to reset the Admin Password
     try {
 
     } 
@@ -113,8 +113,6 @@ module.exports.resetPassword = async (request, response, next) => {
 module.exports.editAdmin = async (request, response, next) => {
     try {
         const id = request.params.id;
-
-        // Check that ID is not out of bounds
 
         if(!id) { // If no ID is specified
             return response.status(404).json("Admin ID invalid - Please check your entry");
@@ -134,10 +132,13 @@ module.exports.editAdmin = async (request, response, next) => {
 module.exports.getSingleAdmin = async (request, response, next) => { // Middleware function to get a single admin
     try {
         const id = request.params.id;
+        const admin = await Admin.findById(id).exec();
     } 
     
     catch(error) {
-
+        if(error) {
+            return response.status(400).json({message: error.toString()});
+        }
     }
 }
 
