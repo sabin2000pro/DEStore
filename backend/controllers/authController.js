@@ -133,6 +133,8 @@ module.exports.getSingleAdmin = async (request, response, next) => { // Middlewa
     try {
         const id = request.params.id;
         const admin = await Admin.findById(id).exec();
+
+        return response.status(200).json(admin);
     } 
     
     catch(error) {
@@ -143,7 +145,13 @@ module.exports.getSingleAdmin = async (request, response, next) => { // Middlewa
 }
 
 module.exports.deleteAdmin = async (request, response, next) => { // Middleware function to delete a single admin
+    try {
 
+    } 
+    
+    catch(error) {
+
+    }
 }
 
 const sendToken = (admin, statusCode, response) => { // Sends back the JSON Web Token
