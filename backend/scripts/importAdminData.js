@@ -43,7 +43,7 @@ const importData = async () => { // Import Data from the database and write it t
                 dataWritten = true;
 
                 if(dataWritten) {
-                    process.exit(1);
+                    return process.exit(1);
                 }
                 
             })
