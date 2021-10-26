@@ -6,13 +6,18 @@ const paymentSchema = new mongoose.Schema({ // Create payment schema
     cardholderName: {
         
     },
+    
+    cardType: {
 
-    cardNumber: {
+    },
+
+    cardNumber: { // The card number
 
     },
 
     expiryDate: {
-        type: Date
+        type: Date,
+        required: [true, 'You must specify your card expiry date']
     },
 
     code: {
