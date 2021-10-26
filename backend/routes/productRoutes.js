@@ -13,7 +13,6 @@ const rateLimit = require('express-rate-limit');
 const windowMs = 1 * 60 * 1000;
 const maxRequests = 4;
 
-
 const limiter = rateLimit({ // Options for rate limiting
     windowMs,
     maxRequests,
