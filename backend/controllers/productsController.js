@@ -6,6 +6,15 @@ const badRequest = 400;
 const notFound = 404;
 const serverError = 500;
 
+/**
+ * 
+ * @param {*} request 
+ * @param {*} response
+ * @param {*} next 
+ * @function verifyBody()
+ * @description: This function verifies the request body before submitting the data
+  * @returns next middleware function
+ */
 module.exports.verifyBody = (request, response, next) => { // Verify the body before creating a product
     const {name, image, description, price, quantity, saleOffer} = request.body;
 
