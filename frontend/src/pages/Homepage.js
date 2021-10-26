@@ -29,10 +29,23 @@ const Homepage = () => {
             <h3>Page {pageNumber + 1}</h3>
             <input type = "text" placeholder = "Search Product" onChange = {(event) => setSearchTerm(event.target.value)}/>
 
-            {products.filter((product, key) => (
-               <div></div>
-            ))}
+            {products.filter((value) => {
+                if(searchTerm === "") {
+                    return value;
+                }
 
+                else if(value.name.toLowerCase().includes(searchTerm.toLowerCase())) {
+                    return value;
+                }
+
+            }).map((value, key) => {
+                return (
+                    <div key = {key}>
+                        <p>{value.name}</p>
+                    </div>
+                )
+            })}
+            
             {displayed ? products.map((product, key) => (
                 <div className = "products" key = {key}>
                     <h4>Product Name: {product.name}</h4>
