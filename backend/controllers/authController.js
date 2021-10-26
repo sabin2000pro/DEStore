@@ -114,15 +114,20 @@ module.exports.editAdmin = async (request, response, next) => {
     try {
         const id = request.params.id;
 
+        // Check that ID is not out of bounds
+
         if(!id) { // If no ID is specified
             return response.status(404).json("Admin ID invalid - Please check your entry");
         }
 
         const updatedAdmin = await Admin.findByIdAndUpdate(id, request.body).exec(); // Updated admin
+        return response.status(200).json(updatedAdmin);
     } 
     
     catch(error) {
-
+        if(error) {
+            return response.status(400).json({message: error.toString()});
+        }
     }
 }
 
