@@ -62,11 +62,20 @@ module.exports.verifyQuantity = async (request, response, next) => { // Verifies
         if(error) {
             return response.status(notFound).json("An error processing the quantity")
         }
-
     }
 
     return next();
 }
+
+/**
+ * 
+ * @param {*} request - Receives client request
+ * @param {*} response - Server responds
+ * @param {*} next 
+ * @function verifyBody()
+ * @description: This function verifies the request body before submitting the data
+  * @returns next middleware function
+ */
 
 module.exports.validateQuantity = async (request, response, next) => { // Middleware function to be added before creating a product. Admin cannot add more than 5 quantities
     try {
@@ -89,6 +98,16 @@ module.exports.validateQuantity = async (request, response, next) => { // Middle
     return next();
 }
 
+/**
+ * 
+ * @param {*} request - Receives client request
+ * @param {*} response - Server responds
+ * @param {*} next 
+ * @function verifyBody()
+ * @description: This function verifies the request body before submitting the data
+  * @returns next middleware function
+ */
+
 module.exports.getAllProducts = async (request, response, next) => { // Returns all of the products
     try {
         // PAGINATION CODE HERE
@@ -109,6 +128,16 @@ module.exports.getAllProducts = async (request, response, next) => { // Returns 
     }
 };
 
+/**
+ * 
+ * @param {*} request - Receives client request
+ * @param {*} response - Server responds
+ * @param {*} next 
+ * @function verifyBody()
+ * @description: This function verifies the request body before submitting the data
+  * @returns next middleware function
+ */
+
 module.exports.getProduct = async (request, response, next) => {
     try {
         const id = request.params.id;
@@ -123,6 +152,16 @@ module.exports.getProduct = async (request, response, next) => {
         }
     }
 };
+
+/**
+ * 
+ * @param {*} request - Receives client request
+ * @param {*} response - Server responds
+ * @param {*} next 
+ * @function verifyBody()
+ * @description: This function verifies the request body before submitting the data
+  * @returns next middleware function
+ */
 
 module.exports.createProduct = async (request, response, next) => { // Middleware function to create a product
     try {
@@ -143,6 +182,16 @@ module.exports.createProduct = async (request, response, next) => { // Middlewar
     }
 };
 
+/**
+ * 
+ * @param {*} request - Receives client request
+ * @param {*} response - Server responds
+ * @param {*} next 
+ * @function verifyBody()
+ * @description: This function verifies the request body before submitting the data
+  * @returns next middleware function
+ */
+
 module.exports.editProduct = async (request, response, next) => { // Modifies a Product such as the price, description, URL
     try {
         const id = request.params.id;
@@ -160,6 +209,16 @@ module.exports.editProduct = async (request, response, next) => { // Modifies a 
 
     }
 };
+
+/**
+ * 
+ * @param {*} request - Receives client request
+ * @param {*} response - Server responds
+ * @param {*} next 
+ * @function verifyBody()
+ * @description: This function verifies the request body before submitting the data
+  * @returns next middleware function
+ */
 
 module.exports.deleteProduct = async (request, response, next) => { // Function that deletes a product
     try {
