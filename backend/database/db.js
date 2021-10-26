@@ -12,13 +12,13 @@ const connectDB = async () => { // Function that connects to the database
 
         }).then(conn => {
             if(conn.connection) {
-                return console.log(`Successfully connected to Database`);
+                console.log(`Successfully connected to Database`);
             }
 
         }).catch(err => {
 
             if(err) {
-                return console.log(err);
+                console.log(err);
             }
         });
     } 

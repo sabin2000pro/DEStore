@@ -24,11 +24,11 @@ app.use('/api/v1/auth', authRoutes);
 
 const server = app.listen(port, (error) => { // Creates the Server
     if(!error) {
-        return console.log(`Listening for requests on port ${port}`);
+        console.log(`Listening for requests on port ${port}`);
     }
 
     else {
-        return console.log(`Could not listen for requests on port ${port}`);
+        console.log(`Could not listen for requests on port ${port}`);
     }
 });
 
@@ -38,3 +38,5 @@ process.on('uncaughtException', (error, promise) => {
         return process.exit(1);
     }
 });
+
+module.exports = server;
