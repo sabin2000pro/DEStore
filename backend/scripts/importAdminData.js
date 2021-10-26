@@ -1,19 +1,49 @@
 const fs = require('fs');
-const path = require('path');
+const mongoose = require('mongoose');
 const Admin = require('../models/adminModel');
+
+const connectDB = async () => { // Function that connects to the database
+    try {
+        return await mongoose.connect("mongodb+srv://sabin2000:123mini123@cluster0.sjkmj.mongodb.net/destore?retryWrites=true&w=majority", {
+
+        }).then(conn => {
+            if(conn.connection) {
+                return console.log(`Successfully connected to Database`);
+            }
+
+        }).catch(err => {
+
+            if(err) {
+                return console.log(err);
+            }
+        });
+    } 
+    
+    catch(error) {
+        
+
+        if(error) {
+            return console.log(error.toString());
+        }
+
+    }
+};
+
+connectDB();
 
 const importData = async () => { // Import Data from the database and write it to the file
     try {
-        const admins = await Admin.find().exec().then(docs => {}).catch(err => {});
+        const admins = await Admin.find();
         console.log(admins);
-
 
         if(admins.length > 0) { // If there are admins in the database
             // Write to the file
-            fs.writeFileSync(`${__dirname}/data/admins.json`, JSON.stringify(admins), (err) => {
+            fs.writeFile(`${__dirname}/../data/admins.json`, JSON.stringify(admins), (err) => {
+                console.log(`Data written to file success`);
+                process.exit(1);
 
                 if(err) {
-                    console.log(err);
+                    return console.log(err);
                 }
 
             })
@@ -30,11 +60,12 @@ const importData = async () => { // Import Data from the database and write it t
 
 const deleteData = async () => {
     try {
-
+        await Admin.deleteMany().exec();
+        console.log('Admin data deleted from file');
     } 
     
     catch(error) {
-
+        console.log(`ERROR - ${error.toString()}`);
     }
 };
 
