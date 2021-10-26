@@ -36,8 +36,12 @@ const productSchema = new mongoose.Schema({
     saleOffer: {
         type: String,
         required: [true, 'You must specify the type of sale offer for the product']
-    }
+    },
 
+    colour: {
+        type: String,
+        required: [true, 'You must specify the colour of the product']
+    }
 
 });
 
