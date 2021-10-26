@@ -33,19 +33,20 @@ connectDB();
 
 const importData = async () => { // Import Data from the database and write it to the file
     try {
+        let dataWritten = false;
         const admins = await Admin.find();
         console.log(admins);
 
         if(admins.length > 0) { // If there are admins in the database
             // Write to the file
-            fs.writeFile(`${__dirname}/../data/admins.json`, JSON.stringify(admins), (err) => {
+            return fs.writeFile(`${__dirname}/../data/admins.json`, JSON.stringify(admins), (err) => {
                 console.log(`Data written to file success`);
-                process.exit(1);
+                dataWritten = true;
 
-                if(err) {
-                    return console.log(err);
+                if(dataWritten) {
+                    process.exit(1);
                 }
-
+                
             })
         }
     } 
