@@ -1,3 +1,8 @@
+// Code Author: Sabin Constantin Lungu
+// Code Written on: 25/10/2021
+// Last Modified Date: 25/10/2021 @ 21:54
+// Bugs? N/A
+
 const Admin = require('../models/adminModel');
 const ok = 200;
 const created = 201;
@@ -6,10 +11,15 @@ const badRequest = 400;
 const notFound = 404;
 const serverError = 500;
 
-// Author: Sabin Constantin Lungu
-// Code Written: 25/10/2021
-
-
+/**
+ * 
+ * @param {*} request - Receives client request
+ * @param {*} response - Server responds
+ * @param {*} next 
+ * @function verifyBody()
+ * @description: This function verifies the request body before submitting the data
+  * @returns next middleware function
+ */
 module.exports.register = async (request, response, next) => { // Register a new Admin
     try {
         const {username, email, password} = request.body; // Extract Username, Email and Password From the body
@@ -32,6 +42,16 @@ module.exports.register = async (request, response, next) => { // Register a new
 
     }
 };
+
+/**
+ * 
+ * @param {*} request - Receives client request
+ * @param {*} response - Server responds
+ * @param {*} next 
+ * @function verifyBody()
+ * @description: This function verifies the request body before submitting the data
+  * @returns next middleware function
+ */
 
 module.exports.login = async (request, response, next) => { // Function to login an Admin
     try {
@@ -65,6 +85,16 @@ module.exports.login = async (request, response, next) => { // Function to login
     }
 
 };
+
+/**
+ * 
+ * @param {*} request - Receives client request
+ * @param {*} response - Server responds
+ * @param {*} next 
+ * @function verifyBody()
+ * @description: This function verifies the request body before submitting the data
+  * @returns next middleware function
+ */
 
 module.exports.forgotPassword = async (request, response, next) => { // Forgot Password Function
     try {
@@ -100,6 +130,16 @@ module.exports.forgotPassword = async (request, response, next) => { // Forgot P
     }
 }
 
+/**
+ * 
+ * @param {*} request - Receives client request
+ * @param {*} response - Server responds
+ * @param {*} next 
+ * @function verifyBody()
+ * @description: This function verifies the request body before submitting the data
+  * @returns next middleware function
+ */
+
 module.exports.resetPassword = async (request, response, next) => { // Middleware function to reset the Admin Password
     try {
 
@@ -109,6 +149,16 @@ module.exports.resetPassword = async (request, response, next) => { // Middlewar
 
     }
 }
+
+/**
+ * 
+ * @param {*} request - Receives client request
+ * @param {*} response - Server responds
+ * @param {*} next 
+ * @function verifyBody()
+ * @description: This function verifies the request body before submitting the data
+  * @returns next middleware function
+ */
 
 module.exports.editAdmin = async (request, response, next) => {
     try {
@@ -129,6 +179,16 @@ module.exports.editAdmin = async (request, response, next) => {
     }
 }
 
+/**
+ * 
+ * @param {*} request - Receives client request
+ * @param {*} response - Server responds
+ * @param {*} next 
+ * @function verifyBody()
+ * @description: This function verifies the request body before submitting the data
+  * @returns next middleware function
+ */
+
 module.exports.getSingleAdmin = async (request, response, next) => { // Middleware function to get a single admin
     try {
         const id = request.params.id;
@@ -144,6 +204,16 @@ module.exports.getSingleAdmin = async (request, response, next) => { // Middlewa
     }
 }
 
+/**
+ * 
+ * @param {*} request - Receives client request
+ * @param {*} response - Server responds
+ * @param {*} next 
+ * @function verifyBody()
+ * @description: This function verifies the request body before submitting the data
+  * @returns next middleware function
+ */
+
 module.exports.deleteAdmin = async (request, response, next) => { // Middleware function to delete a single admin
     try {
 
@@ -153,6 +223,16 @@ module.exports.deleteAdmin = async (request, response, next) => { // Middleware 
 
     }
 }
+
+/**
+ * 
+ * @param {*} request - Receives client request
+ * @param {*} response - Server responds
+ * @param {*} next 
+ * @function verifyBody()
+ * @description: This function verifies the request body before submitting the data
+  * @returns next middleware function
+ */
 
 const sendToken = (admin, statusCode, response) => { // Sends back the JSON Web Token
     const token = admin.getSignedToken(); // Get the signed token from the admin model
