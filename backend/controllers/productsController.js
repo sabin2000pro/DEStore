@@ -113,10 +113,9 @@ module.exports.validateQuantity = async (request, response, next) => { // Middle
  */
 
 module.exports.getAllProducts = async (request, response, next) => { // Returns all of the products
-    try {
-        // PAGINATION CODE HERE
+    try {    
         const PAGE_SIZE = 3;
-        const page = parseInt(request.query.page || "0");
+        const page = parseInt(request.query.page || "0"); // Get the page from the request
 
         const total = await Product.countDocuments({}); // Count the number of documents
         const products = await Product.find({}).limit(PAGE_SIZE).skip(PAGE_SIZE * page); // Find all the products by limiting them
@@ -138,7 +137,7 @@ module.exports.getAllProducts = async (request, response, next) => { // Returns 
  * @param {*} request - Receives client request
  * @param {*} response - Server responds
  * @param {*} next 
- * @function verifyBody()
+ * @function getProduct()
  * @description: This function verifies the request body before submitting the data
   * @returns next middleware function
  */
