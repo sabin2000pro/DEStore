@@ -16,3 +16,12 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: process.env.MONGO_USERNAME
       MONGO_INITDB_ROOT_PASSWORD: process.env.MONGO_PASSWORD
+
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - /app/node_modules
+      - .:/app
+    command: ["npm", "test"]
