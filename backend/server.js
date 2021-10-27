@@ -7,6 +7,7 @@
 // GLOBAL MIDDLEWARE
 const express = require('express');
 const mongoSanitize = require('express-mongo-sanitize');
+const hpp = require('hpp');
 const session = require('express-session');
 const helm = require('helmet');
 const xss = require('xss-clean');
@@ -27,6 +28,7 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(mongoSanitize());
 app.use(helm());
+app.use(hpp());
 app.use(xss());
 app.use(session({
     secret: 'my-secret',

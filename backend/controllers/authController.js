@@ -72,7 +72,7 @@ module.exports.login = async (request, response, next) => {
             return response.status(notFound).json({message: "Passwords do not match. Check your entries"});
         }
 
-        return sendToken(admin, ok, response); // Send back JSON token
+        return sendToken(admin, ok, response); // Send back JSON token. Used to log in the user
     } 
     
     catch(error) {
@@ -80,6 +80,7 @@ module.exports.login = async (request, response, next) => {
         if(error) {
             return response.status(serverError).json({message: error.toString()});
         }
+
     }
 };
 
@@ -173,9 +174,11 @@ module.exports.editAdmin = async (request, response, next) => {
     } 
     
     catch(error) {
+        
         if(error) {
             return response.status(badRequest).json({message: error.toString()});
         }
+
     }
 }
 

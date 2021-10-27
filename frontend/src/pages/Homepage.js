@@ -12,7 +12,10 @@ const Homepage = () => {
    
     return (
        <div>
-           <h1>DE-Store Homepage</h1>
+           <main>
+               <h1>DE-Store</h1>
+           </main>
+
        </div>
     )
 }
