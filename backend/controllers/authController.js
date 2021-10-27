@@ -210,8 +210,8 @@ module.exports.getSingleAdmin = async (request, response, next) => { // Middlewa
  * @param {*} request - Receives client request
  * @param {*} response - Server responds
  * @param {*} next 
- * @function verifyBody()
- * @description: This function verifies the request body before submitting the data
+ * @function deleteAdmin()
+ * @description: This function deletes a single admin from the system
   * @returns next middleware function
  */
 
@@ -220,11 +220,13 @@ module.exports.deleteAdmin = async (request, response, next) => { // Middleware 
         const id = request.params.id;
         await Admin.findByIdAndDelete(id);
 
-        return response.status(204).json({message: 'Admin Deleted'});
+        return response.status(deleted).json({message: 'Admin Deleted'});
     } 
     
     catch(error) {
-
+        if(error) {
+            return response.status(badRequest).json({message: error.toString()});
+        }
     }
 }
 
