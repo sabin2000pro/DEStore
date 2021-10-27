@@ -38,7 +38,7 @@ describe('POST /products', () => { // Test Case 2
 })
 
 // * Test Passes
-describe('GET /admins', () => { // Returns all of the admins - TEST SHOULD PASS as the expected HTTP status code should be 200
+describe('GET /admins', () => { // Test Case 3 - Returns all of the admins - TEST SHOULD PASS as the expected HTTP status code should be 200
     describe('Should return all of the Admins in the database', () => {
         test('Admin Test - Should response with a 200 status code', async () => {
             const admins = await request(server).get('/')
@@ -58,6 +58,6 @@ describe('Test Case - Admin missing E-mail and password', () => { // Test Case 4
     })
 })
 
-describe('Test Case - Products missing name and description', () => { // Test Case 5
-    test("Should respond with a status code of 400")
-})
+// describe('Test Case - Products missing name and description', () => { // Test Case 5
+//     test("Should respond with a status code of 400")
+// })

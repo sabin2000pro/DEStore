@@ -1,3 +1,9 @@
+// Code Author: Sabin Constantin Lungu
+// Code Written on: 25/10/2021
+// Last Modified Date: 25/10/2021 @ 21:54
+// Bugs? N/A
+// File Purpose: Homepage React Component - Displays information about DE-Store and allows navigation between pages
+
 import '../App.css';
 import {useEffect, useState} from 'react';
 
@@ -12,6 +18,7 @@ const ProductsList = () => { // Component to Render all of the products on the s
     const pages = new Array(numberOfPages).fill(null).map((v, i) => i); // Create an array of pages
 
     useEffect(() => { // useEffect hook to retrieve all the products
+
         return fetch(`http://localhost:5950/api/v1/products?page=${pageNumber}`).then((response) => response.json()).then(({total, products}) => {
             setProducts(products);
             setNumberOfPages(total);
@@ -21,7 +28,7 @@ const ProductsList = () => { // Component to Render all of the products on the s
 
     }, [pageNumber]);
 
-   
+
     return (
         <div className = "App">
         <input className = "search__input" type = "text" placeholder = "Search Product" onChange = {(event) => setSearchTerm(event.target.value)}/>
@@ -65,4 +72,4 @@ const ProductsList = () => { // Component to Render all of the products on the s
     
 }
 
-export default ProductsList
+export default ProductsList // Export Component
