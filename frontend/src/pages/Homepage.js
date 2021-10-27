@@ -1,4 +1,5 @@
 import '../App.css';
+import {useEffect, useState} from 'react';
 
 // Code Author: Sabin Constantin Lungu
 // Code Written on: 25/10/2021
@@ -7,10 +8,10 @@ import '../App.css';
 // File Purpose: Homepage
 
 const Homepage = () => {
-
+   
     return (
        <div>
-           <h1>DE STORE HOMEPAGE</h1>
+           <h1>DE-Store Homepage</h1>
        </div>
     )
 }

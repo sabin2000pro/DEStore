@@ -15,7 +15,7 @@ module.exports.register = async (request, response, next) => { // Register a new
         const {username, email, password} = request.body; // Extract Username, Email and Password From the body
 
         if(!username || !email || !password) { // If there is no username, email or password provided
-            return response.status(404).json({message: 'Please make sure you provide the correct details before registering'});
+            return response.status(badRequest).json({message: 'Please make sure you provide the correct details before registering'});
         }
 
         const newAdmin = new Admin({username, email, password}); // Create a new admin

@@ -1,6 +1,7 @@
 const fs = require('fs');
 const mongoose = require('mongoose');
 const Admin = require('../models/adminModel');
+const Product = require('../models/productModel');
 
 const connectDB = async () => { // Function that connects to the database
     try {
@@ -71,7 +72,12 @@ const deleteData = async () => {
 
 const importProducts = async () => {
     try {
+        const products = await Product.find();
 
+        if(products.length > 0) {
+            // Write to file
+            
+        }
     } 
     
     catch(error) {

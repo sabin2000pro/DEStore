@@ -2,6 +2,7 @@ import '../App.css';
 import {useEffect, useState} from 'react';
 
 const ProductsList = () => { // Component to Render all of the products on the screen
+
     const [pageNumber, setPageNumber] = useState(0); // The Current Page Number
     const [numberOfPages, setNumberOfPages] = useState(0); // Number of Pages Variable
     const [products, setProducts] = useState([]); // Product State
@@ -20,6 +21,7 @@ const ProductsList = () => { // Component to Render all of the products on the s
 
     }, [pageNumber]);
 
+   
     return (
         <div className = "App">
         <input className = "search__input" type = "text" placeholder = "Search Product" onChange = {(event) => setSearchTerm(event.target.value)}/>
@@ -60,6 +62,7 @@ const ProductsList = () => { // Component to Render all of the products on the s
 
     </div>
     )
+    
 }
 
 export default ProductsList
