@@ -15,9 +15,9 @@ const serverError = 500;
  * 
  * @param {*} request - Receives client request
  * @param {*} response - Server responds
- * @param {*} next 
- * @function verifyBody()
- * @description: This function verifies the request body before submitting the data
+ * @param {*} next - Calls next middleware function in the chain
+ * @function register()
+ * @description: This middleware function allows admins to register an account with their username, email and password.
   * @returns next middleware function
  */
 module.exports.register = async (request, response, next) => { // Register a new Admin
@@ -39,7 +39,6 @@ module.exports.register = async (request, response, next) => { // Register a new
         if(error) {
             return response.status(serverError).json({message: error.toString()});
         }
-
     }
 };
 
@@ -48,7 +47,7 @@ module.exports.register = async (request, response, next) => { // Register a new
  * @param {*} request - Receives client request
  * @param {*} response - Server responds
  * @param {*} next 
- * @function verifyBody()
+ * @function login
  * @description: This function verifies the request body before submitting the data
   * @returns next middleware function
  */
