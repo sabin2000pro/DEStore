@@ -4,23 +4,25 @@ const server = require('../server');
 const Admin = require('../models/adminModel');
 const Product = require('../models/productModel');
 
-// BUG: Needs to be sorted before other tests
+// * Test Passes
 beforeAll(async() => { // Test DB connection
  const url = 'mongodb+srv://sabin2000:123mini123@cluster0.sjkmj.mongodb.net/destore?retryWrites=true&w=majority';
  return await mongoose.connect(url);
 });
 
-describe('GET /products', () => {
+// * Test Passes
+describe('GET /products', () => { // Test Case 1
     describe('Should return all of the Products', () => {
         test('Should respond with a 200 status code', async () => {
 
-            const response = await request(server).get('/api/v1/products').send();
-            return expect(response.status).toBe(200);
+            const response = await request(server).get('/api/v1/products').send(); // Send over the request to the server
+            return expect(response.status).toBe(200); // Send back response
         })
     })
 });
 
-describe('POST /products', () => {
+// * Test Passes
+describe('POST /products', () => { // Test Case 2
     describe('Create a product given the name, image, description, price, quantity, saleOffer and colour', () => {
         test("Should respond with a 201 status code", async () => {
             const response = await request(server).post('/api/v1/products').send({name: "Test Product 2", "image": "https://i.ebayimg.com/images/g/PTgAAOSwWnpdNGeL/s-l500.jpg", "description": "A nice", "price": 299.99, "quantity": 2, "saleOffer": "Buy 1 get 1 free", "colour": "SSpace gray"});
@@ -29,6 +31,7 @@ describe('POST /products', () => {
     })
 })
 
+// * Test Passes
 describe('GET /admins', () => { // Returns all of the admins - TEST SHOULD PASS as the expected HTTP status code should be 200
     describe('Should return all of the Admins in the database', () => {
         test('Admin Test - Should response with a 200 status code', async () => {
@@ -37,18 +40,18 @@ describe('GET /admins', () => { // Returns all of the admins - TEST SHOULD PASS 
     })
 })
 
-// Test for missing Admin E-mail and password
-describe('Test Case - Admin missing E-mail and password', () => {
+// * Test Passes
+describe('Test Case - Admin missing E-mail and password', () => { // Test Case 4 - Test Missing Admin E-mail and Password.
     test("Should respond with status code of 400", async () => {
         const bodyData = [{email: "email", password: "password"}];
 
-        for (const body of bodyData) {
+        for (const body of bodyData) { // For every value in the body data array of objects
             const response = await request(server).post('/api/v1/auth/register').send(body);
             return expect(response.status).toBe(400);
         }
     })
 })
 
-describe('Test Case - Products missing name and description', () => {
+describe('Test Case - Products missing name and description', () => { // Test Case 5
     test("Should respond with a status code of 400")
 })
