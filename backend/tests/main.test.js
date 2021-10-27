@@ -1,3 +1,9 @@
+// Copyright: All Rights Reserved - Sabin Constantin Lungu Edinburgh Napier University
+// Code Author: Sabin Constantin Lungu
+// Tests Written on: 25/10/2021
+// Last Modified Date: 27/10/2021 @ 09:55
+// Bugs? N/A
+
 const request = require('supertest');
 const mongoose = require('mongoose');
 const server = require('../server');
