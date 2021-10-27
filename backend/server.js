@@ -3,10 +3,13 @@
 // Last Modified Date: 25/10/2021 @ 21:54
 // Bugs? N/A
 // Purpose of File: server.js => Used to connect to the server
+
+// GLOBAL MIDDLEWARE
 const express = require('express');
-const sanitize = require('mongo-sanitize');
+const mongoSanitize = require('express-mongo-sanitize');
 const session = require('express-session');
 const helm = require('helmet');
+const xss = require('xss-clean');
 const cors = require('cors');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
@@ -15,13 +18,16 @@ const port = process.env.PORT;
 const connectDB = require('./database/db.js');
 const app = express();
 
+// Routes
 const productRoutes = require('./routes/productRoutes');
 const authRoutes = require('./routes/authRoutes');
 
 app.use(express.json());
 app.use(cors());
 app.use(morgan('dev'));
+app.use(mongoSanitize());
 app.use(helm());
+app.use(xss());
 app.use(session({
     secret: 'my-secret',
     resave: true,
