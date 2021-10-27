@@ -30,6 +30,8 @@ app.use(session({
       httpOnly: false
     }
   }));
+
+  // Call function to connect to the database
 connectDB();
 
 app.use('/api/v1/products', productRoutes);
