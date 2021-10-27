@@ -137,11 +137,11 @@ module.exports.getAllProducts = async (request, response, next) => { // Returns 
  * @param {*} request - Receives client request
  * @param {*} response - Server responds
  * @param {*} next 
- * @function getProduct()
+ * @function getProduct() -> Retrieves all of the products from the database
+ * @type: Asynchronous Function
  * @description: This function verifies the request body before submitting the data
   * @returns next middleware function
  */
-
 module.exports.getProduct = async (request, response, next) => {
     try {
         const id = request.params.id;
@@ -162,19 +162,22 @@ module.exports.getProduct = async (request, response, next) => {
  * @param {*} request - Receives client request
  * @param {*} response - Server responds
  * @param {*} next 
- * @function verifyBody()
+ * @function createProduct()
  * @description: This function verifies the request body before submitting the data
   * @returns next middleware function
  */
 
 module.exports.createProduct = async (request, response, next) => { // Middleware function to create a product
     try {
-
-        const {name, image, description, price, quantity, saleOffer, colour} = request.body;
-        const newProduct = new Product({name, image, description, price, quantity, saleOffer, colour});
+        let productCreated = false;
+        const {name, image, description, price, quantity, saleOffer, colour} = request.body; // Extract body data
+        const newProduct = new Product({name, image, description, price, quantity, saleOffer, colour}); // Create a new product with the corresponding data
         await newProduct.save();
+        productCreated = true;
 
-        return response.status(created).json("Product Created");
+        if(productCreated) {
+            return response.status(created).json("Product Created");
+        }
     } 
     
     catch(error) {
@@ -182,7 +185,6 @@ module.exports.createProduct = async (request, response, next) => { // Middlewar
         if(error) {
             return response.status(serverError).json({message: 'Request Failed', cause: error.toString()});
         }
-
     }
 };
 
