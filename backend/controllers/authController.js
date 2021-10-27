@@ -47,42 +47,40 @@ module.exports.register = async (request, response, next) => { // Register a new
  * @param {*} request - Receives client request
  * @param {*} response - Server responds
  * @param {*} next 
- * @function login
- * @description: This function verifies the request body before submitting the data
+ * @function login()
+ * @description: This function logs in a user to the application
   * @returns next middleware function
  */
 
-module.exports.login = async (request, response, next) => { // Function to login an Admin
+module.exports.login = async (request, response, next) => {
     try {
-        const {email, password} = request.body;
+        const {email, password} = request.body; // Extract E-mail and Password from the body
 
         if(!email || !password) {
             return response.status(notFound).json({message: "Please provide your e-mail and password before logging in"});
         }
 
-        const admin = await Admin.findOne({email}).select('+password');
+        const admin = await Admin.findOne({email}).select('+password'); // Find an admin by the e-mail
 
         if(!admin) {
             return response.status(notFound).json({message: 'No admin found with that e-mail address'});
         }
 
-        const isPasswordMatch = await admin.comparePasswords(password);
+        const isPasswordMatch = await admin.comparePasswords(password); // Returns true or false if passwords match or not
 
-        if(!isPasswordMatch) {
+        if(!isPasswordMatch) { // If passwords don't match
             return response.status(notFound).json({message: "Passwords do not match. Check your entries"});
         }
 
-        return sendToken(admin, ok, response);
+        return sendToken(admin, ok, response); // Send back JSON token
     } 
     
     catch(error) {
 
         if(error) {
-            return response.status(500).json({message: error.toString()});
+            return response.status(serverError).json({message: error.toString()});
         }
-
     }
-
 };
 
 /**
@@ -90,7 +88,7 @@ module.exports.login = async (request, response, next) => { // Function to login
  * @param {*} request - Receives client request
  * @param {*} response - Server responds
  * @param {*} next 
- * @function verifyBody()
+ * @function forgotPassword()
  * @description: This function verifies the request body before submitting the data
   * @returns next middleware function
  */
@@ -193,13 +191,15 @@ module.exports.getSingleAdmin = async (request, response, next) => { // Middlewa
         const id = request.params.id;
         const admin = await Admin.findById(id).exec();
 
-        return response.status(200).json(admin);
+        return response.status(ok).json(admin);
     } 
     
     catch(error) {
+
         if(error) {
-            return response.status(400).json({message: error.toString()});
+            return response.status(badRequest).json({message: error.toString()});
         }
+        
     }
 }
 
@@ -215,7 +215,10 @@ module.exports.getSingleAdmin = async (request, response, next) => { // Middlewa
 
 module.exports.deleteAdmin = async (request, response, next) => { // Middleware function to delete a single admin
     try {
+        const id = request.params.id;
+        await Admin.findByIdAndDelete(id);
 
+        return response.status(204).json({message: 'Admin Deleted'});
     } 
     
     catch(error) {
