@@ -3,8 +3,9 @@
 // Last Modified Date: 25/10/2021 @ 21:54
 // Bugs? N/A
 // Purpose of File: server.js => Used to connect to the server
-
 const express = require('express');
+const sanitize = require('mongo-sanitize');
+const helm = require('helmet');
 const cors = require('cors');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
@@ -19,6 +20,7 @@ const authRoutes = require('./routes/authRoutes');
 app.use(express.json());
 app.use(cors());
 app.use(morgan('dev'));
+app.use(helm());
 connectDB();
 
 app.use('/api/v1/products', productRoutes);
