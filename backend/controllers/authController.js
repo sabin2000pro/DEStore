@@ -143,7 +143,9 @@ module.exports.resetPassword = async (request, response, next) => { // Middlewar
     } 
     
     catch(error) {
-
+        if(error) {
+            return response.status(badRequest).json({message: error.toString()});
+        }
     }
 }
 
@@ -162,16 +164,16 @@ module.exports.editAdmin = async (request, response, next) => {
         const id = request.params.id;
 
         if(!id) { // If no ID is specified
-            return response.status(404).json("Admin ID invalid - Please check your entry");
+            return response.status(notFound).json("Admin ID invalid - Please check your entry");
         }
 
         const updatedAdmin = await Admin.findByIdAndUpdate(id, request.body).exec(); // Updated admin
-        return response.status(200).json(updatedAdmin);
+        return response.status(ok).json(updatedAdmin);
     } 
     
     catch(error) {
         if(error) {
-            return response.status(400).json({message: error.toString()});
+            return response.status(badRequest).json({message: error.toString()});
         }
     }
 }
@@ -199,7 +201,7 @@ module.exports.getSingleAdmin = async (request, response, next) => { // Middlewa
         if(error) {
             return response.status(badRequest).json({message: error.toString()});
         }
-        
+
     }
 }
 
