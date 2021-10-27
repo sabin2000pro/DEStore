@@ -1,0 +1,17 @@
+[
+    {"_id":"6177cb65646a3395b8f837c8",
+    "username":"babi9",
+    "email":"babi@gmail.com",
+    "password":"$2a$10$gK/As3/Si7yTZG61nlpaZur4gLANUrtjEsNuHpMb5HV/mojsFvoO.",
+    "__v":0
+    },
+    
+    {
+    "_id":"6177ce3b3d3a169383e4827f",
+    "username":
+    "testttlol",
+    "email":"testlol@gmail.com",
+    "password":"$2a$10$GmMkpOdr4N/ER5hUwnRWI.w/kWHCe/0XcbrqG8aTTGU7bfXJ00Mkm",
+    "__v":0
+    }
+]
