@@ -6,7 +6,7 @@ import {Route, Router, Link, Switch} from 'react-router-dom';
 const App = () => {
   return (
       <div>
-        
+          <ProductsList />
       </div>
   )
 }

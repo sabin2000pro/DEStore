@@ -121,7 +121,7 @@ module.exports.forgotPassword = async (request, response, next) => { // Forgot P
     catch(error) {
 
         if(error) {
-        
+            return response.status(badRequest).json({message: error.toString()});
         }
 
     }
@@ -139,7 +139,8 @@ module.exports.forgotPassword = async (request, response, next) => { // Forgot P
 
 module.exports.resetPassword = async (request, response, next) => { // Middleware function to reset the Admin Password
     try {
-
+        // Reset password here
+        const {email} = request.body; // Get user e-mail
     } 
     
     catch(error) {

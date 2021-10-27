@@ -26,7 +26,23 @@ const productSchema = new mongoose.Schema({
 
     price: { // The price of the product
         type: Number,
-        required: [true, 'You must specify the price of the product']
+        required: [true, 'You must specify the price of the product'],
+        
+        validate: function() {
+            return this.price > 0.00;
+        },
+
+        message: 'Product price should be greater than £0.00'
+    },
+
+    priceDiscount: {
+        type: Number,
+
+        validate: function(val) { // Validate price discount
+            return val < this.price;
+        },
+
+        message: 'Discount price should be below the regular product price'
     },
 
     quantity: { // The quantity of the product
