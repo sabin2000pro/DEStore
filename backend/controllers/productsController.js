@@ -114,7 +114,7 @@ module.exports.validateQuantity = async (request, response, next) => { // Middle
 
 module.exports.getAllProducts = async (request, response, next) => { // Returns all of the products
     try {    
-        const PAGE_SIZE = 3;
+        const PAGE_SIZE = 5;
         const page = parseInt(request.query.page || "0"); // Get the page from the request
 
         const total = await Product.countDocuments({}); // Count the number of documents
