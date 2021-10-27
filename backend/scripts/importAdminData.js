@@ -75,7 +75,11 @@ const importProducts = async () => {
         const products = await Product.find();
 
         if(products.length > 0) {
-            // Write to file
+            return fs.writeFile(`${__dirname}/../data/products.json`, JSON.stringify(products), (err) => {
+                console.log(`Data written to file success`);
+                
+                return process.exit(1);
+            })
             
         }
     } 

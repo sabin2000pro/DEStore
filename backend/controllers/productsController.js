@@ -193,7 +193,7 @@ module.exports.createProduct = async (request, response, next) => { // Middlewar
  * @param {*} request - Receives client request
  * @param {*} response - Server responds
  * @param {*} next 
- * @function verifyBody()
+ * @function editProduct() -> Edits a product by sending a PATCH request
  * @description: This function verifies the request body before submitting the data
   * @returns next middleware function
  */
@@ -202,8 +202,6 @@ module.exports.editProduct = async (request, response, next) => { // Modifies a 
     try {
         const id = request.params.id;
         const updatedProduct = await Product.findByIdAndUpdate(id, request.body);
-
-        // Send back response
         return response.status(ok).json(updatedProduct);
     } 
     

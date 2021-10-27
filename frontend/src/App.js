@@ -6,8 +6,6 @@ import {Route, Router, Link, Switch} from 'react-router-dom';
 const App = () => {
   return (
       <div>
-         <Homepage />
-         <ProductsList />
         
       </div>
   )
