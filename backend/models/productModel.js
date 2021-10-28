@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 // Last Modified Date: 25/10/2021 @ 21:54
 // Bugs? N/A
 
-const productSchema = new mongoose.Schema({
+const productSchema = new mongoose.Schema({ // The Product Description
     name: {
         type: String,
         required: [true, 'Product must contain a name'],
@@ -18,7 +18,7 @@ const productSchema = new mongoose.Schema({
         required: [true, 'You must provide an Image URL for the product']
     },
 
-    description: {
+    description: { // Prodcut Description
         type: String,
         required: [true, 'You must specify a description for the product'],
         unique: true
@@ -27,7 +27,7 @@ const productSchema = new mongoose.Schema({
     price: { // The price of the product
         type: Number,
         required: [true, 'You must specify the price of the product'],
-        
+
         validate: function() {
             return this.price > 0.00;
         },

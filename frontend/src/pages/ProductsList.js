@@ -34,6 +34,7 @@ const ProductsList = () => { // Component to Render all of the products on the s
         <h3>Page {pageNumber + 1}</h3>
 
         {displayed ? products.filter((value) => { // Filter the products
+
             if(searchTerm === "") { // if there is no search term
                 return <div><h3>No product found</h3></div>; // Return value
             }
@@ -42,7 +43,7 @@ const ProductsList = () => { // Component to Render all of the products on the s
                 return value;
             }
 
-        }).map((product, key) => (
+        }).map((product, key) => ( // Map through the products
             
             <div className = "products" key = {key}>
                 <h4>Product Name: {product.name}</h4>
