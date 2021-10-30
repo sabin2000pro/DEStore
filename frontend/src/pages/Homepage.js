@@ -13,7 +13,7 @@ const Homepage = () => {
     return (
        <div>
            <main>
-               <h1>DE-Store</h1>
+               <h1>DE-Store Homepage</h1>
            </main>
 
        </div>
