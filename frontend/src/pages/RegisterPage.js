@@ -10,18 +10,23 @@ const RegisterPage = () => { // Register Account Page Component
     const [error, setError ] = useState("");
 
     const registerHandler = async (e) => {
-        e.preventDefault();
+        try {
+            e.preventDefault();
 
-        if(password !== confirmPassword) {
-            setPassword("");
-            setConfirmPassword("");
+            if(password !== confirmPassword) {
+                setPassword("");
+                setConfirmPassword("");
+    
+                setTimeout(() => {
+                    setError("");
+                }, 5000);
+            }
+        } 
+        
+        catch(error) {
 
-            setTimeout(() => {
-                setError("");
-            }, 5000);
         }
 
-        // Check if passwords match or not
     }
 
     return (
@@ -44,9 +49,12 @@ const RegisterPage = () => { // Register Account Page Component
                     <input type = "password" required id = "password" placeholder = "Enter Password" value = {password} onChange = {(e) => {setPassword(e.target.value)}} />
                 </div>
 
+                <div>
+                    <label for = "confirmpassword">Confirm Password </label>
+                    <input type = "password" required id = "confirmpassword" placeholder = "Re-Enter Password" value = {confirmPassword} onChange = {(e) => {setConfirmPassword(e.target.value)}} />
+                 </div>
 
-
-                
+                <button type = "submit">Submit</button>
 
             </form>
         </div>
