@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
+const BYTES = 20;
+const ROUNDS = 10;
 
 // Code Author: Sabin Constantin Lungu
 // Code Written on: 25/10/2021
@@ -40,6 +43,14 @@ adminSchema.pre('save', async function(next) { // Hash Admin Password before sav
 
 adminSchema.methods.comparePasswords = async function(password) { // Method to compare passwords before signing in
     return await bcrypt.compare(password, this.password); // Returns true or false if the passwords match
+}
+
+adminSchema.methods.getResetPasswordToken = function() { // Get the reset password token
+    const resetToken = crypto.randomBytes(BYTES).toString("hex"); // Create the reset token
+    this.resetPasswordToken = crypto.createHash("sha256").update(resetToken).digest('hex');
+    this.resetPasswordExpire = Date.now() + 10 * (60 * 1000); // 1 minute before expiration
+
+    return resetToken; // Return the reset token
 }
 
 adminSchema.methods.getSignedToken = function() { // Sign a JSON web token for the admin
