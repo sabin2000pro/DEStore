@@ -45,9 +45,9 @@ module.exports.verifyBody = (request, response, next) => { // Verify the body be
 
 module.exports.verifyQuantity = async (request, response, next) => { // Verifies the product quantity before sending e-mail if stock is low. Middleware function before creating and retrieving a new product
     try {        
-     
-            const id = request.params.id;
+            const id = request.params.id; // Product ID
             const product = await Product.findById(id); 
+
             const {quantity, name} = product; // Extract the quantity and the name of the product
             const {email} = request.body; // Extract e-mail from the body
             const admin = await User.findOne({email}); // Find a user by e-mail address

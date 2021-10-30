@@ -19,6 +19,8 @@ const AdminProductsPage = () => {
     const [productColour, setProductColour] = useState("");
 
     const [newPrice, setNewPrice] = useState(0);
+    const [newQty, setNewQty] = useState(0); // New Product Quantity
+    const [email, setEmailAddress] = useState("");
 
     const pages = new Array(numberOfPages).fill(null).map((v, i) => i);
 
@@ -46,18 +48,7 @@ const AdminProductsPage = () => {
         return axios.get(`http://localhost:5950/api/v1/products/${id}`).then((response) => {
             const {quantity} = response.data;
 
-            if(quantity > 0) {
-                alert('Product In Stock');
-            }
-
-            if(quantity < 3) {
-                alert('Low Stock - E-mail Sent To Store manager');
-            }
-
-            if(quantity === 0) {
-                alert(`Product Out Of Stock - E-mail Sent To Store Manager`);
-            }
-
+            return axios.post(`http://localhost:5950/api/v1/products/verifyQuantity/${id}`, {id, email: email});
         })
     };
 
@@ -139,6 +130,9 @@ const AdminProductsPage = () => {
             </div>
 
             <div>
+
+                <label for = "email">E-mail Address </label>
+                <input type = "text" placeholder = "Enter E-mail Address" onChange = {(e) => {setEmailAddress(e.target.value)}} />
                 <button onClick = {() => checkQuantity(product._id)}>Check Quantity</button>
             </div>
 
