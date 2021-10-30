@@ -1,15 +1,25 @@
 import React, {useState, useEffect} from 'react'
 import '../App.css';
 import axios from 'axios';
+import {Link, useHistory} from 'react-router-dom';
 
 const RegisterPage = () => { // Register Account Page Component
+    let history = useHistory();
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError ] = useState("");
+    let port = 5950;
 
-    const registerHandler = async (e) => {
+    useEffect(() => {
+        if(localStorage.getItem("authToken")) {
+            return history.push("/adminlogin");
+        }
+
+    }, [history])
+
+    const registerHandler = async (e) => { // Function to Register User
         try {
             e.preventDefault();
 
@@ -21,10 +31,17 @@ const RegisterPage = () => { // Register Account Page Component
                     setError("");
                 }, 5000);
             }
+
+            const {data} = await axios.post(`http://localhost:${port}/api/v1/auth/register`, {username, email, password});
+            console.log(data.token);
+            localStorage.setItem("authToken", data.token);
+            return history.push("/adminlogin");
         } 
         
         catch(error) {
+            if(error) {
 
+            }
         }
 
     }
@@ -55,6 +72,7 @@ const RegisterPage = () => { // Register Account Page Component
                  </div>
 
                 <button type = "submit">Submit</button>
+                <span>Already have an account ? <Link to = "/adminlogin">Login</Link></span>
 
             </form>
         </div>
