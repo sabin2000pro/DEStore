@@ -35,11 +35,11 @@ const AdminProductsPage = () => {
     }
 
     const updatePrice = (id) => {
-        return axios.put(`http://localhost:5950/api/v1/products`, {id: id, newPrice: newPrice});
+        return axios.put(`http://localhost:5950/api/v1/products/${id}`, {id: id, newPrice: newPrice});
     };
 
     const deleteProduct = (id) => { // Deletes a product from the inventory
-        return axios.delete(``);
+        return axios.delete(`http://localhost:5950/api/v1/products/${id}`, {id:id});
     };
 
     return (
@@ -113,6 +113,11 @@ const AdminProductsPage = () => {
                 <label for = "editPrice">Edit Price:  </label>
                 <input type = "number" placeholder = "Enter New Price" onChange = {(e) => setNewPrice(e.target.value)} />
                 <button onClick = {() => updatePrice(product._id)} type = "submit">Edit Price</button>
+            </div>
+
+            <div>
+                <h2>Delete Product </h2>
+                <button onClick = {() => deleteProduct(product._id)} type = "submit">Delete Product</button>
             </div>
 
             <h4>Product Name: {product.name}</h4>
