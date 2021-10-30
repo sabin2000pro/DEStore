@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 
 const LoginPage = () => {
@@ -7,12 +8,13 @@ const LoginPage = () => {
     const [password, setPassword] = useState("");
 
     const loginHandler = async (e) => {
-
+       
     }
+    
 
     return (
         <div>
-            <h1>Admin Login </h1>
+            <h1>Store Manager Login </h1>
             <form onSubmit = {loginHandler}>
 
                 <div>

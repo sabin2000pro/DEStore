@@ -47,7 +47,7 @@ const RegisterPage = () => { // Register Account Page Component
 
     return (
         <div>
-            <h1 className = "register__txt">Admin Registration</h1>
+            <h1 className = "register__txt">Store Manager Registration</h1>
             <form onSubmit = {registerHandler}>
 
                 <div>

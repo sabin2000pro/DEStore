@@ -23,11 +23,11 @@ const Navigation = () => { // Navigation Bar
             </li>
 
             <li>
-              <Link to="/adminregister">Admin Register</Link>
+              <Link to="/adminregister">Store Manager Register</Link>
             </li>
 
             <li>
-                <Link to = '/adminlogin'>Admin Login</Link>
+                <Link to = '/adminlogin'>Store Manager Login</Link>
             </li>
 
           </ul>

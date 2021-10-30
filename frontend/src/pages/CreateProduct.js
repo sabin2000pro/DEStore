@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CreateProduct = () => {
+const CreateProduct = () => { // Protected Route
     return (
         <div>
             
