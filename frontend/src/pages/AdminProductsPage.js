@@ -12,6 +12,11 @@ const AdminProductsPage = () => {
     const [productName, setNewProductName] = useState("");
     const [productImage, setProductImage] = useState("");
     const [productDescription, setProductDescription] = useState(""); // The New Product Description
+    const [productPrice, setProductPrice] = useState(0);
+    const [productPriceDiscount, setProductPriceDiscount] = useState(0);
+    const [productQuantity, setProductQuantity] = useState(0); // The Product Quantity
+    const [productSaleOffer, setProductSaleOffer] = useState("");
+    const [productColour, setProductColour] = useState("");
 
     const pages = new Array(numberOfPages).fill(null).map((v, i) => i);
 
@@ -27,12 +32,12 @@ const AdminProductsPage = () => {
         return axios.post(``);
     }
 
-    const editProduct = (id) => {
-
+    const updateProductPrice = (id) => {
+        return axios.put(``);
     };
 
     const deleteProduct = (id) => { // Deletes a product from the inventory
-
+        return axios.delete(``);
     };
 
     return (
@@ -49,6 +54,11 @@ const AdminProductsPage = () => {
          <div>
             <label for = "image">Product Image URL </label>
              <input type = "text" placeholder = "Enter Image URL" required id = "image" onChange = {(e) => {setProductImage(e.target.value)}} />
+        </div>
+
+        <div>
+            <label for = "description">Product Description </label>
+            <input type = "text" placeholder = "Enter Product Description" required id = "description" onChange = {(e) => {setProductDescription(e.target.value)}} />
         </div>
 
          <h3>Page {pageNumber + 1}</h3>
