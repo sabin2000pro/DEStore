@@ -203,15 +203,20 @@ module.exports.createProduct = async (request, response, next) => { // Middlewar
 
 module.exports.editProduct = async (request, response, next) => { // Modifies a Product such as the price, description, URL
     try {
-        const id = request.params.id;
-        const updatedProduct = await Product.findByIdAndUpdate(id, request.body);
-        return response.status(ok).json(updatedProduct);
+        const newPrice = request.body.newPrice;
+        const id = request.body.id;
+        await Product.findById(id, (err, updatedProduct) => {
+            updatedProduct.price = newPrice;
+            updatedProduct.save();
+            console.log(updatedProduct);
+            return response.send("Data Updated");
+        }).clone().catch(err => {console.log(err)});
     } 
     
     catch(error) {
 
         if(error) {
-            return response.status(serverError).json({message: 'Request Failed', error});
+            return response.status(serverError).json({message: 'Request Failed', error: error.toString()});
         }
 
     }

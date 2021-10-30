@@ -56,8 +56,7 @@ const productSchema = new mongoose.Schema({ // The Product Description
     },
 
     colour: {
-        type: String,
-        required: [true, 'You must specify the colour of the product']
+        type: String
     }
     
 
