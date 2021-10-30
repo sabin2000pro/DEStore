@@ -209,6 +209,20 @@ module.exports.getSingleAdmin = async (request, response, next) => { // Middlewa
     }
 }
 
+module.exports.getAllAdmins = async (request, response, next) => {
+    try {
+        const method = request.method;
+        const admins = await Admin.find();
+
+        return response.status(200).json(admins);
+
+    } 
+    
+    catch(error) {
+
+    }
+}
+
 /**
  * 
  * @param {*} request - Receives client request

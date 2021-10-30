@@ -235,10 +235,14 @@ module.exports.deleteProduct = async (request, response, next) => { // Function 
     try {
         const id = request.params.id;
         const product = await Product.findByIdAndRemove(id).exec();
-        let {quantity} = product;
-        quantity -= 1;
 
-        return response.status(deleted).send(`Product Deleted - Quantity of this product is now ${quantity}`);
+            const admin = await User.findOne(); // Find a user by e-mail address
+            let {quantity, name} = product;
+            quantity--;
+            const productDeletedMsg = `<h1>The product ${product} has been deleted from the inventory </h1>`;
+            await sendEmail({to: admin, subject: "Product Deleted", text: productDeletedMsg});    
+
+             return response.status(deleted).send(`Product Deleted - Quantity of this product is now ${quantity}`);
     } 
     
     catch(error) {
