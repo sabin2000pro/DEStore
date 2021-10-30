@@ -59,6 +59,7 @@ const productSchema = new mongoose.Schema({ // The Product Description
         type: String,
         required: [true, 'You must specify the colour of the product']
     }
+    
 
 });
 
