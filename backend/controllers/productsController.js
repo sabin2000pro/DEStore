@@ -170,17 +170,12 @@ module.exports.getProduct = async (request, response, next) => {
 
 module.exports.createProduct = async (request, response, next) => { // Middleware function to create a product
     try {
-        let productCreated = false;
-        const {name, image, description, price, quantity, saleOffer, colour} = request.body; // Extract body data
-        const newProduct = new Product({name, image, description, price, quantity, saleOffer, colour}); // Create a new product with the corresponding data
+        const {name, image, description, price, priceDiscount, quantity, saleOffer, colour} = request.body; // Extract body data
+        const newProduct = new Product({name, image, description, price, priceDiscount, quantity, saleOffer, colour}); // Create a new product with the corresponding data
 
         await newProduct.save();
-        productCreated = true;
-
-        if(productCreated) {
-            return response.status(created).json("Product Created");
-        }
-
+        return response.status(created).json("Product Created");
+    
     } 
     
     catch(error) {

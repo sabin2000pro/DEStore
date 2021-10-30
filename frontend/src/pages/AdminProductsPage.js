@@ -31,7 +31,7 @@ const AdminProductsPage = () => {
     }, [pageNumber]);
 
     const createProduct = () => { // Function that creates a new product to be stored
-        return axios.post(``);
+        return axios.post(`http://localhost:5950/api/v1/products`, {name: productName, image: productImage, description: productDescription, price: productPrice, priceDiscount: productPriceDiscount, quantity: productQuantity, saleOffer: productSaleOffer, colour: productColour});
     }
 
     const updatePrice = (id) => {
@@ -73,6 +73,23 @@ const AdminProductsPage = () => {
             <label for = "priceDiscount">Price Discount </label>
             <input type = "number" placeholder = "Enter Price Discount" required id = "priceDiscount" onChange = {(e) => {setPriceDiscount(e.target.value)}} />
         </div>
+
+        <div>
+            <label for = "priceDiscount">Quantity</label>
+            <input type = "number" placeholder = "Enter Qty To Add" required id = "quantity" onChange = {(e) => {setProductQuantity(e.target.value)}} />
+        </div>
+
+        <div>
+            <label for = "saleOffer">Sale Offer</label>
+            <input type = "text" placeholder = "Enter Type of Sale Offer" required id = "saleOffer" onChange = {(e) => {setProductSaleOffer(e.target.value)}} />
+        </div>
+
+        <div>
+            <label for = "saleOffer">Colour</label>
+            <input type = "text" placeholder = "Enter Colour" required id = "colour" onChange = {(e) => {setProductColour(e.target.value)}} />
+        </div>
+
+        <button onClick = {createProduct} type = "submit">Create New Product </button>
 
          <h3>Page {pageNumber + 1}</h3>
 
