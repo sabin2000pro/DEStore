@@ -46,7 +46,8 @@ app.use('/api/v1/products', productRoutes);
 app.use('/api/v1/auth', authRoutes);
 
 app.all('*', (request, response, next) => {
-    return response.status(404).json({message: "404 - Page not found"});
+ response.status(404).json({message: "404 - Page not found"});
+ return next();
 })
 
 const server = app.listen(port, (error) => { // Creates the Server

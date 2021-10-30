@@ -4,6 +4,8 @@
 // Bugs? N/A
 
 const Product = require('../models/productModel');
+const User = require('../models/adminModel');
+const sendEmail = require('/Users/sabin2000/Desktop/DEStore/backend/utils/sendEmail.js');
 const ok = 200;
 const created = 201;
 const deleted = 204;
@@ -42,30 +44,32 @@ module.exports.verifyBody = (request, response, next) => { // Verify the body be
  */
 
 module.exports.verifyQuantity = async (request, response, next) => { // Verifies the product quantity before sending e-mail if stock is low. Middleware function before creating and retrieving a new product
-    try {
-        const method = request.method; // The method being requested
-
-        if(method === 'GET') {
+    try {        
+     
             const id = request.params.id;
             const product = await Product.findById(id); 
             const {quantity, name} = product; // Extract the quantity and the name of the product
+            const {email} = request.body; // Extract e-mail from the body
+            const admin = await User.findOne({email}); // Find a user by e-mail address
 
-            if(quantity <= 3) {
-                console.log(`LOW STOCK The product ${name} has a quantity of ${quantity}`);
-                // Send E-mail
+           const lowStockMsg = `<h1>The quantity for the product ${name} is low in stock. More will be ordered soon. There are ${quantity} left in stock`;
+           const outOfStockMsg = `<h1>Currently out of stock for the product ${name}. More stock will be ordered from the warehouse soon. </h1>`;
+
+            if(quantity < 3) {
+                await sendEmail({to: admin.email, subject: "Low Stock", text: lowStockMsg});    
             }  
             
             if(quantity === 0) { // If there is no stock
-                console.log(`Out of stock. Product is going to be ordered`);
-                // Send E-mail for re-stock
+                await sendEmail({to: admin.email, subject: "Out of stock", text: outOfStockMsg});    
             }
-        }    
-    } 
+
+            return response.status(201).json("E-mail Sent");
+        }   
     
     catch(error) {
 
         if(error) {
-            return response.status(notFound).json("An error processing the quantity")
+            return response.status(notFound).json({error: error.toString()})
         }
     }
 

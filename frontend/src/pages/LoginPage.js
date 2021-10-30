@@ -14,7 +14,7 @@ const LoginPage = () => {
         }
     }, [history]);
 
-    const loginHandler = async (e) => {
+    const loginHandler = async (e) => { // Login Function
        try {
         e.preventDefault();
            const {data} = await axios.post(`http://localhost:5950/api/v1/auth/login`, {email, password});

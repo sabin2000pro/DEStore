@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 import AdminProductsPage from './AdminProductsPage'
 
-const PrivateScreen = () => {
+const PrivateScreen = () => { // Private Screen Component
     let history = useHistory();
     const [error, setError] = useState("");
 
@@ -12,7 +12,7 @@ const PrivateScreen = () => {
         }
     }, [history])
 
-    const logoutHandler = async (e) => {
+    const logoutHandler = async (e) => { // Function to log out the Store Manager
         try {
             localStorage.removeItem("authToken"); // Remove auth token from local storage
            return history.push('/adminlogin');

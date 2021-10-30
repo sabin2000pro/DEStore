@@ -42,6 +42,25 @@ const AdminProductsPage = () => {
         return axios.delete(`http://localhost:5950/api/v1/products/${id}`, {id:id});
     };
 
+    const checkQuantity = (id) => { // Checks the quantity of the product
+        return axios.get(`http://localhost:5950/api/v1/products/${id}`).then((response) => {
+            const {quantity} = response.data;
+
+            if(quantity > 0) {
+                alert('Product In Stock');
+            }
+
+            if(quantity < 3) {
+                alert('Low Stock - E-mail Sent To Store manager');
+            }
+
+            if(quantity === 0) {
+                alert(`Product Out Of Stock - E-mail Sent To Store Manager`);
+            }
+
+        })
+    };
+
     return (
         <div className = "App"> 
 
@@ -116,14 +135,16 @@ const AdminProductsPage = () => {
             </div>
 
             <div>
-                <h2>Delete Product </h2>
                 <button onClick = {() => deleteProduct(product._id)} type = "submit">Delete Product</button>
+            </div>
+
+            <div>
+                <button onClick = {() => checkQuantity(product._id)}>Check Quantity</button>
             </div>
 
             <h4>Product Name: {product.name}</h4>
             <p>Product ID: {product._id} </p>
             <p>Product Description: {product.description}</p>
-            <h4>Quantity: {product.quantity}</h4>
             <h4>Price: £{product.price}</h4>
             <h4>Sale Offer: {product.saleOffer}</h4>
             <img src = {product.image} className = "product__img"></img>

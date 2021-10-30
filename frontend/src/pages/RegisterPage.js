@@ -27,7 +27,7 @@ const RegisterPage = () => { // Register Account Page Component
                 setPassword("");
                 setConfirmPassword("");
     
-                setTimeout(() => {
+                return setTimeout(() => {
                     setError("");
                 }, 5000);
             }
