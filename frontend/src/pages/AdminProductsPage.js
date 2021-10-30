@@ -7,27 +7,87 @@ const AdminProductsPage = () => {
     const [numberOfPages, setNumberOfPages] = useState(0); // Number of Pages Variable
     const [searchTerm, setSearchTerm] = useState("");
     const [products, setProducts] = useState([]);
-    const [displayed, setDisplayed] = useState(false);
+    const [displayed, setDisplay] = useState(false);
+
+    const [productName, setNewProductName] = useState("");
+    const [productImage, setProductImage] = useState("");
+    const [productDescription, setProductDescription] = useState(""); // The New Product Description
 
     const pages = new Array(numberOfPages).fill(null).map((v, i) => i);
 
     useEffect(() => { // Fetch all products
         return fetch(`http://localhost:5950/api/v1/products?page=${pageNumber}`).then((response) => response.json()).then(({total, products}) => {
             setProducts(products);
-            setNumberOfPages(total);
-            console.log(products);
-            
+            setNumberOfPages(total);            
         });
+
     }, [pageNumber]);
+
+    const createProduct = () => { // Function that creates a new product to be stored
+        return axios.post(``);
+    }
+
+    const editProduct = (id) => {
+
+    };
+
+    const deleteProduct = (id) => { // Deletes a product from the inventory
+
+    };
 
     return (
         <div className = "App"> 
+
         <input className = "search__input" placeholder = "Search Product" type = "text" onChange = {(event) => {setSearchTerm(event.target.value)}} />
-         <h1>Store Manager All Products - Portal</h1>
+         <h1>DE-Store Admin - Inventory Control</h1>
 
-            <h3>Page {pageNumber + 1}</h3>
+        <div>
+            <label for = "name">Product Name: </label>
+            <input type = "text" placeholder = "Enter Product Name" required id = "name" onChange = {(e) => {setNewProductName(e.target.value)}} />
+         </div>
 
+         <div>
+            <label for = "image">Product Image URL </label>
+             <input type = "text" placeholder = "Enter Image URL" required id = "image" onChange = {(e) => {setProductImage(e.target.value)}} />
         </div>
+
+         <h3>Page {pageNumber + 1}</h3>
+
+         {displayed ? products.filter((value) => {
+             if(searchTerm === "") {
+                 return value;
+             }
+
+             else if(value.name.toLowerCase().includes(searchTerm.toLowerCase())) {
+                 return value;
+             }
+         }).map((product, key) => (
+
+            <div className = "products" key = {key}>
+            <a className = "purchase__btn">Finance Now</a>
+            <h4>Product Name: {product.name}</h4>
+
+            <p>Product Description: {product.description}</p>
+            <h4>Quantity: {product.quantity}</h4>
+            <h4>Price: £{product.price}</h4>
+            <h4>Sale Offer: {product.saleOffer}</h4>
+
+            <img src = {product.image} className = "product__img"></img>
+            
+         </div>
+
+         )) : null}
+
+{pages.map((pageIndex) => (
+             <button onClick = {() => setPageNumber(pageIndex)} >{pageIndex + 1}</button>
+    ))}
+        <div className = "button__group">
+            <button className = "btn" onClick = {() => setDisplay(true)}>Upload Products</button>
+            <button className = "btn" onClick = {() => setDisplay(false)}>Hide Products</button>
+        </div>
+
+    </div>
+
     )
 };
 
