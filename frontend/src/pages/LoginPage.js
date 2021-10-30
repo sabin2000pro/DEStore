@@ -1,16 +1,30 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
-
+import {Link, useHistory} from 'react-router-dom';
 
 const LoginPage = () => {
+    let history = useHistory();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    useEffect(() => {
+        if(localStorage.getItem("authToken")) {
+            return history.push("/");
+        }
+    }, [history]);
+
     const loginHandler = async (e) => {
+       try {
+            e.preventDefault();
+       } 
        
+       catch(err) {
+        if(err) {
+            console.log(err);
+        }
+       }
     }
-    
 
     return (
         <div>
@@ -24,6 +38,7 @@ const LoginPage = () => {
 
                 <div>
                     <label for = "password">Password </label>
+                    <input type = "password" required id = "password" placeholder = "Enter Password" value = {password} onChange = {(e) => {setPassword(e.target.value)}} />
                 </div>
 
             </form>
@@ -31,4 +46,4 @@ const LoginPage = () => {
     )
 }
 
-export default LoginPage
+export default LoginPage // Export the Login Component

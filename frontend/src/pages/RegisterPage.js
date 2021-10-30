@@ -33,7 +33,7 @@ const RegisterPage = () => { // Register Account Page Component
             }
 
             const {data} = await axios.post(`http://localhost:${port}/api/v1/auth/register`, {username, email, password});
-            localStorage.setItem("authToken", data.token); // Store the Auth Token in local storage
+            localStorage.setItem("authToken", data.token);
             return history.push("/adminlogin");
         } 
         
