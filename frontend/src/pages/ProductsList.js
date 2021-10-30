@@ -46,15 +46,16 @@ const ProductsList = () => { // Component to Render all of the products on the s
         }).map((product, key) => ( // Map through the products
             
             <div className = "products" key = {key}>
+                <button className = "purchase__btn">Purchase</button>
                 <h4>Product Name: {product.name}</h4>
 
                 <p>Product Description: {product.description}</p>
                 <h4>Quantity: {product.quantity}</h4>
                 <h4>Price: £{product.price}</h4>
                 <h4>Sale Offer: {product.saleOffer}</h4>
-                <a className = "purchase__btn" href = "/">Purchase</a>
 
                 <img src = {product.image} className = "product__img"></img>
+                
              </div>
     
         )) : null}

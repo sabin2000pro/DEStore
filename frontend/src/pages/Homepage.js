@@ -6,14 +6,13 @@
 
 import '../App.css';
 import {useEffect, useState} from 'react';
-import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 
 const Homepage = () => {
    
     return (
-       <div>
+       <div className = "text__container">
            <main>
-               <h1>DE-Store Homepage</h1>
+               <h1>DE-Store</h1>
            </main>
 
        </div>

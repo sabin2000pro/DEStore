@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import '../App.css';
 import axios from 'axios';
 
 const RegisterPage = () => { // Register Account Page Component
@@ -11,11 +12,16 @@ const RegisterPage = () => { // Register Account Page Component
     const registerHandler = async (e) => {
         e.preventDefault();
 
+        if(password !== confirmPassword) {
+
+        }
+
         // Check if passwords match or not
     }
 
     return (
         <div>
+            <h1 className = "register__txt">Admin Registration</h1>
             <form onSubmit = {registerHandler}>
 
                 <div>
@@ -24,8 +30,15 @@ const RegisterPage = () => { // Register Account Page Component
                 </div>
 
                 <div>
-                    
+                    <label for = "email">E-mail Address</label>
+                    <input required id = "email" type = "email" placeholder = "Enter E-mail Address" value = {email} onChange = {(e) => {setEmail(e.target.value)}} />
                 </div>
+
+                <div>
+                    <label for = "password">Password</label>
+                    <input type = "password" required id = "password" placeholder = "Enter Password" value = {password} onChange = {(e) => {setPassword(e.target.value)}} />
+                </div>
+
 
 
                 
