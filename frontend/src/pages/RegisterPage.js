@@ -13,7 +13,12 @@ const RegisterPage = () => { // Register Account Page Component
         e.preventDefault();
 
         if(password !== confirmPassword) {
+            setPassword("");
+            setConfirmPassword("");
 
+            setTimeout(() => {
+                setError("");
+            }, 5000);
         }
 
         // Check if passwords match or not
