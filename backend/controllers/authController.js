@@ -215,11 +215,12 @@ module.exports.getAllAdmins = async (request, response, next) => {
         const admins = await Admin.find();
 
         return response.status(200).json(admins);
-
     } 
     
     catch(error) {
-
+        if(error) {
+            return response.status(badRequest).json({message: error.toString()});
+        }
     }
 }
 
