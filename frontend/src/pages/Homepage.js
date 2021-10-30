@@ -7,7 +7,7 @@
 import '../App.css';
 import {useEffect, useState} from 'react';
 
-const Homepage = () => {
+const Homepage = () => { // Homepage React Component
    
     return (
        <div className = "text__container">

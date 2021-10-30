@@ -18,8 +18,6 @@ const App = () => {
         <li> <a href = "/adminlogin">Store Manager Login</a>  </li>
       </ul>
     </nav>
-
-
        
        <Switch>
          <PrivateRoute exact path = "/" component = {PrivateScreen} />

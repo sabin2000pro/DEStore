@@ -16,7 +16,10 @@ const LoginPage = () => {
 
     const loginHandler = async (e) => {
        try {
-            e.preventDefault();
+        e.preventDefault();
+           const {data} = await axios.post(`http://localhost:5950/api/v1/auth/login`, {email, password});
+           localStorage.setItem("authToken", data.token);
+           return history.push("/");
        } 
        
        catch(err) {
@@ -40,6 +43,10 @@ const LoginPage = () => {
                     <label for = "password">Password </label>
                     <input type = "password" required id = "password" placeholder = "Enter Password" value = {password} onChange = {(e) => {setPassword(e.target.value)}} />
                 </div>
+
+                <button type = "submit">Login </button>
+                <span>Need an account ? <Link to = "/register">Register Account</Link></span>
+
 
             </form>
         </div>
