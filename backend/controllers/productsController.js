@@ -38,8 +38,8 @@ module.exports.verifyBody = (request, response, next) => { // Verify the body be
  * @param {*} request - Receives client request
  * @param {*} response - Server responds
  * @param {*} next 
- * @function verifyQuantity()
- * @description: This function verifies the request body before submitting the data
+ * @function verifyStock()
+ * @description: This function verifies the quantity of products that are in stock in the DE-Store System.
   * @returns next middleware function
  */
 
@@ -47,6 +47,7 @@ module.exports.verifyStock = async (request, response, next) => { // Verifies th
     try {        
             const id = request.params.id; // Product ID
             const product = await Product.findById(id); 
+            
             const {quantity, name} = product; // Extract the quantity and the name of the product
             const {email} = request.body; // Extract e-mail from the body
             const admin = await User.findOne({email}); // Find a user by e-mail address

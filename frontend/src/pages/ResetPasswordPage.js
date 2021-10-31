@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from 'axios';
 
 const ResetPasswordPage = ({match}) => { // Reset Password Page Component
+    let history = useHistory();
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
@@ -18,11 +19,23 @@ const ResetPasswordPage = ({match}) => { // Reset Password Page Component
             if(password !== confirmPassword) {
                 setPassword("");
                 setConfirmPassword("");
+
+                setTimeout(() => {
+                    setError("");
+                }, 5000);
+                return setError("Passwords don't match");
             }
+
+            const {data} = await axios.put(`http://localhost:5950/api/v1/auth/resetpassword/${match.params.resetToken}`, {password});
+            setSuccess(data.data);
+            return history.push("/");
+
         } 
         
         catch(error) {
-
+            if(error) {
+                console.log(error);
+            }
         }
     }
 
@@ -37,7 +50,17 @@ const ResetPasswordPage = ({match}) => { // Reset Password Page Component
 
                 <div>
                     <label for = "password">Password </label>
+                    <input type = "password" required id = "password" placeholder = "Enter New Password" onChange = {(e) => {setPassword(e.target.value)}} />
                 </div>
+
+                <div>
+                    <label for = "confirmpassword">Confirm Password </label>
+                    <input type = "password" required if = "confirmpassword" placeholder = "Confirm New Password" onChange = {(e) => {setConfirmPassword(e.target.value)}} />
+                </div>
+
+                <button type="submit">Reset Password</button>
+
+
             </form>
 
 
