@@ -21,6 +21,16 @@ module.exports.createPayment = async (request, response, next) => {
     }
 };
 
+module.exports.editPayment = async (request, response, next) => {
+    try {
+
+    } 
+    
+    catch(error) {
+
+    }
+}
+
 module.exports.deletePayment = async (request, response, next) => {
     try {
 
