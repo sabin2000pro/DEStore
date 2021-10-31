@@ -106,7 +106,7 @@ module.exports.validateQuantity = async (request, response, next) => { // Middle
     return next();
 }
 
-module.exports.sortByPrice = async (request, response, next) => {
+module.exports.sortByPrice = async (request, response, next) => { // Sort Products By price
     try {
         const queryObj = {...request.query}; // Take out all of the request query objects
         const sort = request.query.sort;
@@ -115,8 +115,8 @@ module.exports.sortByPrice = async (request, response, next) => {
         let query = Product.find(JSON.parse(queryStr));
 
         if(sort) { // IF there is asort
-            const sortBy = request.query.sort.split(',').join(' ');
-            query = query.sort(sortBy);
+            const sortBy = request.query.sort.split(',').join(' '); // Create the criteria for sorting by splitting by a comma and joining with an empty space
+            query = query.sort(sortBy); // Sort by the specified field
         }
 
         const products = await query;
