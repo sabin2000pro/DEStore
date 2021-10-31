@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import axios from 'axios';
 
@@ -9,10 +9,13 @@ const PaymentPage = () => {
     const [cardNumber, setCardNumber] = useState("");
     const [expiryDate, setExpiryDate] = useState("");
     const [code, setCode] = useState(0);
+    const [paymentComplete, setPaymentComplete] = useState(false);
 
     const createPayment = () => { // Function called to create a payment for the product
-        axios.post(`http://localhost:5950`);
-        return history.push("/");
+        axios.post(`http://localhost:5950/api/v1/payment/createPayment`, {cardholderName: cardholderName, cardType: cardType, cardNumber: cardNumber, expiryDate: expiryDate, code: code});
+        alert('Payment Completed');
+        setPaymentComplete(true);
+        return history.push("/productslist");
     }
 
     return (
@@ -38,9 +41,16 @@ const PaymentPage = () => {
                 </div>
 
                 <div>
-                    
+                    <label for = "expiryDate">Expiry Date</label>
+                    <input type = "text" placeholder = "Enter Expiry Date" required id = "expiryDate" onChange = {(e) => {setExpiryDate(e.target.value)}} />
                 </div>
 
+                <div>
+                    <label for = "code">CCV Code</label>
+                    <input type = "number" placeholder = "Enter CCV Code" required id = "code" onChange = {(e) => {setCode(e.target.value)}} />
+                </div>
+
+                <button>Make Payment</button>
 
             </form>
         </div>
