@@ -4,17 +4,27 @@ import axios from 'axios';
 
 const PaymentPage = () => {
     const [cardholderName, setcardholderName] = useState("");
+    const [cardType, setCardType] = useState("");
+
+    const createPayment = () => {
+
+    }
 
     return (
 
         <div>
             <h1>Enabling - Finance</h1>
 
-            <form>
+            <form onSubmit = {createPayment}>
 
                 <div>
                     <label for = "cardholderName">Cardholder Name</label>
                     <input type = "text" placeholder = "Enter Cardholder Name" required id = "cardholderName" onChange = {(e) => {setcardholderName(e.target.value)}} />
+                </div>
+
+                <div>
+                    <label for = "cardType">Card Type</label>
+                    <input type = "text" placeholder = "Enter Card Type" required id = "cardType" onChange = {(e) => {setCardType(e.target.value)}} />
                 </div>
 
 
