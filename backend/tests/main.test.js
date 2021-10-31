@@ -35,6 +35,15 @@ describe('POST /products', () => { // Test Case 2
             return expect(response.status).toBe(201);
         })
     })
+});
+
+describe('POST /api/v1/auth/register', () => {
+    describe('Registering a new admin with e-mail, username and password', () => {
+        test("Should respond with a 201 created status code", async () => {
+            const response = await request(server).post('/api/v1/auth/register').send({username: "testadmin", email: "testadmin2@gmail.com", password: "testadminlol12345"});
+            return expect(response.status).toBe(201);
+        })
+    })
 })
 
 // * Test Passes
