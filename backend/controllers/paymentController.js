@@ -14,7 +14,12 @@ module.exports.getAllPayments = async (request, response, next) => { // Function
 
 module.exports.createPayment = async (request, response, next) => { // Creates a Payment on the server
     try {
+        const {cardholderName, cardType, cardNumber, expiryDate, code} = request.body;
+        const payment = new Payment({cardholderName, cardType, cardNumber, expiryDate, code});
 
+        await payment.save();
+
+        return response.status(201).json("Payment Created");
     } 
     
     catch(error) {

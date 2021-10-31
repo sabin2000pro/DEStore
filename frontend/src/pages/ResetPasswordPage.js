@@ -24,9 +24,8 @@ const ResetPasswordPage = ({match}) => { // Reset Password Page Component
             }
 
             const {data} = await axios.put(`http://localhost:5950/api/v1/auth/resetpassword/${match.params.resetToken}`, {password});
-            console.log(data);
             setSuccess(data.data);
-            return history.push("/");
+            return history.push("/"); // Redirect after reseting password
         } 
         
         catch(error) {
