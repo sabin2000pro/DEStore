@@ -4,10 +4,14 @@ import {useHistory} from 'react-router-dom';
 
 const ForgotPasswordPage = () => {
     const [email, setEmail] = useState("");
+    const [success, setSuccess] = useState("");
 
     const forgotPasswordHandler = async (e) => {
         try {
             e.preventDefault();
+
+            const {data} = await axios.post(`http://localhost:5950/api/v1/auth/forgotpassword`, {email});
+            setSuccess(data.data);
         } 
         
         catch(error) {
@@ -25,6 +29,8 @@ const ForgotPasswordPage = () => {
         <form onSubmit = {forgotPasswordHandler}>
             <label for = "email">E-mail Address: </label>
             <input type = "email" required id = "email" placeholder = "Enter E-mail Address" onChange = {(e) => {setEmail(e.target.value)}} />
+
+            <button type="submit">Send Email</button>
         </form>
 
     </div>
