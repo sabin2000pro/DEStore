@@ -179,14 +179,18 @@ module.exports.resetPassword = async (request, response, next) => { // Middlewar
 
 module.exports.editAdmin = async (request, response, next) => { // Middleware function to edit an admin
     try {
+        const newUsername = request.body.newUsername;
+        const newEmail = request.body.newEmail;
         const id = request.params.id;
 
-        if(!id) { // If no ID is specified
-            return response.status(notFound).json("Admin ID invalid - Please check your entry");
-        }
+        await Admin.findById(id, (err, updatedAdmin) => {
+            updatedAdmin.username = newUsername;
+            updatedAdmin.email = newEmail;
+            updatedAdmin.save();
 
-        const updatedAdmin = await Admin.findByIdAndUpdate(id, request.body).exec(); // Updated admin
-        return response.status(ok).json(updatedAdmin);
+            return response.send("Admin Updated");
+
+        }).clone().catch(err => {console.log(err)});
     } 
     
     catch(error) {

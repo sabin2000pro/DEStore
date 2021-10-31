@@ -43,7 +43,7 @@ module.exports.verifyBody = (request, response, next) => { // Verify the body be
   * @returns next middleware function
  */
 
-module.exports.verifyQuantity = async (request, response, next) => { // Verifies the product quantity before sending e-mail if stock is low. Middleware function before creating and retrieving a new product
+module.exports.verifyStock = async (request, response, next) => { // Verifies the product quantity before sending e-mail if stock is low. Middleware function before creating and retrieving a new product
     try {        
             const id = request.params.id; // Product ID
             const product = await Product.findById(id); 

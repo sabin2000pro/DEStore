@@ -22,6 +22,6 @@ const limiter = rateLimit({ // Options for rate limiting
 
 productRoutes.route('/').get(productController.getAllProducts).post(productController.verifyBody, productController.validateQuantity, limiter, productController.createProduct)
 productRoutes.route('/:id').get(productController.getProduct).put(productController.editProduct).delete(productController.deleteProduct);
-productRoutes.route('/verifyQuantity/:id').post(productController.verifyQuantity);
+productRoutes.route('/verifyStock/:id').post(productController.verifyStock);
 
 module.exports = productRoutes; // Export the product routes

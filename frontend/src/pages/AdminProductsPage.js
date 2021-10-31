@@ -1,8 +1,10 @@
 import '../App.css';
 import {useEffect, useState} from 'react';
 import axios from 'axios';
+import {useHistory} from 'react-router-dom';
 
 const AdminProductsPage = () => {
+    let history = useHistory();
     const [pageNumber, setPageNumber] = useState(0);
     const [numberOfPages, setNumberOfPages] = useState(0); // Number of Pages Variable
     const [searchTerm, setSearchTerm] = useState("");
@@ -48,7 +50,7 @@ const AdminProductsPage = () => {
         return axios.get(`http://localhost:5950/api/v1/products/${id}`).then((response) => {
             const {quantity} = response.data;
 
-            return axios.post(`http://localhost:5950/api/v1/products/verifyQuantity/${id}`, {id, email: email});
+            return axios.post(`http://localhost:5950/api/v1/products/verifyStock/${id}`, {id, email: email});
         })
     };
 
@@ -115,8 +117,6 @@ const AdminProductsPage = () => {
              
 
             <div className = "products" key = {key}>
-
-            
             <a className = "purchase__btn">Finance Now</a>
 
             <div>
@@ -130,7 +130,6 @@ const AdminProductsPage = () => {
             </div>
 
             <div>
-
                 <label for = "email">E-mail Address </label>
                 <input type = "text" placeholder = "Enter E-mail Address" onChange = {(e) => {setEmailAddress(e.target.value)}} />
                 <button onClick = {() => checkQuantity(product._id)}>Check Quantity</button>
