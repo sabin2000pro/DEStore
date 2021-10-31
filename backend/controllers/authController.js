@@ -4,7 +4,7 @@
 // Bugs? N/A
 
 const Admin = require('../models/adminModel');
-const sendEmail = require('/Users/sabin2000/Desktop/DEStore/backend/utils/sendEmail.js');
+const sendEmail = require('../utils/sendEmail');
 const crypto = require('crypto');
 const ok = 200;
 const created = 201;

@@ -5,7 +5,7 @@
 
 const Product = require('../models/productModel');
 const User = require('../models/adminModel');
-const sendEmail = require('/Users/sabin2000/Desktop/DEStore/backend/utils/sendEmail.js');
+const sendEmail = require('../utils/sendEmail');
 const ok = 200;
 const created = 201;
 const deleted = 204;
@@ -47,7 +47,7 @@ module.exports.verifyStock = async (request, response, next) => { // Verifies th
     try {        
             const id = request.params.id; // Product ID
             const product = await Product.findById(id); 
-            
+
             const {quantity, name} = product; // Extract the quantity and the name of the product
             const {email} = request.body; // Extract e-mail from the body
             const admin = await User.findOne({email}); // Find a user by e-mail address

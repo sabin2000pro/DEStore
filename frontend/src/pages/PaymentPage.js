@@ -1,17 +1,18 @@
 import React, {useState, useEffect} from 'react';
-import {Link, useHistory} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import axios from 'axios';
 
 const PaymentPage = () => {
+    let history = useHistory();
     const [cardholderName, setcardholderName] = useState("");
     const [cardType, setCardType] = useState("");
     const [cardNumber, setCardNumber] = useState("");
     const [expiryDate, setExpiryDate] = useState("");
     const [code, setCode] = useState(0);
 
-
     const createPayment = () => { // Function called to create a payment for the product
-        return axios.post();
+        axios.post(`http://localhost:5950`);
+        return history.push("/");
     }
 
     return (
@@ -34,6 +35,10 @@ const PaymentPage = () => {
                 <div>
                     <label for = "cardNumber">Card Number</label>
                     <input type = "text" placeholder = "Enter Card Number" required id = "cardNumber" onChange = {(e) => {setCardNumber(e.target.value)}} />
+                </div>
+
+                <div>
+                    
                 </div>
 
 
