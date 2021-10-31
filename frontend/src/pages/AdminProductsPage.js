@@ -38,9 +38,13 @@ const AdminProductsPage = () => {
         return axios.post(`http://localhost:5950/api/v1/products`, {name: productName, image: productImage, description: productDescription, price: productPrice, priceDiscount: productPriceDiscount, quantity: productQuantity, saleOffer: productSaleOffer, colour: productColour});
     }
 
-    const updatePrice = (id) => {
+    const updatePrice = (id) => { // Update the price of a product
         return axios.put(`http://localhost:5950/api/v1/products/${id}`, {id: id, newPrice: newPrice});
     };
+
+    const updateQty = (id) => {
+        return axios.put(``);
+    }
 
     const deleteProduct = (id) => { // Deletes a product from the inventory
         return axios.delete(`http://localhost:5950/api/v1/products/${id}`, {id:id});

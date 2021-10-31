@@ -4,6 +4,7 @@ import {useHistory} from 'react-router-dom';
 
 const ForgotPasswordPage = () => {
     const [email, setEmail] = useState("");
+    const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
 
     const forgotPasswordHandler = async (e) => {
@@ -16,7 +17,13 @@ const ForgotPasswordPage = () => {
         
         catch(error) {
             if(error) {
-                console.log(error);
+                setError(error.response.data.error);
+                setEmail("");
+          
+                return setTimeout(() => {
+                  setError("");
+                }, 5000);
+          
             }
         }
     }
@@ -25,6 +32,9 @@ const ForgotPasswordPage = () => {
     <div>
         <h1>Forgot Password</h1>
         <p>If you have forgotten your password, please enter your e-mail address below to send a reset link </p>
+
+        {error && <span>{error}</span>}
+        {success && <span>{success}</span>}
 
         <form onSubmit = {forgotPasswordHandler}>
             <label for = "email">E-mail Address: </label>
