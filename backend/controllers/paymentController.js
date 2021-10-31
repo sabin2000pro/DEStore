@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 const Payment = require('../models/paymentModel');
+const created = 201;
+const deleted = 204;
+const serverError = 500;
 
 module.exports.getAllPayments = async (request, response, next) => { // Function to Retrieve All Payments - THIS CAN ONLY BE DONE BY STORE MANAGERS
     try {
@@ -16,7 +19,6 @@ module.exports.createPayment = async (request, response, next) => { // Creates a
     try {
         const {cardholderName, cardType, cardNumber, expiryDate, code} = request.body;
         const payment = new Payment({cardholderName, cardType, cardNumber, expiryDate, code});
-
         await payment.save();
 
         return response.status(201).json("Payment Created");
@@ -55,12 +57,12 @@ module.exports.deletePayment = async (request, response, next) => { // Deletes a
         const id = request.params.id;
         await Payment.findByIdAndDelete(id);
 
-        return response.status(204).json("Payment Deleted");
+        return response.status(deleted).json("Payment Deleted");
     } 
     
     catch(error) {
         if(error) {
-            return response.status(500).json({message: error.toString()});
+            return response.status(serverError).json({message: error.toString()});
         }
     }
 };
