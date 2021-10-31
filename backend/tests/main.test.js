@@ -1,7 +1,8 @@
 // Copyright: All Rights Reserved - Sabin Constantin Lungu Edinburgh Napier University
 // Code Author: Sabin Constantin Lungu
 // Tests Written on: 25/10/2021
-// Last Modified Date: 27/10/2021 @ 09:55
+// Last Modified Date: 31/10/21 @ 10:32
+// Modification Description: 
 // Bugs? N/A
 
 const request = require('supertest');
@@ -40,8 +41,17 @@ describe('POST /products', () => { // Test Case 2
 describe('POST /api/v1/auth/register', () => {
     describe('Registering a new admin with e-mail, username and password', () => {
         test("Should respond with a 201 created status code", async () => {
-            const response = await request(server).post('/api/v1/auth/register').send({username: "testadmin", email: "testadmin2@gmail.com", password: "testadminlol12345"});
+            const response = await request(server).post('/api/v1/auth/register').send({username: "testagain", email: "testagain@gmail.com", password: "testagain"});
             return expect(response.status).toBe(201);
+        })
+    })
+});
+
+describe('POST /api/v1/auth/login', () => {
+    describe("Login a new admin with e-mail and password", () => {
+        test("Should respond with a 200 OK Status Code", async () => {
+            const response = await request(server).post('/api/v1/auth/login').send({email: "testagain@gmail.com", password: "testagain"});
+            return expect(response.status).toBe(200);
         })
     })
 })
