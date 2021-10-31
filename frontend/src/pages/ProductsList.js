@@ -6,10 +6,13 @@
 
 import '../App.css';
 import {useEffect, useState} from 'react';
+import {useHistory} from 'react-router-dom';
 
 const ProductsList = () => { // Component to Render all of the products on the screen
-    const [pageNumber, setPageNumber] = useState(0); // The Current Page Number
-    const [numberOfPages, setNumberOfPages] = useState(0); // Number of Pages Variable
+    let DEFAULT = 0;
+    let history = useHistory();
+    const [pageNumber, setPageNumber] = useState(DEFAULT); // The Current Page Number
+    const [numberOfPages, setNumberOfPages] = useState(DEFAULT); // Number of Pages Variable
     const [products, setProducts] = useState([]); // Product State
     const [displayed, setDisplay] = useState(false);
     const [searchTerm, setSearchTerm] = useState(""); // The Search Term Stored here
@@ -21,8 +24,7 @@ const ProductsList = () => { // Component to Render all of the products on the s
         return fetch(`http://localhost:5950/api/v1/products?page=${pageNumber}`).then((response) => response.json()).then(({total, products}) => {
             setProducts(products);
             setNumberOfPages(total);
-            console.log(products);
-            
+            return console.log(products);
         });
 
     }, [pageNumber]);
