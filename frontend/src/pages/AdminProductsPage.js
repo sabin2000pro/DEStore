@@ -39,7 +39,15 @@ const AdminProductsPage = () => {
     }
 
     const updatePrice = (id) => { // Update the price of a product
-        return axios.put(`http://localhost:5950/api/v1/products/${id}`, {id: id, newPrice: newPrice});
+        try {
+            axios.put(`http://localhost:5950/api/v1/products/${id}`, {id: id, newPrice: newPrice}).then(data => {console.log(data)}).catch(err => {console.log(err)});
+            alert('Price Updated');
+            return history.push('/');
+        } 
+        
+        catch(error) {
+
+        }
     };
 
     const updateQty = (id) => {
