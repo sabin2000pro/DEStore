@@ -119,9 +119,7 @@ const AdminProductsPage = () => {
              }
          }).map((product, key) => (
              
-
             <div className = "products" key = {key}>
-            <a className = "purchase__btn">Finance Now</a>
 
             <div>
                 <label for = "editPrice">Edit Price:  </label>

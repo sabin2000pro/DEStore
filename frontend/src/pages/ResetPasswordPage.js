@@ -9,8 +9,7 @@ const ResetPasswordPage = ({match}) => { // Reset Password Page Component
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
 
-
-    const resetPasswordHandler = async (e) => {
+    const resetPasswordHandler = async (e) => { // Reset Password Function
         try {
             e.preventDefault();
 
