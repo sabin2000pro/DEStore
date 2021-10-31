@@ -32,6 +32,15 @@ module.exports.createPayment = async (request, response, next) => { // Creates a
 module.exports.editPayment = async (request, response, next) => {
     try {
         const id = request.params.id;
+        const newCardNumber = request.body.newCardNumber;
+        const newCode = request.body.newCode;
+
+        await Payment.findById(id, (error, updatedPayment) => {
+            updatedPayment.cardNumber = newCardNumber;
+            updatedPayment.code = newCode;
+
+            updatedPayment.save();
+        })
     } 
     
     catch(error) {
