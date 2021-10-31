@@ -77,6 +77,13 @@ describe('Test Case - Admin missing E-mail and password', () => { // Test Case 4
     })
 })
 
+// TEST CASE TO VERIFY THAT A PAYMENT CAN BE CREATED
+describe("Test Case - Create a Payment with name, card type, card number, expiry date and the code", () => {
+    test("Should respond with a status code of 201 CREATED", async () => {
+        
+    })
+})
+
 // describe('Test Case - Products missing name and description', () => { // Test Case 5
 //     test("Should respond with a status code of 400")
 // })
