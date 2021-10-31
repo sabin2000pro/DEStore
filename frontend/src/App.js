@@ -1,5 +1,6 @@
 import './App.css';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import Homepage from './pages/Homepage';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import PrivateRoute from './components/routing/PrivateRoute';
@@ -16,6 +17,7 @@ const App = () => {
 
     <nav>
       <ul>
+        <li><a href = "/home">Homepage</a></li>
         <li> <a href = "/productslist">View Products</a>  </li>
         <li> <a href = "/register">Store Manager Register</a>  </li>
         <li> <a href = "/adminlogin">Store Manager Login</a>  </li>
@@ -24,6 +26,7 @@ const App = () => {
        
        <Switch>
          <PrivateRoute exact path = "/" component = {PrivateScreen} />
+          <Route exact path = "/home" component = {Homepage} />
           <Route exact path = "/productslist" component = {ProductsList} />
           <Route exact path = "/adminlogin" component = {LoginPage} />
           <Route exact path = "/register" component = {RegisterPage} />
