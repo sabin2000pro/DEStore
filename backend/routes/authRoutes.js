@@ -22,7 +22,7 @@ authRoutes.route('/getAdmins').get(authController.getAllAdmins);
 authRoutes.route('/deleteAdmin/:id').delete(authController.deleteAdmin);
 
 authRoutes.route('/forgotpassword').post(authController.forgotPassword); // Authentication Route for Forgot Password
-authRoutes.route('/resetpassword/:resetToken', authController.resetPassword); // Authentication Route to reset the password.
+authRoutes.route('/resetpassword/:resetToken').put(authController.resetPassword); // Authentication Route to reset the password.
 authRoutes.route('/editAdmin/:id').put(authController.editAdmin);
 
 module.exports = authRoutes; // Export authentication routes

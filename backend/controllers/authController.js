@@ -5,6 +5,7 @@
 
 const Admin = require('../models/adminModel');
 const sendEmail = require('/Users/sabin2000/Desktop/DEStore/backend/utils/sendEmail.js');
+const crypto = require('crypto');
 const ok = 200;
 const created = 201;
 const deleted = 204;
@@ -141,9 +142,22 @@ module.exports.forgotPassword = async (request, response, next) => { // Forgot P
 
 module.exports.resetPassword = async (request, response, next) => { // Middleware function to reset the Admin Password
     try {
-        const {email} = request.body; // Get user e-mail
+        const resetToken = request.params.resetToken;
         const passwordBody = request.body.password;
-        const resetPasswordToken = crypto.createHash("sha256").update(resetToken).digest('hex'); // Create reset password token
+
+        const passwordResetToken = crypto.createHash("sha256").update(resetToken).digest('hex'); // Create reset password token
+        const admin = await Admin.findOne({passwordResetToken, passwordResetExpires: {$gt: Date.now()}});
+
+        if(!admin) {
+            throw new Error('No Admin Found with that E-mail Address');
+        }
+
+        admin.password = passwordBody;
+        admin.passwordResetToken = undefined;
+        admin.passwordResetExpires = undefined;
+
+        await admin.save(); // Save the admin to the database
+        return response.status(created).json({success: true, data: "Password Reset Success"});
     } 
     
     catch(error) {
@@ -163,7 +177,7 @@ module.exports.resetPassword = async (request, response, next) => { // Middlewar
   * @returns next middleware function
  */
 
-module.exports.editAdmin = async (request, response, next) => {
+module.exports.editAdmin = async (request, response, next) => { // Middleware function to edit an admin
     try {
         const id = request.params.id;
 
@@ -253,11 +267,10 @@ module.exports.deleteAdmin = async (request, response, next) => { // Middleware 
 
 /**
  * 
- * @param {*} request - Receives client request
- * @param {*} response - Server responds
+ * @param {*} admin
  * @param {*} next 
- * @function verifyBody()
- * @description: This function verifies the request body before submitting the data
+ * @function sendToken()
+ * @description: This function signs a unique JSON Web token when Store managers register and login
   * @returns next middleware function
  */
 

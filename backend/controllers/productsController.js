@@ -38,7 +38,7 @@ module.exports.verifyBody = (request, response, next) => { // Verify the body be
  * @param {*} request - Receives client request
  * @param {*} response - Server responds
  * @param {*} next 
- * @function verifyBody()
+ * @function verifyQuantity()
  * @description: This function verifies the request body before submitting the data
   * @returns next middleware function
  */
@@ -47,7 +47,6 @@ module.exports.verifyQuantity = async (request, response, next) => { // Verifies
     try {        
             const id = request.params.id; // Product ID
             const product = await Product.findById(id); 
-
             const {quantity, name} = product; // Extract the quantity and the name of the product
             const {email} = request.body; // Extract e-mail from the body
             const admin = await User.findOne({email}); // Find a user by e-mail address
@@ -55,7 +54,7 @@ module.exports.verifyQuantity = async (request, response, next) => { // Verifies
            const lowStockMsg = `<h1>The quantity for the product ${name} is low in stock. More will be ordered soon. There are ${quantity} left in stock`;
            const outOfStockMsg = `<h1>Currently out of stock for the product ${name}. More stock will be ordered from the warehouse soon. </h1>`;
 
-            if(quantity < 3) {
+            if(quantity < 3) { // If quantity is less than 3
                 await sendEmail({to: admin.email, subject: "Low Stock", text: lowStockMsg});    
             }  
             
@@ -63,7 +62,7 @@ module.exports.verifyQuantity = async (request, response, next) => { // Verifies
                 await sendEmail({to: admin.email, subject: "Out of stock", text: outOfStockMsg});    
             }
 
-            return response.status(201).json("E-mail Sent");
+            return response.status(created).json("E-mail Sent");
         }   
     
     catch(error) {
@@ -203,11 +202,14 @@ module.exports.createProduct = async (request, response, next) => { // Middlewar
 module.exports.editProduct = async (request, response, next) => { // Modifies a Product such as the price, description, URL
     try {
         const newPrice = request.body.newPrice;
+        const newQty = request.body.newQty;
         const id = request.body.id;
+
         await Product.findById(id, (err, updatedProduct) => {
             updatedProduct.price = newPrice;
+            updatedProduct.quantity = newQty;
             updatedProduct.save();
-            console.log(updatedProduct);
+
             return response.send("Data Updated");
         }).clone().catch(err => {console.log(err)});
     } 
@@ -236,13 +238,14 @@ module.exports.deleteProduct = async (request, response, next) => { // Function 
         const id = request.params.id;
         const product = await Product.findByIdAndRemove(id).exec();
 
-            const admin = await User.findOne(); // Find a user by e-mail address
-            let {quantity, name} = product;
-            quantity--;
-            const productDeletedMsg = `<h1>The product ${product} has been deleted from the inventory </h1>`;
-            await sendEmail({to: admin, subject: "Product Deleted", text: productDeletedMsg});    
+        const admin = await User.findOne(); // Find a user by e-mail address
+        let {quantity, name} = product;
 
-             return response.status(deleted).send(`Product Deleted - Quantity of this product is now ${quantity}`);
+        quantity--;
+        const productDeletedMsg = `<h1>The product ${product} has been deleted from the inventory </h1>`;
+        await sendEmail({to: admin, subject: "Product Deleted", text: productDeletedMsg});    
+
+        return response.status(deleted).send(`Product Deleted - Quantity of this product is now ${quantity}`);
     } 
     
     catch(error) {
