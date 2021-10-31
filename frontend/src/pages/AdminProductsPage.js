@@ -53,6 +53,18 @@ const AdminProductsPage = () => {
         }
     };
 
+    const updateDescription = (id) => {
+        try {
+            
+        } 
+        
+        catch(error) {
+            if(error) {
+                console.log(error);
+            }
+        }
+    }
+
     const deleteProduct = (id) => { // Deletes a product from the inventory
         try {
             axios.delete(`http://localhost:5950/api/v1/products/${id}`, {id:id});
@@ -62,7 +74,7 @@ const AdminProductsPage = () => {
         
         catch(error) {
             if(error) {
-                console.log(error);
+                return console.log(error);
             }
         }
     };

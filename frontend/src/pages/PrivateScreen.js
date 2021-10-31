@@ -7,8 +7,8 @@ const PrivateScreen = () => { // Private Screen Component
     const [error, setError] = useState("");
 
     useEffect(() => {
-        if(!localStorage.getItem("authToken")) {
-            return history.push('/login');
+        if(!localStorage.getItem("authToken")) { // If there is no auth token in local storage
+            return history.push('/adminlogin'); // Redirect back to login
         }
     }, [history])
 
@@ -27,8 +27,8 @@ const PrivateScreen = () => { // Private Screen Component
 
     return (
         <div>
+         <button onClick = {logoutHandler}>Logout</button>
             <AdminProductsPage />
-            <button onClick = {logoutHandler}>Logout</button>
         </div>
     )
 

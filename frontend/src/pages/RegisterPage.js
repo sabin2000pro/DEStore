@@ -39,7 +39,8 @@ const RegisterPage = () => { // Register Account Page Component
         
         catch(error) {
             if(error) {
-
+                
+               return console.log(error);
             }
         }
 
