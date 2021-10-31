@@ -42,11 +42,19 @@ const ResetPasswordPage = ({match}) => { // Reset Password Page Component
 
     return (
         <div>
-            <h1>Reset Password Page </h1>
-
             <p>Reset Your Password Below</p>
 
             <form onSubmit = {resetPasswordHandler}>
+
+            <h3 style = {{fontFamily: "Arial"}}>Reset Password</h3>
+
+            {error && <span>{error} </span>}
+
+            {success && (
+            <span>
+            {success} <Link to="/login">Login</Link>
+            </span>
+            )}
 
                 <div>
                     <label for = "password">Password </label>
