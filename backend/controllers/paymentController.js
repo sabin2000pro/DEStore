@@ -42,7 +42,9 @@ module.exports.editPayment = async (request, response, next) => {
             updatedPayment.code = newCode;
 
             updatedPayment.save();
-        })
+            return response.send("Payment Updated");
+            
+        }).clone().catch(err => {console.log(err)});
     } 
     
     catch(error) {
