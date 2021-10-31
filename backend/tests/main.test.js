@@ -55,6 +55,15 @@ describe('POST /api/v1/auth/login', () => {
             return expect(response.status).toBe(200);
         })
     })
+});
+
+describe("POST - /api/v1/auth/forgotPassword", () => {
+    describe("Sends back a 200 OK STATUS CODE - Means the e-mail has been sent successfully", () => {
+        test("Respond back with 200 OK Statsu Code", async () => {
+            const response = await request(server).post('/api/v1/auth/forgotPassword').send({email: "sabinlungu200@gmail.com"});
+            return expect(response.status).toBe(200);
+        })
+    })
 })
 
 // * Test Passes
