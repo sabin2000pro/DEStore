@@ -142,6 +142,7 @@ const AdminProductsPage = () => {
             <p>Product Description: {product.description}</p>
             <h4>Price: £{product.price}</h4>
             <h4>Sale Offer: {product.saleOffer}</h4>
+            <h5>In Stock</h5>
             <img src = {product.image} className = "product__img"></img>
             
          </div>

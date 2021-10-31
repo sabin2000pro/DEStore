@@ -4,14 +4,11 @@ import axios from 'axios';
 
 const PaymentPage = () => {
 
-
     return (
         <div>
-            <h1>Product Payment</h1>
-            <h2>Your Chosen Product</h2>
-
+            <h1>Enabling - Finance</h1>
             <div>
-                
+
              </div>   
 
 
@@ -19,4 +16,4 @@ const PaymentPage = () => {
     )
 };
 
-export default PaymentPage;
+export default PaymentPage; // Export the Payment Page Component
