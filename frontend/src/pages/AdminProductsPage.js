@@ -46,16 +46,23 @@ const AdminProductsPage = () => {
         } 
         
         catch(error) {
-
+            if(error) {
+                console.log(error);
+            }
         }
     };
 
-    const updateQty = (id) => {
-        return axios.put(``);
-    }
-
     const deleteProduct = (id) => { // Deletes a product from the inventory
-        return axios.delete(`http://localhost:5950/api/v1/products/${id}`, {id:id});
+        try {
+            axios.delete(`http://localhost:5950/api/v1/products/${id}`, {id:id});
+            alert('Product Deleted');
+        } 
+        
+        catch(error) {
+            if(error) {
+                console.log(error);
+            }
+        }
     };
 
     const checkQuantity = (id) => { // Checks the quantity of the product
