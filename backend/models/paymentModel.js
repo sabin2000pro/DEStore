@@ -3,6 +3,7 @@
 const mongoose = require('mongoose');
 
 const paymentSchema = new mongoose.Schema({ // Create payment schema
+
     cardholderName: {
         type: String,
         required: [true, 'You must specify the name of the Cardholder']
