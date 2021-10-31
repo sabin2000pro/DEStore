@@ -128,20 +128,23 @@ module.exports.sortByPrice = async (request, response, next) => { // Sort Produc
             return response.status(serverError).json({message: 'Request Failed', error});
         }
     }
+
+    return next();
 }
 
 module.exports.limitFields = async (request, response, next) => {
     try {
         const queryObj = {...request.query};
-        const excludedFields = ['page', 'sort', 'limit', 'fields'];
-        excludedFields.forEach(el => delete queryObj[el]);
-
         let queryStr = JSON.stringify(queryObj);
         let query = Product.find(JSON.parse(queryStr));
 
         if(request.query.fields) { // If there is a limit parameter
             const fields = request.query.fields.split(',').join(' ');
             query = query.select(fields);
+        }
+
+        else {
+            query = query.select('-__v');
         }
 
         const products = await query;
@@ -154,6 +157,8 @@ module.exports.limitFields = async (request, response, next) => {
             return response.status(serverError).json({message: 'Request Failed', error: error.toString()});
         }
     }
+
+    return next();
 }
 
 /**
