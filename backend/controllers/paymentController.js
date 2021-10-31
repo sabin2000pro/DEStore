@@ -11,7 +11,7 @@ module.exports.getAllPayments = async (request, response, next) => { // Function
     }
 };
 
-module.exports.createPayment = async (request, response, next) => {
+module.exports.createPayment = async (request, response, next) => { // Creates a Payment on the server
     try {
 
     } 
@@ -28,12 +28,12 @@ module.exports.editPayment = async (request, response, next) => {
     
     catch(error) {
         if(error) {
-            return response
+            return response.status(500).json({message: error.toString()});
         }
     }
 }
 
-module.exports.deletePayment = async (request, response, next) => {
+module.exports.deletePayment = async (request, response, next) => { // Deletes a payment
     try {
 
     } 
