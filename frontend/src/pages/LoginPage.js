@@ -16,11 +16,14 @@ const LoginPage = () => {
 
     const loginHandler = async (e) => { // Login Function
        try {
+
         e.preventDefault();
+        
            const {data} = await axios.post(`http://localhost:5950/api/v1/auth/login`, {email, password});
            localStorage.setItem("authToken", data.token);
            return history.push("/");
        } 
+       
        
        catch(err) {
         if(err) {
