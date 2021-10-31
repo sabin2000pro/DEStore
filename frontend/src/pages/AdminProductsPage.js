@@ -19,7 +19,7 @@ const AdminProductsPage = () => {
     const [productQuantity, setProductQuantity] = useState(0); // The Product Quantity
     const [productSaleOffer, setProductSaleOffer] = useState("");
     const [productColour, setProductColour] = useState("");
-
+    const [newProduct, setNewProductData] = useState([]);
     const [newPrice, setNewPrice] = useState(0);
     const [newDescription, setNewDescription] = useState("");
     const [email, setEmailAddress] = useState("");
@@ -38,6 +38,7 @@ const AdminProductsPage = () => {
         try {
             axios.post(`http://localhost:5950/api/v1/products`, {name: productName, image: productImage, description: productDescription, price: productPrice, priceDiscount: productPriceDiscount, quantity: productQuantity, saleOffer: productSaleOffer, colour: productColour}).then(data => {
                 const newProductData = data.data;
+                setNewProductData(newProductData);
                 console.log(newProductData);
             })
 
@@ -56,6 +57,7 @@ const AdminProductsPage = () => {
         try {
             axios.put(`http://localhost:5950/api/v1/products/${id}`, {id: id, newPrice: newPrice}).then(data => {console.log(data)}).catch(err => {console.log(err)});
             alert('Price Updated');
+            return window.location.reload(false);
         } 
         
         catch(error) {

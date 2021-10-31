@@ -20,7 +20,8 @@ const limiter = rateLimit({ // Options for rate limiting
     message: `Too many requests coming from the IP: ${ip.address()}. Try again after ${windowMs} MS. You can only make a maximum of ${maxRequests} to prevent DOS attacks`
  });
 
-productRoutes.route('/').get(productController.getAllProducts).post(productController.verifyBody, productController.validateQuantity, limiter, productController.createProduct)
+productRoutes.route('/').get(productController.getAllProducts).post(productController.verifyBody, productController.validateQuantity, limiter, productController.createProduct);
+productRoutes.route('/sortByPrice').get(productController.sortByPrice);
 productRoutes.route('/:id').get(productController.getProduct).put(productController.editProduct).delete(productController.deleteProduct);
 productRoutes.route('/verifyStock/:id').post(productController.verifyStock);
 
