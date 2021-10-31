@@ -54,7 +54,7 @@ module.exports.verifyStock = async (request, response, next) => { // Verifies th
            const lowStockMsg = `<h1>The quantity for the product ${name} is low in stock. More will be ordered soon. There are ${quantity} left in stock`;
            const outOfStockMsg = `<h1>Currently out of stock for the product ${name}. More stock will be ordered from the warehouse soon. </h1>`;
 
-            if(quantity < 3) { // If quantity is less than 3
+            if(quantity <= 3) { // If quantity is less than 3
                 await sendEmail({to: admin.email, subject: "Low Stock", text: lowStockMsg});    
             }  
             

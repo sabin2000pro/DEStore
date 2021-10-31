@@ -7,7 +7,7 @@ const ForgotPasswordPage = () => {
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
 
-    const forgotPasswordHandler = async (e) => {
+    const forgotPasswordHandler = async (e) => { // Forgot Password Handler Function
         try {
             e.preventDefault();
 
