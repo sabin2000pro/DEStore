@@ -5,6 +5,7 @@ import LoginPage from './pages/LoginPage';
 import PrivateRoute from './components/routing/PrivateRoute';
 import PrivateScreen from './pages/PrivateScreen';
 import ProductsList from './pages/ProductsList';
+import ForgotPasswordPage from './pages/ForgotPasswordPage';
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
           <Route exact path = "/productslist" component = {ProductsList} />
           <Route exact path = "/adminlogin" component = {LoginPage} />
           <Route exact path = "/register" component = {RegisterPage} />
+          <Route exact path = "/forgotpassword" component = {ForgotPasswordPage} />
        </Switch>
 
 

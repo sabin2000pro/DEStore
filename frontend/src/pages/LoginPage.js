@@ -44,6 +44,8 @@ const LoginPage = () => {
                     <input type = "password" required id = "password" placeholder = "Enter Password" value = {password} onChange = {(e) => {setPassword(e.target.value)}} />
                 </div>
 
+                <a href = "/forgotpassword"> Forgot Password ? Reset Here </a>
+
                 <button type = "submit">Login </button>
                 <span>Need an account ? <Link to = "/register">Register Account</Link></span>
 
