@@ -13,7 +13,7 @@ import PaymentPage from './pages/PaymentPage';
 const App = () => {
   return (
     <Router>
-    <div className = "app">
+      <div className = "app">
 
     <nav>
       <ul>
@@ -34,8 +34,6 @@ const App = () => {
           <Route exact path = "/passwordreset/:resetToken" component = {ResetPasswordPage} />
           <Route exact path = "/payment" component = {PaymentPage} />
        </Switch>
-
-
 
     </div>
  </Router>
