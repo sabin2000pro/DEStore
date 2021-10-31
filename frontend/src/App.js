@@ -7,6 +7,7 @@ import PrivateScreen from './pages/PrivateScreen';
 import ProductsList from './pages/ProductsList';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
+import PaymentPage from './pages/PaymentPage';
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
           <Route exact path = "/register" component = {RegisterPage} />
           <Route exact path = "/forgotpassword" component = {ForgotPasswordPage} />
           <Route exact path = "/passwordreset/:resetToken" component = {ResetPasswordPage} />
+          <Route exact path = "/payment" component = {PaymentPage} />
        </Switch>
 
 
