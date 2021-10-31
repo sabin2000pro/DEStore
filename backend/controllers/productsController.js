@@ -132,6 +132,17 @@ module.exports.sortByPrice = async (request, response, next) => { // Sort Produc
 
 module.exports.limitFields = async (request, response, next) => {
     try {
+        const queryObj = {...request.query};
+        const limit = request.query.limit;
+
+        let queryStr = JSON.stringify(queryObj);
+        let query = Product.find(JSON.parse(queryStr));
+
+        if(limit) { // If there is a limit parameter
+            const fields = request.query.fields.split(",").join(' ');
+            query = query.select(fields);
+        }
+
 
     } 
     
