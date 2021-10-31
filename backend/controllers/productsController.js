@@ -202,12 +202,12 @@ module.exports.createProduct = async (request, response, next) => { // Middlewar
 module.exports.editProduct = async (request, response, next) => { // Modifies a Product such as the price, description, URL
     try {
         const newPrice = request.body.newPrice;
-        const newQty = request.body.newQty;
+        //const newQty = request.body.newQty;
         const id = request.body.id;
 
         await Product.findById(id, (err, updatedProduct) => {
             updatedProduct.price = newPrice;
-            updatedProduct.quantity = newQty;
+            //updatedProduct.quantity = newQty;
             updatedProduct.save();
 
             return response.send("Data Updated");
