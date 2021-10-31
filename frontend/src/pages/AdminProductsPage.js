@@ -21,6 +21,7 @@ const AdminProductsPage = () => {
     const [productColour, setProductColour] = useState("");
 
     const [newPrice, setNewPrice] = useState(0);
+    const [newDescription, setNewDescription] = useState("");
     const [newQty, setNewQty] = useState(0); // New Product Quantity
     const [email, setEmailAddress] = useState("");
 
@@ -143,6 +144,11 @@ const AdminProductsPage = () => {
                 <label for = "editPrice">Edit Price:  </label>
                 <input type = "number" placeholder = "Enter New Price" onChange = {(e) => setNewPrice(e.target.value)} />
                 <button onClick = {() => updatePrice(product._id)} type = "submit">Edit Price</button>
+            </div>
+
+            <div>
+                <label for = "editDescription">Edit Description: </label>
+                <input type = "text" placeholder = "Enter New Description" onChange = {(e) => {setNewDescription(e.target.value)}} />
             </div>
 
             <div>
