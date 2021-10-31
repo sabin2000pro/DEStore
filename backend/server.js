@@ -45,7 +45,7 @@ connectDB();
 
 app.use('/api/v1/products', productRoutes);
 app.use('/api/v1/auth', authRoutes);
-app.use('api/v1/payment', paymentRoutes);
+app.use('/api/v1/payment', paymentRoutes);
 
 app.all('*', (request, response, next) => {
  response.status(404).json({message: "404 - Page not found"});

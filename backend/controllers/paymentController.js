@@ -3,7 +3,7 @@ const Payment = require('../models/paymentModel');
 
 module.exports.getAllPayments = async (request, response, next) => { // Function to Retrieve All Payments - THIS CAN ONLY BE DONE BY STORE MANAGERS
     try {
-
+        return response.send("All Payments Here");
     } 
     
     catch(error) {
