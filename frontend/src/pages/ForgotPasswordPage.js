@@ -16,6 +16,7 @@ const ForgotPasswordPage = () => {
         } 
         
         catch(error) {
+            
             if(error) {
                 setError(error.response.data.error);
                 setEmail("");

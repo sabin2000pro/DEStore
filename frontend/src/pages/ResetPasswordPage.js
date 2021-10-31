@@ -14,9 +14,7 @@ const ResetPasswordPage = ({match}) => { // Reset Password Page Component
         try {
             e.preventDefault();
 
-            // Check if Passsword matches password confirm
-
-            if(password !== confirmPassword) {
+            if(password !== confirmPassword) { 
                 setPassword("");
                 setConfirmPassword("");
 
@@ -27,9 +25,9 @@ const ResetPasswordPage = ({match}) => { // Reset Password Page Component
             }
 
             const {data} = await axios.put(`http://localhost:5950/api/v1/auth/resetpassword/${match.params.resetToken}`, {password});
+            console.log(data);
             setSuccess(data.data);
             return history.push("/");
-
         } 
         
         catch(error) {
