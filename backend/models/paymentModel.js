@@ -28,7 +28,7 @@ const paymentSchema = new mongoose.Schema({ // Create payment schema
     },
 
     code: {
-        type: String,
+        type: Number,
         required: [true, 'You must specify the CCV code at the back of your card'],
         unique: true,
         maxlength: 3

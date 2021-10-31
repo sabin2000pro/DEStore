@@ -35,7 +35,9 @@ module.exports.createPayment = async (request, response, next) => { // Creates a
 
 module.exports.getSinglePayment = async (request, response, next) => {
     try {
-
+        const id = request.params.id;
+        const payment = await Payment.findById(id);
+        return response.status(ok).json(payment);
     } 
     
     catch(error) {

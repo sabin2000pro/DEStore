@@ -5,9 +5,13 @@ import axios from 'axios';
 const PaymentPage = () => {
     const [cardholderName, setcardholderName] = useState("");
     const [cardType, setCardType] = useState("");
+    const [cardNumber, setCardNumber] = useState("");
+    const [expiryDate, setExpiryDate] = useState("");
+    const [code, setCode] = useState(0);
 
-    const createPayment = () => {
 
+    const createPayment = () => { // Function called to create a payment for the product
+        return axios.post();
     }
 
     return (
@@ -25,6 +29,11 @@ const PaymentPage = () => {
                 <div>
                     <label for = "cardType">Card Type</label>
                     <input type = "text" placeholder = "Enter Card Type" required id = "cardType" onChange = {(e) => {setCardType(e.target.value)}} />
+                </div>
+
+                <div>
+                    <label for = "cardNumber">Card Number</label>
+                    <input type = "text" placeholder = "Enter Card Number" required id = "cardNumber" onChange = {(e) => {setCardNumber(e.target.value)}} />
                 </div>
 
 
