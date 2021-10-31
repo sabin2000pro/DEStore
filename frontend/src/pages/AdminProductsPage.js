@@ -42,7 +42,7 @@ const AdminProductsPage = () => {
         try {
             axios.put(`http://localhost:5950/api/v1/products/${id}`, {id: id, newPrice: newPrice}).then(data => {console.log(data)}).catch(err => {console.log(err)});
             alert('Price Updated');
-            return history.push('/');
+            return window.location.reload(false);
         } 
         
         catch(error) {
@@ -56,6 +56,7 @@ const AdminProductsPage = () => {
         try {
             axios.delete(`http://localhost:5950/api/v1/products/${id}`, {id:id});
             alert('Product Deleted');
+            return window.location.reload(false);
         } 
         
         catch(error) {
@@ -70,6 +71,7 @@ const AdminProductsPage = () => {
             const {quantity} = response.data;
             axios.post(`http://localhost:5950/api/v1/products/verifyStock/${id}`, {id, email: email});
             alert('Low Stock - E-mail Sent');
+            return window.location.reload(false);
         })
     };
 
