@@ -133,22 +133,25 @@ module.exports.sortByPrice = async (request, response, next) => { // Sort Produc
 module.exports.limitFields = async (request, response, next) => {
     try {
         const queryObj = {...request.query};
-        const limit = request.query.limit;
+        const excludedFields = ['page', 'sort', 'limit', 'fields'];
+        excludedFields.forEach(el => delete queryObj[el]);
 
         let queryStr = JSON.stringify(queryObj);
         let query = Product.find(JSON.parse(queryStr));
 
-        if(limit) { // If there is a limit parameter
-            const fields = request.query.fields.split(",").join(' ');
+        if(request.query.fields) { // If there is a limit parameter
+            const fields = request.query.fields.split(',').join(' ');
             query = query.select(fields);
         }
 
+        const products = await query;
+        return response.status(200).json({results: products.length, products});
 
     } 
     
     catch(error) {
         if(error) {
-            return response.status(serverError).json({message: 'Request Failed', error});
+            return response.status(serverError).json({message: 'Request Failed', error: error.toString()});
         }
     }
 }
