@@ -30,8 +30,9 @@ const paymentSchema = new mongoose.Schema({ // Create payment schema
         unique: true
     },
 
-    balance: {
-        default: 1750.00
+    balance: { // Default Balance that customers can spend
+        type: Number,
+        default: 2000.00
     },
 
 });
