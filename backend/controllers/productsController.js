@@ -124,7 +124,21 @@ module.exports.sortByPrice = async (request, response, next) => { // Sort Produc
     } 
     
     catch(error) {
+        if(error) {
+            return response.status(serverError).json({message: 'Request Failed', error});
+        }
+    }
+}
 
+module.exports.limitFields = async (request, response, next) => {
+    try {
+
+    } 
+    
+    catch(error) {
+        if(error) {
+            return response.status(serverError).json({message: 'Request Failed', error});
+        }
     }
 }
 
