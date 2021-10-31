@@ -51,7 +51,7 @@ const AdminProductsPage = () => {
                 console.log(error);
             }
         }
-    }
+    };
 
     const updatePrice = (id) => { // Update the price of a product
         try {
