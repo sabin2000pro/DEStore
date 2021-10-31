@@ -198,7 +198,6 @@ module.exports.editAdmin = async (request, response, next) => { // Middleware fu
         if(error) {
             return response.status(badRequest).json({message: error.toString()});
         }
-
     }
 }
 

@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 const server = require('../server');
 const Admin = require('../models/adminModel');
 const Product = require('../models/productModel');
+const Payment = require('../models/paymentModel');
 
 // * Test Passes
 beforeAll(async() => { // Test DB connection
@@ -32,7 +33,7 @@ describe('GET /products', () => { // Test Case 1
 describe('POST /products', () => { // Test Case 2
     describe('Create a product given the name, image, description, price, quantity, saleOffer and colour', () => {
         test("Should respond with a 201 status code", async () => {
-            const response = await request(server).post('/api/v1/products').send({name: "Test Product 2", "image": "https://i.ebayimg.com/images/g/PTgAAOSwWnpdNGeL/s-l500.jpg", "description": "A nice", "price": 299.99, "quantity": 2, "saleOffer": "Buy 1 get 1 free", "colour": "SSpace gray"});
+            const response = await request(server).post('/api/v1/products').send({name: "Test Product 6", "image": "https://i.ebayimg.com/images/g/PTgAAOSwWnpdNGeL/s-l500.jpg", "description": "A nice product", "price": 600.99, "quantity": 3, "saleOffer": "Buy 1 get 1 free", "colour": "Black"});
             return expect(response.status).toBe(201);
         })
     })
@@ -41,7 +42,7 @@ describe('POST /products', () => { // Test Case 2
 describe('POST /api/v1/auth/register', () => {
     describe('Registering a new admin with e-mail, username and password', () => {
         test("Should respond with a 201 created status code", async () => {
-            const response = await request(server).post('/api/v1/auth/register').send({username: "testagain", email: "testagain@gmail.com", password: "testagain"});
+            const response = await request(server).post('/api/v1/auth/register').send({username: "newtestlol", email: "newtestloll@gmail.com", password: "newtestloll"});
             return expect(response.status).toBe(201);
         })
     })
@@ -60,7 +61,26 @@ describe('POST /api/v1/auth/login', () => {
 describe('GET /admins', () => { // Test Case 3 - Returns all of the admins - TEST SHOULD PASS as the expected HTTP status code should be 200
     describe('Should return all of the Admins in the database', () => {
         test('Admin Test - Should response with a 200 status code', async () => {
-            const admins = await request(server).get('/')
+            const response = await request(server).get('/api/v1/auth/getAdmins').send();
+            return expect(response.status).toBe(200);
+        })
+    })
+});
+
+describe('Test Case - Returns all Payments', () => {
+    describe("Test Case - Get All Payments Should Return 200 OK Status Code", () => {
+        test("Payment Test - Return 200 OK Status Code", async () => {
+            const response = await request(server).get('/api/v1/payment/getAllPayments').send();
+            return expect(response.status).toBe(200);
+        })
+    })
+})
+
+// TEST CASE TO VERIFY THAT A PAYMENT CAN BE CREATED
+describe("Test Case - Create a Payment with name, card type, card number, expiry date and the code", () => {
+    describe("Should respond with a status code of 201 CREATED", () => {
+        test('Payment Test - Should Respond with 201 Created', async () => {
+
         })
     })
 })
@@ -74,13 +94,6 @@ describe('Test Case - Admin missing E-mail and password', () => { // Test Case 4
             const response = await request(server).post('/api/v1/auth/register').send(body);
             return expect(response.status).toBe(400);
         }
-    })
-})
-
-// TEST CASE TO VERIFY THAT A PAYMENT CAN BE CREATED
-describe("Test Case - Create a Payment with name, card type, card number, expiry date and the code", () => {
-    test("Should respond with a status code of 201 CREATED", async () => {
-        
     })
 })
 
