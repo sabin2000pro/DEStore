@@ -52,7 +52,10 @@ module.exports.editPayment = async (request, response, next) => {
 
 module.exports.deletePayment = async (request, response, next) => { // Deletes a payment
     try {
+        const id = request.params.id;
+        await Payment.findByIdAndDelete(id);
 
+        return response.status(204).json("Payment Deleted");
     } 
     
     catch(error) {
