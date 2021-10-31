@@ -128,26 +128,31 @@ module.exports.sortByPrice = async (request, response, next) => { // Sort Produc
             return response.status(serverError).json({message: 'Request Failed', error});
         }
     }
-
-    return next();
 }
 
 module.exports.limitFields = async (request, response, next) => {
     try {
         const queryObj = {...request.query};
+        const excludedFields = ['limit', 'fields'];
+        excludedFields.forEach(el => delete queryObj[el]);
+
         let queryStr = JSON.stringify(queryObj);
-        let query = Product.find(JSON.parse(queryStr));
+        let query = Product.find(JSON.parse(queryStr))
+
+                // * 4 Pagination
+        const page = request.query.page * 1 || 1; // The page from the request.query
+        const limit = request.query.limit * 1 || 100; // The page limit
+        const skip = (page - 1) * limit; // The previous page * limit
+        query = query.skip(skip).limit(limit);
 
         if(request.query.fields) { // If there is a limit parameter
-            const fields = request.query.fields.split(',').join(' ');
+            const fields = request.query.fields.split(',').join(" ");
             query = query.select(fields);
         }
 
-        else {
-            query = query.select('-__v');
-        }
 
         const products = await query;
+        console.log(queryStr);
         return response.status(200).json({results: products.length, products});
 
     } 
@@ -157,8 +162,6 @@ module.exports.limitFields = async (request, response, next) => {
             return response.status(serverError).json({message: 'Request Failed', error: error.toString()});
         }
     }
-
-    return next();
 }
 
 /**
