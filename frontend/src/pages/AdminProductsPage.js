@@ -53,8 +53,8 @@ const AdminProductsPage = () => {
     const checkQuantity = (id) => { // Checks the quantity of the product
         return axios.get(`http://localhost:5950/api/v1/products/${id}`).then((response) => {
             const {quantity} = response.data;
-
-            return axios.post(`http://localhost:5950/api/v1/products/verifyStock/${id}`, {id, email: email});
+            axios.post(`http://localhost:5950/api/v1/products/verifyStock/${id}`, {id, email: email});
+            alert('Low Stock - E-mail Sent');
         })
     };
 
@@ -117,6 +117,7 @@ const AdminProductsPage = () => {
              else if(value.name.toLowerCase().includes(searchTerm.toLowerCase())) {
                  return value;
              }
+
          }).map((product, key) => (
              
             <div className = "products" key = {key}>

@@ -12,10 +12,20 @@ const PaymentPage = () => {
     const [paymentComplete, setPaymentComplete] = useState(false);
 
     const createPayment = () => { // Function called to create a payment for the product
-        axios.post(`http://localhost:5950/api/v1/payment/createPayment`, {cardholderName: cardholderName, cardType: cardType, cardNumber: cardNumber, expiryDate: expiryDate, code: code});
-        alert('Payment Completed');
-        setPaymentComplete(true);
-        return history.push("/productslist");
+        try {
+            axios.post(`http://localhost:5950/api/v1/payment/createPayment`, {cardholderName: cardholderName, cardType: cardType, cardNumber: cardNumber, expiryDate: expiryDate, code: code});
+            alert('Payment Completed');
+            setPaymentComplete(true);
+            return history.push("/productslist");
+        } 
+        
+        catch(error) {
+            
+            if(error) {
+                console.log(error);
+            }
+        }
+        
     }
 
     return (
