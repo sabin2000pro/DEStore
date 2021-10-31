@@ -22,7 +22,6 @@ const AdminProductsPage = () => {
 
     const [newPrice, setNewPrice] = useState(0);
     const [newDescription, setNewDescription] = useState("");
-    const [newQty, setNewQty] = useState(0); // New Product Quantity
     const [email, setEmailAddress] = useState("");
 
     const pages = new Array(numberOfPages).fill(null).map((v, i) => i);
@@ -36,14 +35,27 @@ const AdminProductsPage = () => {
     }, [pageNumber]);
 
     const createProduct = () => { // Function that creates a new product to be stored
-        return axios.post(`http://localhost:5950/api/v1/products`, {name: productName, image: productImage, description: productDescription, price: productPrice, priceDiscount: productPriceDiscount, quantity: productQuantity, saleOffer: productSaleOffer, colour: productColour});
+        try {
+            axios.post(`http://localhost:5950/api/v1/products`, {name: productName, image: productImage, description: productDescription, price: productPrice, priceDiscount: productPriceDiscount, quantity: productQuantity, saleOffer: productSaleOffer, colour: productColour}).then(data => {
+                const newProductData = data.data;
+                console.log(newProductData);
+            })
+
+            alert('Product Created');
+            return window.location.reload(false);
+        } 
+        
+        catch(error) {
+            if(error) {
+                console.log(error);
+            }
+        }
     }
 
     const updatePrice = (id) => { // Update the price of a product
         try {
             axios.put(`http://localhost:5950/api/v1/products/${id}`, {id: id, newPrice: newPrice}).then(data => {console.log(data)}).catch(err => {console.log(err)});
             alert('Price Updated');
-            return window.location.reload(false);
         } 
         
         catch(error) {

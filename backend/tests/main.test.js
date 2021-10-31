@@ -104,6 +104,28 @@ describe('Test Case - Admin missing E-mail and password', () => { // Test Case 4
             return expect(response.status).toBe(400);
         }
     })
+});
+
+describe('Test Case - Admin Missing E-mail And Password Log in', () => {
+    test("Should respond with status code of 400", async () => {
+        const bodyData = [{email: "emal", password: "password"}];
+
+        for(const body of bodyData) {
+            const response = await request(server).post('/api/v1/auth/login').send(body);
+            return expect(response.status).toBe(400);
+        }
+    })
+})
+
+describe('Test Case - Forgot Password Missing E-mail', () => {
+    test("Should Respond with a Status Code of 400", async () => {
+        const bodyData = [{}];
+
+        for(const body of bodyData) {
+            const response = await request(server).post('/api/v1/auth/forgotPassword').send(body);
+            return expect(response.status).toBe(404);
+        }
+    })
 })
 
 // describe('Test Case - Products missing name and description', () => { // Test Case 5

@@ -59,19 +59,19 @@ module.exports.login = async (request, response, next) => {
         const {email, password} = request.body; // Extract E-mail and Password from the body
 
         if(!email || !password) {
-            return response.status(notFound).json({message: "Please provide your e-mail and password before logging in"});
+            return response.status(400).json({message: "Please provide your e-mail and password before logging in"});
         }
 
         const admin = await Admin.findOne({email}).select('+password'); // Find an admin by the e-mail
 
         if(!admin) {
-            return response.status(notFound).json({message: 'No admin found with that e-mail address'});
+            return response.status(400).json({message: 'No admin found with that e-mail address'});
         }
 
         const isPasswordMatch = await admin.comparePasswords(password); // Returns true or false if passwords match or not
 
         if(!isPasswordMatch) { // If passwords don't match
-            return response.status(notFound).json({message: "Passwords do not match. Check your entries"});
+            return response.status(400).json({message: "Passwords do not match. Check your entries"});
         }
 
         return sendToken(admin, ok, response); // Send back JSON token. Used to log in the user
@@ -124,7 +124,7 @@ module.exports.forgotPassword = async (request, response, next) => { // Forgot P
     catch(error) {
 
         if(error) {
-            return response.status(badRequest).json({message: error.toString()});
+            return response.status(notFound).json({message: error.toString()});
         }
 
     }

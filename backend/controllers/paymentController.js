@@ -49,7 +49,7 @@ module.exports.getSinglePayment = async (request, response, next) => {
 
 module.exports.editPayment = async (request, response, next) => { // Function to edit a payment
     try {
-        const id = request.params.id;
+        const id = request.params.id; // The ID
         const newCardHolderName = request.body.newCardHolderName;
         const newCardType = request.body.newCardType;
         const newCardNumber = request.body.newCardNumber;
