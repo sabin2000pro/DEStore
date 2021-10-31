@@ -23,11 +23,13 @@ module.exports.createPayment = async (request, response, next) => {
 
 module.exports.editPayment = async (request, response, next) => {
     try {
-
+        const id = request.params.id;
     } 
     
     catch(error) {
-
+        if(error) {
+            return response
+        }
     }
 }
 
