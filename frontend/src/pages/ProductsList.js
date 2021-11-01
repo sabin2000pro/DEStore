@@ -6,6 +6,7 @@
 
 import '../App.css';
 import {useEffect, useState} from 'react';
+import {Link} from 'react-router-dom';
 
 const ProductsList = () => { // Component to Render all of the products on the screen
     let DEFAULT = 0;
@@ -18,13 +19,15 @@ const ProductsList = () => { // Component to Render all of the products on the s
     const pages = new Array(numberOfPages).fill(null).map((v, i) => i); // Create an array of pages
 
     useEffect(() => { // useEffect hook to retrieve all the products
+        const fetchProducts = () => {
+            return fetch(`http://localhost:5950/api/v1/products?page=${pageNumber}`).then((response) => response.json()).then(({total, products}) => {
+                setProducts(products);
+                setNumberOfPages(total);
+                return console.log(products);
+            });
+        }
 
-        return fetch(`http://localhost:5950/api/v1/products?page=${pageNumber}`).then((response) => response.json()).then(({total, products}) => {
-            setProducts(products);
-            setNumberOfPages(total);
-            return console.log(products);
-        });
-
+        fetchProducts();
     }, [pageNumber]);
 
 
@@ -47,7 +50,7 @@ const ProductsList = () => { // Component to Render all of the products on the s
             
             <div className = "products" key = {key}>
                 
-                <a href = "/payment" className = "purchase__btn">Finance Now</a>
+                <Link to = {{pathname: `/payment/${product._id}`, state: {product}}}>Finance Now</Link>
                 <h4>Product Name: {product.name}</h4>
 
                 <p>Product Description: {product.description}</p>

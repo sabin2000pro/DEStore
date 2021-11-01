@@ -32,7 +32,7 @@ const App = () => {
           <Route exact path = "/register" component = {RegisterPage} />
           <Route exact path = "/forgotpassword" component = {ForgotPasswordPage} />
           <Route exact path = "/passwordreset/:resetToken" component = {ResetPasswordPage} />
-          <Route exact path = "/payment" component = {PaymentPage} />
+          <Route exact path = "/payment/:id" component = {PaymentPage} />
        </Switch>
 
     </div>

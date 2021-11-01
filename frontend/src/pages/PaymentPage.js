@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
-import {useHistory} from 'react-router-dom';
+import {useHistory, useLocation} from 'react-router-dom';
 import axios from 'axios';
 
-const PaymentPage = () => {
+const PaymentPage = (props) => {
+    let location = useLocation();
     let history = useHistory();
+    const {name, image} = location.state.product;
     const [cardholderName, setcardholderName] = useState("");
     const [cardType, setCardType] = useState("");
     const [cardNumber, setCardNumber] = useState("");
@@ -32,6 +34,11 @@ const PaymentPage = () => {
 
         <div>
             <h1>Enabling - Finance</h1>
+
+            <div>
+                <h1>{name}</h1>
+                <img height = {200} width = {200} src = {image} />
+            </div>
 
             <form onSubmit = {createPayment}>
 

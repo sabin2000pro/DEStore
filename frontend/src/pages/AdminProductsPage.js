@@ -93,7 +93,7 @@ const AdminProductsPage = () => {
         <div className = "App"> 
 
         <input className = "search__input" placeholder = "Search Product" type = "text" onChange = {(event) => {setSearchTerm(event.target.value)}} />
-         <h1>DE-Store Admin - Inventory Control</h1>
+         <h1>DE-Store - Inventory Control</h1>
          <h2>Create Electronic Product </h2>
 
         <div>
