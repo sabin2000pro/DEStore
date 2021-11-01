@@ -35,7 +35,7 @@ const RegisterPage = () => { // Register Account Page Component
 
             const {data} = await axios.post(`http://localhost:${port}/api/v1/auth/register`, {username, email, password});
             console.log(data.token);
-            
+
             localStorage.setItem("authToken", data.token);
             return history.push("/adminlogin");
         } 
@@ -55,22 +55,22 @@ const RegisterPage = () => { // Register Account Page Component
             <form onSubmit = {registerHandler}>
 
                 <div>
-                    <label for = "username">Username:</label>
+                    <label htmlFor = "username">Username:</label>
                     <input required id = "username" type = "text" placeholder = "Enter Username" value = {username} onChange = {(e) => {setUsername(e.target.value)}} />
                 </div>
 
                 <div>
-                    <label for = "email">E-mail Address</label>
+                    <label htmlFor = "email">E-mail Address</label>
                     <input required id = "email" type = "email" placeholder = "Enter E-mail Address" value = {email} onChange = {(e) => {setEmail(e.target.value)}} />
                 </div>
 
                 <div>
-                    <label for = "password">Password</label>
+                    <label htmlFor = "password">Password</label>
                     <input type = "password" required id = "password" placeholder = "Enter Password" value = {password} onChange = {(e) => {setPassword(e.target.value)}} />
                 </div>
 
                 <div>
-                    <label for = "confirmpassword">Confirm Password </label>
+                    <label htmlFor = "confirmpassword">Confirm Password </label>
                     <input type = "password" required id = "confirmpassword" placeholder = "Re-Enter Password" value = {confirmPassword} onChange = {(e) => {setConfirmPassword(e.target.value)}} />
                  </div>
 

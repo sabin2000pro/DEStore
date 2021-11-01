@@ -12,6 +12,7 @@ import PaymentPage from './pages/PaymentPage';
 
 const App = () => {
   return (
+    
     <Router>
       <div className = "app">
 

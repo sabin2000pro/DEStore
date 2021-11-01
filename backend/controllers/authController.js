@@ -142,8 +142,8 @@ module.exports.forgotPassword = async (request, response, next) => { // Forgot P
 
 module.exports.resetPassword = async (request, response, next) => { // Middleware function to reset the Admin Password
     try {
-        const resetToken = request.params.resetToken;
-        const passwordBody = request.body.password;
+        const resetToken = request.params.resetToken; // Stores the reset token from the param
+        const passwordBody = request.body.password; // The new password
 
         const passwordResetToken = crypto.createHash("sha256").update(resetToken).digest('hex'); // Create reset password token
         const admin = await Admin.findOne({passwordResetToken, passwordResetExpires: {$gt: Date.now()}});

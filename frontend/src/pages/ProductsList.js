@@ -27,7 +27,7 @@ const ProductsList = () => { // Component to Render all of the products on the s
             });
         }
 
-        fetchProducts();
+        fetchProducts()
     }, [pageNumber]);
 
 
@@ -39,7 +39,7 @@ const ProductsList = () => { // Component to Render all of the products on the s
         {displayed ? products.filter((value) => { // Filter the products
 
             if(searchTerm === "") { // if there is no search term
-                return <div><h3>No product found</h3></div>; // Return value
+                return value;
             }
 
             else if(value.name.toLowerCase().includes(searchTerm.toLowerCase())) {
@@ -49,8 +49,7 @@ const ProductsList = () => { // Component to Render all of the products on the s
         }).map((product, key) => ( // Map through the products
             
             <div className = "products" key = {key}>
-                
-                <Link to = {{pathname: `/payment/${product._id}`, state: {product}}}>Finance Now</Link>
+                <Link to = {{pathname: `/payment/${product._id}`, state: {product}} }>Finance Now</Link>
                 <h4>Product Name: {product.name}</h4>
 
                 <p>Product Description: {product.description}</p>
@@ -59,7 +58,6 @@ const ProductsList = () => { // Component to Render all of the products on the s
                 <h4>Sale Offer: {product.saleOffer}</h4>
 
                 <img src = {product.image} className = "product__img"></img>
-                
              </div>
     
         )) : null}

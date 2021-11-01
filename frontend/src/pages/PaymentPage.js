@@ -3,8 +3,9 @@ import {useHistory, useLocation} from 'react-router-dom';
 import axios from 'axios';
 
 const PaymentPage = (props) => {
-    let location = useLocation();
+    let location = useLocation(); // Used to pass props from one screen to another
     let history = useHistory();
+
     const {name, image} = location.state.product;
     const [cardholderName, setcardholderName] = useState("");
     const [cardType, setCardType] = useState("");
@@ -29,7 +30,6 @@ const PaymentPage = (props) => {
         }
         
     }
-
     return (
 
         <div>
