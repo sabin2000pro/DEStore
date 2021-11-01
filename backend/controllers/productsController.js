@@ -90,10 +90,9 @@ module.exports.validateQuantity = async (request, response, next) => { // Middle
     try {
         const {quantity} = request.body;
 
-        if(quantity >= 5) {
+        if(quantity > 5) {
             return response.status(badRequest).json("You cannot create more than 5 products at once");
         }
-
     } 
     
     catch(error) {
