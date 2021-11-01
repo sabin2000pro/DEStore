@@ -5,7 +5,7 @@ import {Link, useHistory} from 'react-router-dom';
 
 const RegisterPage = () => { // Register Account Page Component
     let history = useHistory();
-    const [username, setUsername] = useState("");
+    const [username, setUsername] = useState(""); // The Username of Store Manager
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -13,14 +13,15 @@ const RegisterPage = () => { // Register Account Page Component
     let port = 5950;
 
     useEffect(() => {
-        if(localStorage.getItem("authToken")) {
-            return history.push("/adminlogin");
+        if(localStorage.getItem("authToken")) { // If there is a token in local storage
+            return history.push("/adminlogin"); // Redirect user to login
         }
 
     }, [history])
 
     const registerHandler = async (e) => { // Function to Register User
         try {
+
             e.preventDefault();
 
             if(password !== confirmPassword) {
@@ -33,6 +34,8 @@ const RegisterPage = () => { // Register Account Page Component
             }
 
             const {data} = await axios.post(`http://localhost:${port}/api/v1/auth/register`, {username, email, password});
+            console.log(data.token);
+            
             localStorage.setItem("authToken", data.token);
             return history.push("/adminlogin");
         } 

@@ -11,12 +11,12 @@ import {useHistory} from 'react-router-dom';
 const ProductsList = () => { // Component to Render all of the products on the screen
     let DEFAULT = 0;
     let history = useHistory();
+
     const [pageNumber, setPageNumber] = useState(DEFAULT); // The Current Page Number
     const [numberOfPages, setNumberOfPages] = useState(DEFAULT); // Number of Pages Variable
     const [products, setProducts] = useState([]); // Product State
     const [displayed, setDisplay] = useState(false);
     const [searchTerm, setSearchTerm] = useState(""); // The Search Term Stored here
-
     const pages = new Array(numberOfPages).fill(null).map((v, i) => i); // Create an array of pages
 
     useEffect(() => { // useEffect hook to retrieve all the products
@@ -29,7 +29,7 @@ const ProductsList = () => { // Component to Render all of the products on the s
 
     }, [pageNumber]);
 
-
+    
     return (
         <div className = "App">
         <input className = "search__input" type = "text" placeholder = "Search Product" onChange = {(event) => setSearchTerm(event.target.value)}/>
