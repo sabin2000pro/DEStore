@@ -10,7 +10,6 @@ import {Link} from 'react-router-dom';
 
 const ProductsList = () => { // Component to Render all of the products on the screen
     let DEFAULT = 0;
-
     const [pageNumber, setPageNumber] = useState(DEFAULT); // The Current Page Number
     const [numberOfPages, setNumberOfPages] = useState(DEFAULT); // Number of Pages Variable
     const [products, setProducts] = useState([]); // Product State
@@ -49,6 +48,7 @@ const ProductsList = () => { // Component to Render all of the products on the s
         }).map((product, key) => ( // Map through the products
             
             <div className = "products" key = {key}>
+
                 <Link to = {{pathname: `/payment/${product._id}`, state: {product}} }>Finance Now</Link>
                 <h4>Product Name: {product.name}</h4>
 
