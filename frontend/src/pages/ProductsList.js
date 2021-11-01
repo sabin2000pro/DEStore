@@ -6,11 +6,9 @@
 
 import '../App.css';
 import {useEffect, useState} from 'react';
-import {useHistory} from 'react-router-dom';
 
 const ProductsList = () => { // Component to Render all of the products on the screen
     let DEFAULT = 0;
-    let history = useHistory();
 
     const [pageNumber, setPageNumber] = useState(DEFAULT); // The Current Page Number
     const [numberOfPages, setNumberOfPages] = useState(DEFAULT); // Number of Pages Variable
@@ -29,7 +27,7 @@ const ProductsList = () => { // Component to Render all of the products on the s
 
     }, [pageNumber]);
 
-    
+
     return (
         <div className = "App">
         <input className = "search__input" type = "text" placeholder = "Search Product" onChange = {(event) => setSearchTerm(event.target.value)}/>
