@@ -39,6 +39,7 @@ const App = () => { // Main App Component
 
     </div>
  </Router>
+ 
   )
 }
 
