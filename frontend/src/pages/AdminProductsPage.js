@@ -21,7 +21,6 @@ const AdminProductsPage = () => {
     const [productColour, setProductColour] = useState("");
     const [newProduct, setNewProductData] = useState([]);
     const [newPrice, setNewPrice] = useState(0);
-    const [newDescription, setNewDescription] = useState("");
     const [email, setEmailAddress] = useState("");
 
     const pages = new Array(numberOfPages).fill(null).map((v, i) => i);
@@ -66,18 +65,6 @@ const AdminProductsPage = () => {
             }
         }
     };
-
-    const updateDescription = (id) => {
-        try {
-            
-        } 
-        
-        catch(error) {
-            if(error) {
-                console.log(error);
-            }
-        }
-    }
 
     const deleteProduct = (id) => { // Deletes a product from the inventory
         try {
@@ -171,11 +158,6 @@ const AdminProductsPage = () => {
                 <label for = "editPrice">Edit Price:  </label>
                 <input type = "number" placeholder = "Enter New Price" onChange = {(e) => setNewPrice(e.target.value)} />
                 <button onClick = {() => updatePrice(product._id)} type = "submit">Edit Price</button>
-            </div>
-
-            <div>
-                <label for = "editDescription">Edit Description: </label>
-                <input type = "text" placeholder = "Enter New Description" onChange = {(e) => {setNewDescription(e.target.value)}} />
             </div>
 
             <div>
