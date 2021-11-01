@@ -1,5 +1,6 @@
 import './App.css';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+// Pages Imports
 import Homepage from './pages/Homepage';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
@@ -10,7 +11,7 @@ import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import PaymentPage from './pages/PaymentPage';
 
-const App = () => {
+const App = () => { // Main App Component
   return (
     
     <Router>
