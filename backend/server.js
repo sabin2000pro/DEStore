@@ -30,6 +30,7 @@ app.use(morgan('dev'));
 app.use(mongoSanitize());
 app.use(helm());
 app.use(hpp());
+
 app.use(xss());
 app.use(session({
     secret: 'my-secret',
@@ -42,7 +43,6 @@ app.use(session({
 
   // Call function to connect to the database
 connectDB();
-
 app.use('/api/v1/products', productRoutes);
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/payment', paymentRoutes);

@@ -89,7 +89,8 @@ describe('Test Case - Returns all Payments', () => {
 describe("Test Case - Create a Payment with name, card type, card number, expiry date and the code", () => {
     describe("Should respond with a status code of 201 CREATED", () => {
         test('Payment Test - Should Respond with 201 Created', async () => {
-
+            const response = await request(server).post('/api/v1/payment/createPayment').send({cardholderName: "Test Name", cardType: "VISA", cardNumber: "9009 1844 5675 9091", expiryDate: "03/11/2023", code: 944});
+            return expect(response.status).toBe(201);
         })
     })
 })
