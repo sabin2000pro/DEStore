@@ -16,6 +16,11 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: process.env.MONGO_USERNAME
       MONGO_INITDB_ROOT_PASSWORD: process.env.MONGO_PASSWORD
+    healthcheck:
+      test: echo 'db.stats().ok' | mongo localhost:27017/destore --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 10
 
   tests:
     build:

@@ -105,7 +105,6 @@ module.exports.forgotPassword = async (request, response, next) => { // Forgot P
             return response.status(notFound).json({message: 'E-mail could not be sent. No admin found with that e-mail address'});
         }
 
-
         const resetToken = admin.getResetPasswordToken(); // Extract the password reset token from the model
         await admin.save();
         const resetURL = `http://localhost:3000/passwordreset/${resetToken}`; // The Reset Password URL LINK

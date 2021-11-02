@@ -13,7 +13,13 @@ const ROUNDS = 10;
 const adminSchema = new mongoose.Schema({
     username: {
         type: String,
-        required: [true, 'You must specify the username']
+        required: [true, 'You must specify the username'],
+
+        validate: function() {
+            return this.username !== " ";
+        },
+
+        message: "Username should not be left empty"
     },
 
     email: {
@@ -25,7 +31,13 @@ const adminSchema = new mongoose.Schema({
 
     password: {
         type: String,
-        required: [true, 'You must specify the Admin Password']
+        required: [true, 'You must specify the Admin Password'],
+
+        validate: function() {
+            return this.password !== ""
+        },
+
+        message: 'Password should not be left empty'
     },
 
     passwordResetToken: String, // The password reset token for the admin.
