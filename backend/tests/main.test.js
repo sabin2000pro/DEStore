@@ -129,18 +129,6 @@ describe('Test Case - Forgot Password Missing E-mail', () => {
     })
 });
 
-describe('Test Case - Forgot Password Invalid Data Type', () => {
-    test('Should respond with a status code of 400', async () => {
-        const bodyData = [{"email": 349}]
-
-        for(const body of bodyData) {
-            const response = await request(server).post('/api/v1/auth/forgotPassword').send(body);
-            return expect(response.status).toBe(404);
-        }
-        
-    })
-})
-
 describe('Test Case - Products missing name and description', () => { // Test Case 5
     test("Should respond with a status code of 400", async () => {
         const bodyData = [{}];
@@ -153,3 +141,37 @@ describe('Test Case - Products missing name and description', () => { // Test Ca
 
     })
  })
+
+ describe('Test Case - Forgot Password Invalid Data Type', () => {
+    test('Should respond with a status code of 400', async () => {
+        const bodyData = [{"email": 349}]
+
+        for(const body of bodyData) {
+            const response = await request(server).post('/api/v1/auth/forgotPassword').send(body);
+            return expect(response.status).toBe(404);
+        }
+
+    })
+});
+
+describe('Test Case - Admin Register - Invalid Username Data Type', () => {
+    test('Should respond with a status code of 400', async () => {
+        const bodyData = [{"username": 1234}];
+
+        for(const body of bodyData) {
+            const response = await request(server).post('/api/v1/auth/register').send(body);
+            return expect(response.status).toBe(400);
+        }
+    })
+});
+
+describe('Test Case - Admin Login - Invalid E-mail and Username Data Types', () => {
+    test('Should respond with a 400 Bad Request Status Code', async () => {
+        const bodyData = [{"email": 123, "password": 555}];
+
+        for(const body of bodyData) {
+            const response = await request(server).post('/api/v1/auth/login').send(body);
+            return expect(response.status).toBe(429);
+        }
+    })
+})
