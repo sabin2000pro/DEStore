@@ -28,10 +28,10 @@ const productSchema = new mongoose.Schema({ // The Product Description
         type: Number,
 
         validate: function() {
-            return this.price > 0.00;
+            return this.price > 20.00;
         },
 
-        message: 'Product price should be greater than £0.00'
+        message: 'Product price should be greater than £20.00'
     },
 
     priceDiscount: {
@@ -46,7 +46,6 @@ const productSchema = new mongoose.Schema({ // The Product Description
 
     quantity: { // The quantity of the product
         type: Number,
-        required: [true, 'Admin - You must specify the amount of products you would like there to be in stock']
     },
 
     saleOffer: {
