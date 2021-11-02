@@ -67,6 +67,18 @@ const AdminProductsPage = () => {
         }
     };
 
+    const updateQty = (id) => {
+        try {
+            axios.put('http://localhost:5950/api/v1/products/${id}', {id: id, newQty: newQty}).then(data => {console.log(data)}).catch(err => {console.log(err)});
+            alert('Quantity Updated');
+            return window.location.reload(false);
+        } 
+        
+        catch(error) {
+
+        }
+    }
+
     const deleteProduct = (id) => { // Deletes a product from the inventory
         try {
             axios.delete(`http://localhost:5950/api/v1/products/${id}`, {id:id});
@@ -161,7 +173,13 @@ const AdminProductsPage = () => {
                 <input type = "number" placeholder = "Enter New Price" onChange = {(e) => setNewPrice(e.target.value)} />
                 <button onClick = {() => updatePrice(product._id)} type = "submit">Edit Price</button>
             </div>
-            
+
+            <div>
+                <label for = "editQty">Edit Quantity: </label>
+                <input type = "number" placeholder = "Enter New Quantity" onChange = {(e) => setNewQty(e.target.value)} />
+                <button onClick = {() => updateQty(product._id)} type = "submit">Edit Quantity</button>
+            </div>
+
             <div>
                 <button onClick = {() => deleteProduct(product._id)} type = "submit">Delete Product</button>
             </div>
