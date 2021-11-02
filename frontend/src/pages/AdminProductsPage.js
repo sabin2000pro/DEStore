@@ -28,14 +28,14 @@ const AdminProductsPage = () => {
 
     useEffect(() => { // Fetch all products
         const fetchAdminProducts = () => {
-            
+
             return fetch(`http://localhost:5950/api/v1/products?page=${pageNumber}`).then((response) => response.json()).then(({total, products}) => {
             setProducts(products);
             setNumberOfPages(total);            
         });
         }
         
-        fetchAdminProducts();
+        return fetchAdminProducts();
     }, [pageNumber]);
 
     const createProduct = () => { // Function that creates a new product to be stored
@@ -47,6 +47,7 @@ const AdminProductsPage = () => {
             })
 
             alert('Product Created');
+            
             return setTimeout(() => {
                 window.location.reload(false)
             }, 3000);
