@@ -59,19 +59,19 @@ module.exports.login = async (request, response, next) => {
         const {email, password} = request.body; // Extract E-mail and Password from the body
 
         if(!email || !password) {
-            return response.status(400).json({message: "Please provide your e-mail and password before logging in"});
+            return response.status(badRequest).json({message: "Please provide your e-mail and password before logging in"});
         }
 
         const admin = await Admin.findOne({email}).select('+password'); // Find an admin by the e-mail
 
         if(!admin) {
-            return response.status(400).json({message: 'No admin found with that e-mail address'});
+            return response.status(badRequest).json({message: 'No admin found with that e-mail address'});
         }
 
         const isPasswordMatch = await admin.comparePasswords(password); // Returns true or false if passwords match or not
 
         if(!isPasswordMatch) { // If passwords don't match
-            return response.status(400).json({message: "Passwords do not match. Check your entries"});
+            return response.status(badRequest).json({message: "Passwords do not match. Check your entries"});
         }
 
         return sendToken(admin, ok, response); // Send back JSON token. Used to log in the user
@@ -101,9 +101,11 @@ module.exports.forgotPassword = async (request, response, next) => { // Forgot P
         const {email} = request.body; // Extract the e-mail from the body
         const admin = await Admin.findOne({email}); // Find an admin by the e-mail address
 
-        if(!email) {
+        if(!email) { // If no e-mail found in the database
             return response.status(notFound).json({message: 'E-mail could not be sent. No admin found with that e-mail address'});
         }
+
+
         const resetToken = admin.getResetPasswordToken(); // Extract the password reset token from the model
         await admin.save();
         const resetURL = `http://localhost:3000/passwordreset/${resetToken}`; // The Reset Password URL LINK
@@ -114,7 +116,6 @@ module.exports.forgotPassword = async (request, response, next) => { // Forgot P
         
         // Send E-mail using Nodemailer
         await sendEmail({to: admin.email, subject: "Password Reset Request", text: resetMessage});
-
         return response.status(ok).json({success: true, data: "E-mail sent"});
     } 
     
