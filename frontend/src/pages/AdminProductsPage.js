@@ -27,11 +27,15 @@ const AdminProductsPage = () => {
     const pages = new Array(numberOfPages).fill(null).map((v, i) => i);
 
     useEffect(() => { // Fetch all products
-        return fetch(`http://localhost:5950/api/v1/products?page=${pageNumber}`).then((response) => response.json()).then(({total, products}) => {
+        const fetchAdminProducts = () => {
+            
+            return fetch(`http://localhost:5950/api/v1/products?page=${pageNumber}`).then((response) => response.json()).then(({total, products}) => {
             setProducts(products);
             setNumberOfPages(total);            
         });
-
+        }
+        
+        fetchAdminProducts();
     }, [pageNumber]);
 
     const createProduct = () => { // Function that creates a new product to be stored
@@ -43,7 +47,9 @@ const AdminProductsPage = () => {
             })
 
             alert('Product Created');
-            return window.location.reload(false);
+            return setTimeout(() => {
+                window.location.reload(false)
+            }, 3000);
         } 
         
         catch(error) {
@@ -57,7 +63,9 @@ const AdminProductsPage = () => {
         try {
             axios.put(`http://localhost:5950/api/v1/products/${id}`, {id: id, newPrice: newPrice}).then(data => {console.log(data)}).catch(err => {console.log(err)});
             alert('Price Updated');
-            return window.location.reload(false);
+            return setTimeout(() => {
+                window.location.reload(false)
+            }, 3000);
         } 
         
         catch(error) {
@@ -71,7 +79,9 @@ const AdminProductsPage = () => {
         try {
             axios.put(`http://localhost:5950/api/v1/products/${id}`, {id: id, newQty: newQty}).then(data => {console.log(data)}).catch(err => {console.log(err)});
             alert('Quantity Updated');
-            return window.location.reload(false);
+            return setTimeout(() => {
+                window.location.reload(false)
+            }, 3000);
         } 
         
         catch(error) {
