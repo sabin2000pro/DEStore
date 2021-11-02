@@ -58,5 +58,5 @@ adminSchema.methods.getSignedToken = function() { // Sign a JSON web token for t
     return jwt.sign({id: this._id}, process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXPIRES_IN});
 }
 
-const Admin = mongoose.model('Admin', adminSchema);
+const Admin = mongoose.model('Admin', adminSchema); // Create the Admin Model
 module.exports = Admin; // Export the Admin Model

@@ -21,7 +21,13 @@ const productSchema = new mongoose.Schema({ // The Product Description
     description: { // Prodcut Description
         type: String,
         required: [true, 'You must specify a description for the product'],
-        unique: true
+        unique: true,
+
+        validate: function(val) {
+            return val !== "";
+        },
+
+        message: 'Description should not be left empty'
     },
 
     price: { // The price of the product
