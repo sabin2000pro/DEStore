@@ -91,7 +91,18 @@ const AdminProductsPage = () => {
     };
 
     const updateQty = (id) => {
+        try {
+            return axios.put(`http://localhost:5950/api/v1/products/${id}`).then((response) => {
+                const {quantity} = response.data;
+                console.log(quantity);
+            })
+        } 
         
+        catch(error) {
+            if(error) {
+                console.log(error);
+            }
+        }
     }
 
     return (
