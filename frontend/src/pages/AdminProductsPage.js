@@ -90,21 +90,6 @@ const AdminProductsPage = () => {
         })
     };
 
-    const updateQty = (id) => {
-        try {
-            return axios.put(`http://localhost:5950/api/v1/products/${id}`).then((response) => {
-                const {quantity} = response.data;
-                console.log(quantity);
-            })
-        } 
-        
-        catch(error) {
-            if(error) {
-                console.log(error);
-            }
-        }
-    }
-
     return (
         <div className = "App"> 
 
@@ -176,13 +161,7 @@ const AdminProductsPage = () => {
                 <input type = "number" placeholder = "Enter New Price" onChange = {(e) => setNewPrice(e.target.value)} />
                 <button onClick = {() => updatePrice(product._id)} type = "submit">Edit Price</button>
             </div>
-
-            <div>
-                <label for = "editQuantity">Edit Quantity: </label>
-                <input type = "number" placeholder = "Enter New Quantity" onChange = {(e) => setNewQty(e.target.value)} />
-                <button onClick = {() => updateQty(product._id)} type = "submit">Edit Quantity</button>
-            </div>
-
+            
             <div>
                 <button onClick = {() => deleteProduct(product._id)} type = "submit">Delete Product</button>
             </div>
