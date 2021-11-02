@@ -39,7 +39,7 @@ describe('POST /products', () => { // Test Case 2
     })
 });
 
-describe('POST /api/v1/auth/register', () => {
+describe('POST /api/v1/auth/register', () => { // Test Case 3
     describe('Registering a new admin with e-mail, username and password', () => {
         test("Should respond with a 201 created status code", async () => {
             const response = await request(server).post('/api/v1/auth/register').send({username: "newtestlol", email: "newtestloll@gmail.com", password: "newtestloll"});
@@ -49,7 +49,7 @@ describe('POST /api/v1/auth/register', () => {
 });
 
 describe('POST /api/v1/auth/login', () => {
-    describe("Login a new admin with e-mail and password", () => {
+    describe("Login a new admin with e-mail and password", () => { // Test Case 4
         test("Should respond with a 200 OK Status Code", async () => {
             const response = await request(server).post('/api/v1/auth/login').send({email: "testagain@gmail.com", password: "testagain"});
             return expect(response.status).toBe(200);
@@ -59,7 +59,7 @@ describe('POST /api/v1/auth/login', () => {
 
 describe("POST - /api/v1/auth/forgotPassword", () => {
     describe("Sends back a 200 OK STATUS CODE - Means the e-mail has been sent successfully", () => {
-        test("Respond back with 200 OK Statsu Code", async () => {
+        test("Respond back with 200 OK Status Code", async () => {
             const response = await request(server).post('/api/v1/auth/forgotPassword').send({email: "sabinlungu200@gmail.com"});
             return expect(response.status).toBe(200);
         })
