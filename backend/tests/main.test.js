@@ -76,7 +76,7 @@ describe('GET /admins', () => { // Test Case 3 - Returns all of the admins - TES
     })
 });
 
-describe('Test Case - Returns all Payments', () => {
+describe('Test Case - GET: Returns all Payments', () => {
     describe("Test Case - Get All Payments Should Return 200 OK Status Code", () => {
         test("Payment Test - Return 200 OK Status Code", async () => {
             const response = await request(server).get('/api/v1/payment/getAllPayments').send();
@@ -96,7 +96,7 @@ describe("Test Case - Create a Payment with name, card type, card number, expiry
 })
 
 // * Test Passes
-describe('Test Case - Admin missing E-mail and password', () => { // Test Case 4 - Test Missing Admin E-mail and Password.
+describe('Test Case - Admin REGISTER missing E-mail and password', () => { // Test Case 4 - Test Missing Admin E-mail and Password.
     test("Should respond with status code of 400", async () => {
         const bodyData = [{email: "email", password: "password"}];
 
@@ -107,7 +107,7 @@ describe('Test Case - Admin missing E-mail and password', () => { // Test Case 4
     })
 });
 
-describe('Test Case - Admin Missing E-mail And Password Log in', () => {
+describe('Test Case - Admin LOGIN Missing E-mail And Password Log in', () => {
     test("Should respond with status code of 400", async () => {
         const bodyData = [{email: "emal", password: "password"}];
 
@@ -127,8 +127,29 @@ describe('Test Case - Forgot Password Missing E-mail', () => {
             return expect(response.status).toBe(404);
         }
     })
+});
+
+describe('Test Case - Forgot Password Invalid Data Type', () => {
+    test('Should respond with a status code of 400', async () => {
+        const bodyData = [{"email": 349}]
+
+        for(const body of bodyData) {
+            const response = await request(server).post('/api/v1/auth/forgotPassword').send(body);
+            return expect(response.status).toBe(404);
+        }
+        
+    })
 })
 
-// describe('Test Case - Products missing name and description', () => { // Test Case 5
-//     test("Should respond with a status code of 400")
-// })
+describe('Test Case - Products missing name and description', () => { // Test Case 5
+    test("Should respond with a status code of 400", async () => {
+        const bodyData = [{}];
+
+        for(const body of bodyData) {
+            const response = await request(server).post('/api/v1/products').send(body);
+            return expect(response.status).toBe(404);
+        }
+
+
+    })
+ })

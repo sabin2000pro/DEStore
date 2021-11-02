@@ -5,11 +5,11 @@ const unauthorized = 401;
 module.exports.protectProducts = async (request, response, next) => { // Middleware function to only grant registered admins the right to create, update and delete products
 
     try {
-        let token; // Get the token
+        let token;
         const headers = request.headers.authorization;
-    
-        if(headers && headers.startsWith("Bearer")) { // If the header starts with Bearer
-            token = headers.split(' ')[1]; // Split the token header to include the full token -> Bearer AAFJAFJ
+
+        if(headers && headers.startsWith("Bearer")) {
+            token = headers.split(' ')[1];
         }
     
         if(!token) { // If no token is found
@@ -23,8 +23,8 @@ module.exports.protectProducts = async (request, response, next) => { // Middlew
             return response.status(unauthorized).json("No admin ID found with that token");
         }
 
-        request.admin = admin; // Update admin
-        return next(); // Call next middleware function
+        request.admin = admin;
+        return next();
     }
     
     catch(error) {
@@ -32,5 +32,6 @@ module.exports.protectProducts = async (request, response, next) => { // Middlew
         if(error) {
             return response.status(unauthorized).json("You are not authorized to reach this route");
         }
+
     }
 };
