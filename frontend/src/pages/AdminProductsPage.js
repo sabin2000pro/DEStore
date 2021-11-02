@@ -69,13 +69,15 @@ const AdminProductsPage = () => {
 
     const updateQty = (id) => {
         try {
-            axios.put('http://localhost:5950/api/v1/products/${id}', {id: id, newQty: newQty}).then(data => {console.log(data)}).catch(err => {console.log(err)});
+            axios.put(`http://localhost:5950/api/v1/products/${id}`, {id: id, newQty: newQty}).then(data => {console.log(data)}).catch(err => {console.log(err)});
             alert('Quantity Updated');
             return window.location.reload(false);
         } 
         
         catch(error) {
-
+            if(error) {
+                console.log(error.toString());
+            }
         }
     }
 
@@ -83,7 +85,9 @@ const AdminProductsPage = () => {
         try {
             axios.delete(`http://localhost:5950/api/v1/products/${id}`, {id:id});
             alert('Product Deleted');
-            return window.location.reload(false);
+            return setTimeout(() => {
+                window.location.reload(false)
+            }, 3000);
         } 
         
         catch(error) {
@@ -95,10 +99,15 @@ const AdminProductsPage = () => {
 
     const checkQuantity = (id) => { // Checks the quantity of the product
         return axios.get(`http://localhost:5950/api/v1/products/${id}`).then((response) => {
+
             const {quantity} = response.data;
+            console.log(quantity);
             axios.post(`http://localhost:5950/api/v1/products/verifyStock/${id}`, {id, email: email});
             alert('Low Stock - E-mail Sent');
-            return window.location.reload(false);
+
+            return setTimeout(() => {
+                window.location.reload(false)
+            }, 3000);
         })
     };
 

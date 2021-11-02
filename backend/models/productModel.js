@@ -26,7 +26,6 @@ const productSchema = new mongoose.Schema({ // The Product Description
 
     price: { // The price of the product
         type: Number,
-        required: [true, 'You must specify the price of the product'],
 
         validate: function() {
             return this.price > 0.00;
