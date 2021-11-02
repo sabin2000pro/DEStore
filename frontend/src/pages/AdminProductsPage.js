@@ -20,6 +20,7 @@ const AdminProductsPage = () => {
     const [productSaleOffer, setProductSaleOffer] = useState("");
     const [productColour, setProductColour] = useState("");
     const [newProduct, setNewProductData] = useState([]);
+    const [newQty, setNewQty] = useState(0);
     const [newPrice, setNewPrice] = useState(0);
     const [email, setEmailAddress] = useState("");
 
@@ -89,6 +90,10 @@ const AdminProductsPage = () => {
         })
     };
 
+    const updateQty = (id) => {
+        
+    }
+
     return (
         <div className = "App"> 
 
@@ -140,7 +145,8 @@ const AdminProductsPage = () => {
 
          <h3>Page {pageNumber + 1}</h3>
 
-         {displayed ? products.filter((value) => {
+         {displayed ? products.filter((value) => { // Filter out value for searching
+
              if(searchTerm === "") {
                  return value;
              }
@@ -158,6 +164,12 @@ const AdminProductsPage = () => {
                 <label for = "editPrice">Edit Price:  </label>
                 <input type = "number" placeholder = "Enter New Price" onChange = {(e) => setNewPrice(e.target.value)} />
                 <button onClick = {() => updatePrice(product._id)} type = "submit">Edit Price</button>
+            </div>
+
+            <div>
+                <label for = "editQuantity">Edit Quantity: </label>
+                <input type = "number" placeholder = "Enter New Quantity" onChange = {(e) => setNewQty(e.target.value)} />
+                <button onClick = {() => updateQty(product._id)} type = "submit">Edit Quantity</button>
             </div>
 
             <div>

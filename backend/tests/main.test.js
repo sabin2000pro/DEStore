@@ -137,8 +137,6 @@ describe('Test Case - Products missing name and description', () => { // Test Ca
             const response = await request(server).post('/api/v1/products').send(body);
             return expect(response.status).toBe(404);
         }
-
-
     })
  })
 
