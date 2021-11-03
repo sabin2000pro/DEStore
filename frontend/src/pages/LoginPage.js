@@ -4,13 +4,12 @@ import {Link, useHistory} from 'react-router-dom';
 
 const LoginPage = () => {
     let history = useHistory();
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    useEffect(() => {
-        if(localStorage.getItem("authToken")) {
-            return history.push("/");
+    useEffect(() => { 
+        if(localStorage.getItem("authToken")) { // If there is a token in local storage
+            return history.push("/"); // Redirect home
         }
     }, [history]);
 
@@ -18,7 +17,6 @@ const LoginPage = () => {
        try {
 
         e.preventDefault();
-        
            const {data} = await axios.post(`http://localhost:5950/api/v1/auth/login`, {email, password});
            localStorage.setItem("authToken", data.token);
            return history.push("/");
@@ -26,9 +24,12 @@ const LoginPage = () => {
        
        
        catch(err) {
+
         if(err) {
-            console.log(err);
+            return console.log(err);
         }
+
+
        }
     }
 

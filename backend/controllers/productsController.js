@@ -108,17 +108,17 @@ module.exports.validateQuantity = async (request, response, next) => { // Middle
 module.exports.sortByPrice = async (request, response, next) => { // Sort Products By price
     try {
         const queryObj = {...request.query}; // Take out all of the request query objects
-        const sort = request.query.sort;
+        const sort = request.query.sort; // Sort Query
 
         let queryStr = JSON.stringify(queryObj);
         let query = Product.find(JSON.parse(queryStr));
 
         if(sort) { // IF there is asort
-            const sortBy = request.query.sort.split(',').join(' '); // Create the criteria for sorting by splitting by a comma and joining with an empty space
-            query = query.sort(sortBy); // Sort by the specified field
+            const sortBy = request.query.sort.split(',').join(' ');
+            query = query.sort(sortBy);
         }
 
-        const products = await query; // Await the result
+        const products = await query;
         return response.status(200).json({results: products.length, products});
     } 
     
@@ -239,7 +239,6 @@ module.exports.createProduct = async (request, response, next) => { // Middlewar
         if(error) {
             return response.status(serverError).json({message: 'Request Failed', cause: error.toString()});
         }
-
         
     }
 };

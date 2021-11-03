@@ -10,7 +10,6 @@ const AdminProductsPage = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [products, setProducts] = useState([]);
     const [displayed, setDisplay] = useState(false);
-
     const [productName, setNewProductName] = useState("");
     const [productImage, setProductImage] = useState("");
     const [productDescription, setProductDescription] = useState(""); // The New Product Description
@@ -33,7 +32,7 @@ const AdminProductsPage = () => {
             setProducts(products);
             setNumberOfPages(total);            
         });
-        
+
         }
         
         return fetchAdminProducts();
