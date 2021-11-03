@@ -33,6 +33,7 @@ const AdminProductsPage = () => {
             setProducts(products);
             setNumberOfPages(total);            
         });
+        
         }
         
         return fetchAdminProducts();
@@ -47,7 +48,7 @@ const AdminProductsPage = () => {
             })
 
             alert('Product Created');
-            
+
             return setTimeout(() => {
                 window.location.reload(false)
             }, 3000);
@@ -64,9 +65,11 @@ const AdminProductsPage = () => {
         try {
             axios.put(`http://localhost:5950/api/v1/products/${id}`, {id: id, newPrice: newPrice}).then(data => {console.log(data)}).catch(err => {console.log(err)});
             alert('Price Updated');
+
             return setTimeout(() => {
                 window.location.reload(false)
             }, 3000);
+
         } 
         
         catch(error) {
@@ -80,6 +83,7 @@ const AdminProductsPage = () => {
         try {
             axios.put(`http://localhost:5950/api/v1/products/${id}`, {id: id, newQty: newQty}).then(data => {console.log(data)}).catch(err => {console.log(err)});
             alert('Quantity Updated');
+
             return setTimeout(() => {
                 window.location.reload(false)
             }, 3000);
@@ -96,6 +100,7 @@ const AdminProductsPage = () => {
         try {
             axios.delete(`http://localhost:5950/api/v1/products/${id}`, {id:id});
             alert('Product Deleted');
+
             return setTimeout(() => {
                 window.location.reload(false)
             }, 3000);
@@ -110,16 +115,16 @@ const AdminProductsPage = () => {
 
     const checkQuantity = (id) => { // Checks the quantity of the product
         return axios.get(`http://localhost:5950/api/v1/products/${id}`).then((response) => {
-
             const {quantity} = response.data;
             console.log(quantity);
+
             axios.post(`http://localhost:5950/api/v1/products/verifyStock/${id}`, {id, email: email});
             alert('Low Stock - E-mail Sent');
 
             return setTimeout(() => {
                 window.location.reload(false)
             }, 3000);
-        })
+        }).catch(err => {console.log(err)});
     };
 
     return (

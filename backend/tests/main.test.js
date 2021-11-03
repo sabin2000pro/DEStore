@@ -56,7 +56,7 @@ describe('POST /api/v1/auth/login', () => {
     })
 });
 
-describe("POST - /api/v1/auth/forgotPassword", () => {
+describe("POST - /api/v1/auth/forgotPassword", () => { // Test Case 5
     describe("Sends back a 200 OK STATUS CODE - Means the e-mail has been sent successfully", () => {
         test("Respond back with 200 OK Status Code", async () => {
             const response = await request(server).post('/api/v1/auth/forgotPassword').send({email: "sabinlungu200@gmail.com"});
