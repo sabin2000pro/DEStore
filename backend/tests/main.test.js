@@ -2,7 +2,6 @@
 // Code Author: Sabin Constantin Lungu
 // Tests Written on: 25/10/2021
 // Last Modified Date: 31/10/21 @ 10:32
-// Modification Description: 
 // Bugs? N/A
 
 const request = require('supertest');

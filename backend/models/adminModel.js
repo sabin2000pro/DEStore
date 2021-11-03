@@ -14,11 +14,6 @@ const adminSchema = new mongoose.Schema({
     username: {
         type: String,
         required: [true, 'You must specify the username'],
-
-        validate: function() {
-            return this.username !== " ";
-        },
-
         message: "Username should not be left empty"
     },
 
@@ -32,11 +27,6 @@ const adminSchema = new mongoose.Schema({
     password: {
         type: String,
         required: [true, 'You must specify the Admin Password'],
-
-        validate: function() {
-            return this.password !== ""
-        },
-
         message: 'Password should not be left empty'
     },
 

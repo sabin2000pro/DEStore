@@ -118,7 +118,7 @@ module.exports.sortByPrice = async (request, response, next) => { // Sort Produc
             query = query.sort(sortBy); // Sort by the specified field
         }
 
-        const products = await query;
+        const products = await query; // Await the result
         return response.status(200).json({results: products.length, products});
     } 
     
@@ -133,10 +133,11 @@ module.exports.limitFields = async (request, response, next) => { // Function to
     try {
         const queryObj = {...request.query}; // The query object
         const excludedFields = ['limit', 'fields'];
+        
         const page = request.query.page * 1 || 1; // The page from the request.query
         const limit = request.query.limit * 1 || 100; // The page limit
         const skip = (page - 1) * limit; // The previous page * limit
-        excludedFields.forEach(el => delete queryObj[el]);
+        excludedFields.forEach(val => delete queryObj[val]);
 
         let queryStr = JSON.stringify(queryObj);
         let query = Product.find(JSON.parse(queryStr)) // Parse the query string by finding all producgts
@@ -231,7 +232,6 @@ module.exports.createProduct = async (request, response, next) => { // Middlewar
 
         await newProduct.save();
         return response.status(created).json("Product Created");
-    
     } 
     
     catch(error) {
@@ -239,6 +239,8 @@ module.exports.createProduct = async (request, response, next) => { // Middlewar
         if(error) {
             return response.status(serverError).json({message: 'Request Failed', cause: error.toString()});
         }
+
+        
     }
 };
 
