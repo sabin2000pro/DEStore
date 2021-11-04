@@ -2,6 +2,7 @@ import '../App.css';
 import {useEffect, useState} from 'react';
 import axios from 'axios';
 import {useHistory} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 const AdminProductsPage = () => {
     let history = useHistory();
@@ -114,7 +115,7 @@ const AdminProductsPage = () => {
 
     const checkQuantity = (id) => { // Checks the quantity of the product
         return axios.get(`http://localhost:5950/api/v1/products/${id}`).then((response) => {
-            
+
             const {quantity} = response.data;
             console.log(quantity);
 
@@ -194,6 +195,7 @@ const AdminProductsPage = () => {
 
             <div>
                 <h1>Price Control</h1>
+
                 <label for = "editPrice">Edit Price:  </label>
                 <input type = "number" placeholder = "Enter New Price" onChange = {(e) => setNewPrice(e.target.value)} />
                 <button onClick = {() => updatePrice(product._id)} type = "submit">Edit Price</button>
@@ -221,7 +223,9 @@ const AdminProductsPage = () => {
             <h4>Price: £{product.price}</h4>
             <h4>Sale Offer: {product.saleOffer}</h4>
             <h5>In Stock</h5>
+            <Link to = {{pathname: `/payment/${product._id}`, state: {product}} }>View Product</Link>
             <img src = {product.image} className = "product__img"></img>
+
             
          </div>
 
