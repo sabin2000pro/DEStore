@@ -10,20 +10,21 @@ import axios from 'axios';
 
 const Homepage = () => { // Homepage React Component
     const [payments, setPayments] = useState([]);
+    const [email, setEmail] = useState("");
+
 
     useEffect(() => { // Used for loyalty card
         return getAllPayments();
       }, [])
 
-
-    const getAllPayments = async () => {
+    const getAllPayments = async () => { // retrieves all the payments from the database
         return await axios.get(`http://localhost:5950/api/v1/payment/getAllPayments`).then(response => {
                 const payments = response.data.payments;
                 const length = response.data.payments.length;
                 setPayments(payments);
 
                 if(length > 5) { // If there are more than 5 payments
-                    alert(`You are eligible for a rewards coupon`)
+                    alert(`You are have received a Loyalty Card. Enter your e-mail below`);
                 }
 
             })
@@ -31,7 +32,9 @@ const Homepage = () => { // Homepage React Component
    
     return (
       <div>
-
+          <form>
+              
+          </form>
       </div>
     )
 }

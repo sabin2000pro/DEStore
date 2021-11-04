@@ -33,10 +33,10 @@ const AdminProductsPage = () => {
             setProducts(products);
             setNumberOfPages(total);            
         });
-
-        }
+    }
         
         return fetchAdminProducts();
+
     }, [pageNumber]);
 
     const createProduct = () => { // Function that creates a new product to be stored
@@ -125,7 +125,7 @@ const AdminProductsPage = () => {
             return setTimeout(() => {
                 window.location.reload(false)
             }, 3000);
-            
+
         }).catch(err => {console.log(err)});
     };
 
