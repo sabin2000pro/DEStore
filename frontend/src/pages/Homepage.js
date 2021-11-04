@@ -9,28 +9,31 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
 const Homepage = () => { // Homepage React Component
+    const [payments, setPayments] = useState([]);
 
     useEffect(() => { // Used for loyalty card
-        const getPayments = async () => {
-            await axios.get(`http://localhost:5950/api/v1/payment/getAllPayments`).then((response) => {
-                const thePayments = response.data;
+        return getAllPayments();
+      }, [])
 
-                thePayments.forEach(payment => {console.log(payment)});
+      const renderPayments = payments.map((payment, key) => {
+          return <div key = {key}>
+              <h3>{payment._id}</h3>
+          </div>
+      })
+
+    const getAllPayments = async () => {
+        return await axios.get(`http://localhost:5950/api/v1/payment/getAllPayments`).then(response => {
+                const payments = response.data.payments;
+                const length = response.data.payments.length;
+                setPayments(payments);
             })
-        }
-
-      getPayments();
-    }, [])
+    }
    
     return (
-       <div className = "text__container">
-           <main>
-               <h1>DE-Store Homepage</h1>
-               
-               
-           </main>
+      <div>
+    {renderPayments}
 
-       </div>
+      </div>
     )
 }
 
