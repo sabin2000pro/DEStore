@@ -223,7 +223,7 @@ const AdminProductsPage = () => {
             <h4>Price: £{product.price}</h4>
             <h4>Sale Offer: {product.saleOffer}</h4>
             <h5>In Stock</h5>
-            <Link to = {{pathname: `/payment/${product._id}`, state: {product}} }>View Product</Link>
+            <Link to = {{pathname: `/product/${product._id}`, state: {product}} }>View Product</Link>
             <img src = {product.image} className = "product__img"></img>
 
             
