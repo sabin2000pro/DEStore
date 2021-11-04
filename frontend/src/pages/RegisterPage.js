@@ -13,15 +13,17 @@ const RegisterPage = () => { // Register Account Page Component
     let port = 5950;
 
     useEffect(() => {
-        const verifyAuthToken = () => {
-            if(localStorage.getItem("authToken")) { // If there is a token in local storage
-                return history.push("/adminlogin"); // Redirect user to login
-            }
-        }
-     
+        
         return verifyAuthToken();
 
-    }, [history])
+    }, [history]);
+
+    const verifyAuthToken = () => {
+        if(localStorage.getItem("authToken")) { // If there is a token in local storage
+            return history.push("/adminlogin"); // Redirect user to login
+        }
+    }
+ 
 
     const registerHandler = async (e) => { // Function to Register User
 

@@ -7,24 +7,6 @@ const created = 201;
 const deleted = 204;
 const serverError = 500;
 
-module.exports.getLoyaltyCard = async (request, response, next) => {
-    try {
-        const payments = await Payment.find();
-        const admins = await Admin.find({});
-        const {email} = request.body;
-
-        if(!email) {
-            return response.status(404).json({message: "That e-mail is not available"});
-        }
-    } 
-    
-    catch(error) {
-        if(error) {
-            return response.status(serverError).json({message: error.toString()});
-        }
-    }
-}
-
 module.exports.getAllPayments = async (request, response, next) => { // Function to Retrieve All Payments - THIS CAN ONLY BE DONE BY STORE MANAGERS
     try {
         const payments = await Payment.find();
