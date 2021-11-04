@@ -18,6 +18,7 @@ const Homepage = () => { // Homepage React Component
       const renderPayments = payments.map((payment, key) => {
           return <div key = {key}>
               <h3>{payment._id}</h3>
+              <h3>Card type: {payment.cardType}</h3>
           </div>
       })
 
