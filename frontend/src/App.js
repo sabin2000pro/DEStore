@@ -10,6 +10,7 @@ import ProductsList from './pages/ProductsList';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import PaymentPage from './pages/PaymentPage';
+import AccountingPage from './pages/AccountingPage';
 
 const App = () => { // Main App Component
   return (
@@ -23,7 +24,7 @@ const App = () => { // Main App Component
         <li> <a href = "/productslist">View Products</a>  </li>
         <li> <a href = "/register">Store Manager Register</a>  </li>
         <li> <a href = "/adminlogin">Store Manager Login</a>  </li>
-        <li><a href = "/accounting">Accounting</a></li>
+        <li><a href = "/accounting">Performance Analysis</a></li>
       </ul>
     </nav>
        
@@ -36,6 +37,7 @@ const App = () => { // Main App Component
           <Route exact path = "/forgotpassword" component = {ForgotPasswordPage} />
           <Route exact path = "/passwordreset/:resetToken" component = {ResetPasswordPage} />
           <Route exact path = "/payment/:id" component = {PaymentPage} />
+          <Route exact path = "/accounting" component = {AccountingPage} />
        </Switch>
 
     </div>
