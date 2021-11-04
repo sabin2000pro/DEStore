@@ -9,10 +9,16 @@ services:
     volumes: 
       - /app/node_modules
       - .:/app
-
   mongo:
     image: mongo
     restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - type: volume
+        source: mongodb_data_volume
+        target: /data/db
+
     environment:
       MONGO_INITDB_ROOT_USERNAME: process.env.MONGO_USERNAME
       MONGO_INITDB_ROOT_PASSWORD: process.env.MONGO_PASSWORD
@@ -30,3 +36,7 @@ services:
       - /app/node_modules
       - .:/app
     command: ["npm", "test"]
+
+volumes:
+  mongodb_data_volume:
+    external: true
