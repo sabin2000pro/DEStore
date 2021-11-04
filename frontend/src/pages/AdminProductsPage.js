@@ -114,6 +114,7 @@ const AdminProductsPage = () => {
 
     const checkQuantity = (id) => { // Checks the quantity of the product
         return axios.get(`http://localhost:5950/api/v1/products/${id}`).then((response) => {
+            
             const {quantity} = response.data;
             console.log(quantity);
 

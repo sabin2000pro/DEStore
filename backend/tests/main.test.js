@@ -159,6 +159,7 @@ describe('Test Case - Admin Register - Invalid Username Data Type', () => {
             const response = await request(server).post('/api/v1/auth/register').send(body);
             return expect(response.status).toBe(400);
         }
+        
     })
 });
 

@@ -13,13 +13,18 @@ const RegisterPage = () => { // Register Account Page Component
     let port = 5950;
 
     useEffect(() => {
-        if(localStorage.getItem("authToken")) { // If there is a token in local storage
-            return history.push("/adminlogin"); // Redirect user to login
+        const verifyAuthToken = () => {
+            if(localStorage.getItem("authToken")) { // If there is a token in local storage
+                return history.push("/adminlogin"); // Redirect user to login
+            }
         }
+     
+        return verifyAuthToken();
 
     }, [history])
 
     const registerHandler = async (e) => { // Function to Register User
+
         try {
 
             e.preventDefault();
@@ -31,10 +36,11 @@ const RegisterPage = () => { // Register Account Page Component
                 return setTimeout(() => {
                     setError("");
                 }, 5000);
+
             }
 
-            const {data} = await axios.post(`http://localhost:${port}/api/v1/auth/register`, {username, email, password});
-            console.log(data.token);
+            const {data} = await axios.post(`http://localhost:${port}/api/v1/auth/register`, {username, email, password}); // Send post request to the back-end API
+            console.log(data.token); // Log that token
 
             localStorage.setItem("authToken", data.token);
             return history.push("/adminlogin");
@@ -42,9 +48,9 @@ const RegisterPage = () => { // Register Account Page Component
         
         catch(error) {
             if(error) {
-                
                return console.log(error);
             }
+
         }
 
     }

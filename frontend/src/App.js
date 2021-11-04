@@ -23,6 +23,7 @@ const App = () => { // Main App Component
         <li> <a href = "/productslist">View Products</a>  </li>
         <li> <a href = "/register">Store Manager Register</a>  </li>
         <li> <a href = "/adminlogin">Store Manager Login</a>  </li>
+        <li><a href = "/accounting">Accounting</a></li>
       </ul>
     </nav>
        
