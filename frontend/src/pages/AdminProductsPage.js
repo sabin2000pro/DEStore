@@ -125,6 +125,7 @@ const AdminProductsPage = () => {
             return setTimeout(() => {
                 window.location.reload(false)
             }, 3000);
+            
         }).catch(err => {console.log(err)});
     };
 
@@ -223,7 +224,7 @@ const AdminProductsPage = () => {
             <h4>Price: £{product.price}</h4>
             <h4>Sale Offer: {product.saleOffer}</h4>
             <h5>In Stock</h5>
-            
+
             <Link to = {{pathname: `/product/${product._id}`, state: {product}} }>View Product</Link>
             <img src = {product.image} className = "product__img"></img>
             
@@ -231,7 +232,7 @@ const AdminProductsPage = () => {
 
          )) : null}
 
-{pages.map((pageIndex) => (
+        {pages.map((pageIndex) => (
              <button onClick = {() => setPageNumber(pageIndex)} >{pageIndex + 1}</button>
     ))}
         <div className = "button__group">

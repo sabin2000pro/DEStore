@@ -5,7 +5,8 @@
 // File Purpose: Homepage React Component - Displays information about DE-Store and allows navigation between pages
 
 import '../App.css';
-import {useEffect, useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 
 const Homepage = () => { // Homepage React Component
    

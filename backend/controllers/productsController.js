@@ -204,7 +204,7 @@ module.exports.getAllProducts = async (request, response, next) => { // Returns 
  * @description: This function verifies the request body before submitting the data
   * @returns next middleware function
  */
-module.exports.getProduct = async (request, response, next) => {
+module.exports.getProduct = async (request, response, next) => { // Gets a single product
     try {
         const id = request.params.id;
         const product = await Product.findById(id);

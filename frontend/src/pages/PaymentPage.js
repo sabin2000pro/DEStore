@@ -11,7 +11,7 @@ const PaymentPage = (props) => {
     const [cardNumber, setCardNumber] = useState("");
     const [expiryDate, setExpiryDate] = useState("");
     const [code, setCode] = useState(0);
-    const [paymentComplete, setPaymentComplete] = useState(false);
+    const [paymentCompete, setPaymentComplete] = useState(false);
 
     const createPayment = () => { // Function called to create a payment for the product
         try {
