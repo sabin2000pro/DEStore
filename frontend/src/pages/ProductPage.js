@@ -5,7 +5,7 @@ import axios from 'axios';
 const ProductPage = (props) => {
     let location = useLocation();
     let history = useHistory();
-    const {name, image} = location.state.product;
+    const {name, image, price, description} = location.state.product;
 
     return (
         <div>
@@ -13,6 +13,14 @@ const ProductPage = (props) => {
             <div>
                 <h1>{name}</h1>
                 <img height = {200} width = {200} src = {image} />
+            </div>
+
+            <div>
+                Product: {name}
+                <br/>
+                Price: {price}
+                <br />
+                {description}
             </div>
         </div>
     )
