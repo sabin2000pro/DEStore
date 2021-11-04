@@ -11,7 +11,7 @@ import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import PaymentPage from './pages/PaymentPage';
 import AccountingPage from './pages/AccountingPage';
-import ProductPage from './pages/ProductPage';
+import ProductPage from './pages/ProductPage'
 
 const App = () => { // Main App Component
   return (

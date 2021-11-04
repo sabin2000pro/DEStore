@@ -9,11 +9,25 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
 const Homepage = () => { // Homepage React Component
+
+    useEffect(() => { // Used for loyalty card
+        const getPayments = async () => {
+            await axios.get(`http://localhost:5950/api/v1/payment/getAllPayments`).then((response) => {
+                const thePayments = response.data;
+
+                thePayments.forEach(payment => {console.log(payment)});
+            })
+        }
+
+      getPayments();
+    }, [])
    
     return (
        <div className = "text__container">
            <main>
                <h1>DE-Store Homepage</h1>
+               
+               
            </main>
 
        </div>
