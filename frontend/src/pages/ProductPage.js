@@ -3,6 +3,9 @@ import {useHistory, useLocation} from 'react-router-dom';
 import axios from 'axios';
 
 const ProductPage = () => {
+    let location = useLocation();
+    let history = useHistory();
+
     return (
         <div>
             
