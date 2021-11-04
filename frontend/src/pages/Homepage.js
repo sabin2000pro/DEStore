@@ -15,24 +15,22 @@ const Homepage = () => { // Homepage React Component
         return getAllPayments();
       }, [])
 
-      const renderPayments = payments.map((payment, key) => {
-          return <div key = {key}>
-              <h3>{payment._id}</h3>
-              <h3>Card type: {payment.cardType}</h3>
-          </div>
-      })
 
     const getAllPayments = async () => {
         return await axios.get(`http://localhost:5950/api/v1/payment/getAllPayments`).then(response => {
                 const payments = response.data.payments;
                 const length = response.data.payments.length;
                 setPayments(payments);
+
+                if(length > 5) { // If there are more than 5 payments
+                    alert(`You are eligible for a rewards coupon`)
+                }
+
             })
     }
    
     return (
       <div>
-    {renderPayments}
 
       </div>
     )
