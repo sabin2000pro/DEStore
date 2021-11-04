@@ -12,7 +12,6 @@ const Homepage = () => { // Homepage React Component
     const [payments, setPayments] = useState([]);
     const [email, setEmail] = useState("");
 
-
     useEffect(() => { // Used for loyalty card
         return getAllPayments();
       }, [])
@@ -33,7 +32,7 @@ const Homepage = () => { // Homepage React Component
     return (
       <div>
           <form>
-              
+
           </form>
       </div>
     )

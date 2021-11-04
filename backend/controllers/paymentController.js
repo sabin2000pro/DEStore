@@ -1,9 +1,24 @@
 const mongoose = require('mongoose');
 const Payment = require('../models/paymentModel');
+const Admin = require('../models/adminModel');
+const sendEmail = require('../utils/sendEmail');
 const ok = 200;
 const created = 201;
 const deleted = 204;
 const serverError = 500;
+
+module.exports.getLoyaltyCard = async (request, response, next) => {
+    try {
+        const payments = await Payment.find();
+        const admins = await Admin.find({});
+    } 
+    
+    catch(error) {
+        if(error) {
+            return response.status(serverError).json({message: error.toString()});
+        }
+    }
+}
 
 module.exports.getAllPayments = async (request, response, next) => { // Function to Retrieve All Payments - THIS CAN ONLY BE DONE BY STORE MANAGERS
     try {
