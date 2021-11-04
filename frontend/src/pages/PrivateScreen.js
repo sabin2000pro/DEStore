@@ -14,7 +14,7 @@ const PrivateScreen = () => { // Private Screen Component
 
     const logoutHandler = async (e) => { // Function to log out the Store Manager
         try {
-            localStorage.removeItem("authToken"); // Remove auth token from local storage
+           localStorage.removeItem("authToken"); // Remove auth token from local storage
            return history.push('/adminlogin');
         } 
         
