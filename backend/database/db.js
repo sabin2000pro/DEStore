@@ -10,12 +10,14 @@ const DB_URI = process.env.DB_URI;
 const connectDB = async () => { // Function that connects to the database
     try {
 
-        return await mongoose.connect(DB_URI, { // Connect to the database by awaiting the result
+        return await mongoose.connect(DB_URI, {
 
         }).then(conn => {
+
             if(conn.connection) {
                 console.log(`Successfully connected to Database`);
             }
+
 
         }).catch(err => {
 
@@ -29,7 +31,6 @@ const connectDB = async () => { // Function that connects to the database
 
         if(error) {
             console.log(error.toString());
-            throw new Error(error.toString());
         }
 
     }

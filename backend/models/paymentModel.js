@@ -8,11 +8,6 @@ const paymentSchema = new mongoose.Schema({ // Create payment schema
         type: String,
         required: [true, 'You must specify the name of the Cardholder']
     },
-
-    product: {
-        type: String,
-        required: [true, 'Please specify the product you are paying for']
-    },
     
     cardType: {
         type: String,

@@ -19,6 +19,7 @@ const RegisterPage = () => { // Register Account Page Component
     }, [history]);
 
     const verifyAuthToken = () => {
+        
         if(localStorage.getItem("authToken")) { // If there is a token in local storage
             return history.push("/adminlogin"); // Redirect user to login
         }
