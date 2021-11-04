@@ -4,7 +4,6 @@ import axios from 'axios';
 
 const ProductPage = (props) => {
     let location = useLocation();
-    let history = useHistory();
     const {name, image, price, description} = location.state.product;
 
     return (
