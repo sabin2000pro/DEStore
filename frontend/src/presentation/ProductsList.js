@@ -19,6 +19,7 @@ const ProductsList = () => { // Component to Render all of the products on the s
 
     useEffect(() => { // useEffect hook to retrieve all the products
         const fetchProducts = () => {
+            
             return fetch(`http://localhost:5950/api/v1/products?page=${pageNumber}`).then((response) => response.json()).then(({total, products}) => {
                 setProducts(products);
                 setNumberOfPages(total);

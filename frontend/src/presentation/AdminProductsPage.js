@@ -41,9 +41,11 @@ const AdminProductsPage = () => {
 
     const createProduct = () => { // Function that creates a new product to be stored
         try {
-            axios.post(`http://localhost:5950/api/v1/products`, {name: productName, image: productImage, description: productDescription, price: productPrice, priceDiscount: productPriceDiscount, quantity: productQuantity, saleOffer: productSaleOffer, colour: productColour}).then(data => {
+
+          axios.post(`http://localhost:5950/api/v1/products`, {name: productName, image: productImage, description: productDescription, price: productPrice, priceDiscount: productPriceDiscount, quantity: productQuantity, saleOffer: productSaleOffer, colour: productColour}).then(data => {
                 const newProductData = data.data;
                 setNewProductData(newProductData);
+                
                 console.log(newProductData);
             })
 

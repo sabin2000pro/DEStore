@@ -1,17 +1,17 @@
 import './App.css';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 // Pages Imports
-import Homepage from './pages/Homepage';
-import RegisterPage from './pages/RegisterPage';
-import LoginPage from './pages/LoginPage';
+import Homepage from './presentation/Homepage';
+import RegisterPage from './presentation/RegisterPage';
+import LoginPage from './presentation/LoginPage';
 import PrivateRoute from './components/routing/PrivateRoute';
-import PrivateScreen from './pages/PrivateScreen';
-import ProductsList from './pages/ProductsList';
-import ForgotPasswordPage from './pages/ForgotPasswordPage';
-import ResetPasswordPage from './pages/ResetPasswordPage';
-import PaymentPage from './pages/PaymentPage';
-import AccountingPage from './pages/AccountingPage';
-import ProductPage from './pages/ProductPage'
+import PrivateScreen from './presentation/PrivateScreen';
+import ProductsList from './presentation/ProductsList';
+import ForgotPasswordPage from './presentation/ForgotPasswordPage';
+import ResetPasswordPage from './presentation/ResetPasswordPage';
+import PaymentPage from './presentation/PaymentPage';
+import AccountingPage from './presentation/AccountingPage';
+import ProductPage from './presentation/ProductPage'
 
 const App = () => { // Main App Component
   return (
