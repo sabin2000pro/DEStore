@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const DB_URI = process.env.DB_URI;
+const DB_URI = process.env.DB_URI; // The connection string
 
 // Code Author: Sabin Constantin Lungu
 // Code Written on: 25/10/2021
@@ -8,7 +8,9 @@ const DB_URI = process.env.DB_URI;
 // File Purpose: Creates a connection to the MongoDB Database
 
 const connectDB = async () => { // Function that connects to the database
+
     try {
+        let connected = false;
 
         return await mongoose.connect(DB_URI, {
 
@@ -16,13 +18,13 @@ const connectDB = async () => { // Function that connects to the database
 
             if(conn.connection) {
                 console.log(`Successfully connected to Database`);
+                connected = true;
             }
-
 
         }).catch(err => {
 
             if(err) {
-                console.log(err);
+                return console.log(err);
             }
         });
     } 
@@ -30,7 +32,7 @@ const connectDB = async () => { // Function that connects to the database
     catch(error) {
 
         if(error) {
-            console.log(error.toString());
+            return console.error(error.toString());
         }
 
     }

@@ -25,6 +25,7 @@ const serverError = 500;
 module.exports.register = async (request, response, next) => { // Register a new Admin
     try {
         const {username, email, password} = request.body; // Extract Username, Email and Password From the body
+        let isSuccess = false;
 
         if(!username || !email || !password) { // If there is no username, email or password provided
             return response.status(badRequest).json({message: 'Please make sure you provide the correct details before registering'});
@@ -32,6 +33,7 @@ module.exports.register = async (request, response, next) => { // Register a new
 
         const newAdmin = new Admin({username, email, password}); // Create a new admin
         await newAdmin.save(); // Save it to the database
+        isSuccess = true;
 
         return sendToken(newAdmin, created, response); // Generate and send JWT
     } 
@@ -41,6 +43,7 @@ module.exports.register = async (request, response, next) => { // Register a new
         if(error) {
             return response.status(serverError).json({message: error.toString()});
         }
+
     }
 };
 

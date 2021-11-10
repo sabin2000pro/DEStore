@@ -8,13 +8,16 @@ const LoginPage = () => {
     const [password, setPassword] = useState("");
 
     useEffect(() => { 
+
         if(localStorage.getItem("authToken")) { // If there is a token in local storage
             return history.push("/"); // Redirect home
         }
+
     }, [history]);
 
     const loginHandler = async (e) => { // Login Function
        try {
+
            e.preventDefault();
            const {data} = await axios.post(`http://localhost:5950/api/v1/auth/login`, {email, password});
            
@@ -26,10 +29,8 @@ const LoginPage = () => {
        catch(err) {
 
         if(err) {
-            return console.log(err);
+            return console.error(err);
         }
-
-
        }
     }
 

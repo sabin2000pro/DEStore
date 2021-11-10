@@ -19,7 +19,7 @@ const ProductsList = () => { // Component to Render all of the products on the s
 
     useEffect(() => { // useEffect hook to retrieve all the products
         const fetchProducts = () => {
-            
+
             return fetch(`http://localhost:5950/api/v1/products?page=${pageNumber}`).then((response) => response.json()).then(({total, products}) => {
                 setProducts(products);
                 setNumberOfPages(total);
@@ -27,7 +27,7 @@ const ProductsList = () => { // Component to Render all of the products on the s
             });
         }
 
-        fetchProducts()
+       return fetchProducts();
     }, [pageNumber]);
 
 
@@ -63,8 +63,8 @@ const ProductsList = () => { // Component to Render all of the products on the s
     
         )) : null}
         
-     {pages.map((pageIndex) => (
-             <button onClick = {() => setPageNumber(pageIndex)} >{pageIndex + 1}</button>
+     {pages.map((pageIndex) => ( // Map over the page 
+        <button onClick = {() => setPageNumber(pageIndex)} >{pageIndex + 1}</button>
     ))}
         <div className = "button__group">
             <button className = "btn" onClick = {() => setDisplay(true)}>View Products</button>
@@ -72,6 +72,7 @@ const ProductsList = () => { // Component to Render all of the products on the s
         </div>
 
     </div>
+
     )
     
 }

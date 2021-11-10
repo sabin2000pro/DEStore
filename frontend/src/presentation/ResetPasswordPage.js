@@ -4,6 +4,7 @@ import axios from 'axios';
 
 const ResetPasswordPage = ({match}) => { // Reset Password Page Component
     let history = useHistory();
+
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
@@ -13,7 +14,7 @@ const ResetPasswordPage = ({match}) => { // Reset Password Page Component
         try {
             e.preventDefault();
 
-            if(password !== confirmPassword) { 
+            if(password !== confirmPassword) {  // If passwords don't match
                 setPassword("");
                 setConfirmPassword("");
 
@@ -31,28 +32,27 @@ const ResetPasswordPage = ({match}) => { // Reset Password Page Component
         } 
         
         catch(error) {
-            
+
             if(error) {
-                console.log(error);
+                return console.log(error);
             }
+
         }
     }
 
 
     return (
-        <div>
+
+        <div className = "register__form-container">
             <p>Reset Your Password Below</p>
 
             <form onSubmit = {resetPasswordHandler}>
-
             <h3 style = {{fontFamily: "Arial"}}>Reset Password</h3>
 
             {error && <span>{error} </span>}
 
-            {success && (
-            <span>
-            {success} <Link to="/login">Login</Link>
-            </span>
+        {success && (
+            <span> {success} <Link to="/login">Login</Link></span>
             )}
 
                 <div>
@@ -69,8 +69,6 @@ const ResetPasswordPage = ({match}) => { // Reset Password Page Component
 
 
             </form>
-
-
          </div>
     )
 };

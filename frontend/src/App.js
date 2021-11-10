@@ -19,6 +19,7 @@ const App = () => { // Main App Component
     <Router>
       <div className = "app">
 
+    //* Navigation Links
     <nav>
       <ul>
         <li><a href = "/home">Homepage</a></li>
@@ -29,6 +30,7 @@ const App = () => { // Main App Component
       </ul>
     </nav>
        
+       //* Switching Between Links
        <Switch>
          <PrivateRoute exact path = "/" component = {PrivateScreen} />
           <Route exact path = "/home" component = {Homepage} />

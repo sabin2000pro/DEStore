@@ -5,11 +5,11 @@ const unauthorized = 401;
 module.exports.protectProducts = async (request, response, next) => { // Middleware function to only grant registered admins the right to create, update and delete products
 
     try {
-        let token;
-        const headers = request.headers.authorization;
+        let token; // The JSON web token
+        const headers = request.headers.authorization; // Extract it from the header
 
-        if(headers && headers.startsWith("Bearer")) {
-            token = headers.split(' ')[1];
+        if(headers && headers.startsWith("Bearer")) { // If the header starts with Bearer
+            token = headers.split(' ')[1]; // Split the second index
         }
     
         if(!token) { // If no token is found
@@ -19,7 +19,7 @@ module.exports.protectProducts = async (request, response, next) => { // Middlew
         const decoded = jwt.verify(token, process.env.JWT_SECRET); // Verify the token using jwt.verify()
         const admin = await Admin.findById(decoded.id); // Find an admin using that decoded token
 
-        if(!admin) {
+        if(!admin) { // If no admin found
             return response.status(unauthorized).json("No admin ID found with that token");
         }
 

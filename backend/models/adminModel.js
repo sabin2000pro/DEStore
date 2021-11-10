@@ -39,8 +39,8 @@ adminSchema.pre('save', async function(next) { // Hash Admin Password before sav
     if(!this.isModified('password')) {
         return next();
     }
-
-    const salt = await bcrypt.genSalt(10); // Create Salt
+    
+    const salt = await bcrypt.getSalt(10);
     this.password = await bcrypt.hash(this.password, salt); // hash the password
 });
 

@@ -37,7 +37,7 @@ const ForgotPasswordPage = () => {
         {error && <span>{error}</span>}
         {success && <span>{success}</span>}
 
-        <form onSubmit = {forgotPasswordHandler}>
+        <form method = "POST" onSubmit = {forgotPasswordHandler}>
             <label for = "email">E-mail Address: </label>
             <input type = "email" required id = "email" placeholder = "Enter E-mail Address" onChange = {(e) => {setEmail(e.target.value)}} />
 

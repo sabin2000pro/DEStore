@@ -4,11 +4,10 @@ import axios from 'axios';
 
 const ProductPage = (props) => {
     let location = useLocation();
-    const {name, image, price, description} = location.state.product;
+    const {name, image, price, description} = location.state.product; // Get the location of the product data
 
     return (
         <div>
-
             <div>
                 <h1>{name}</h1>
                 <img height = {200} width = {200} src = {image} />

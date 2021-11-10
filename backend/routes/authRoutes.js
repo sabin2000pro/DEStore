@@ -21,8 +21,8 @@ authRoutes.route('/login').post(limiter, authController.login);
 authRoutes.route('/getAdmins').get(authController.getAllAdmins);
 authRoutes.route('/deleteAdmin/:id').delete(authController.deleteAdmin);
 
-authRoutes.route('/forgotpassword').post(authController.forgotPassword); // Authentication Route for Forgot Password
-authRoutes.route('/resetpassword/:resetToken').put(authController.resetPassword); // Authentication Route to reset the password.
+authRoutes.route('/forgotpassword').post(authController.forgotPassword);
+authRoutes.route('/resetpassword/:resetToken').put(authController.resetPassword); 
 authRoutes.route('/editAdmin/:id').put(authController.editAdmin);
 
 module.exports = authRoutes; // Export authentication routes

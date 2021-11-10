@@ -18,19 +18,18 @@ const RegisterPage = () => { // Register Account Page Component
 
     }, [history]);
 
-    const verifyAuthToken = () => {
+    const verifyAuthToken = () => { // Verify authentication token
         
         if(localStorage.getItem("authToken")) { // If there is a token in local storage
             return history.push("/adminlogin"); // Redirect user to login
         }
+
     }
  
-
     const registerHandler = async (e) => { // Function to Register User
 
         try {
-
-            e.preventDefault();
+            e.preventDefault(); // Prevent form from re-submitting
 
             if(password !== confirmPassword) {
                 setPassword("");
@@ -45,17 +44,17 @@ const RegisterPage = () => { // Register Account Page Component
             const {data} = await axios.post(`http://localhost:${port}/api/v1/auth/register`, {username, email, password}); // Send post request to the back-end API
             console.log(data.token); // Log that token
 
-            localStorage.setItem("authToken", data.token);
+            localStorage.setItem("authToken", data.token); // Store the token in local storage
             return history.push("/adminlogin");
         } 
         
         catch(error) {
+
             if(error) {
                return console.log(error);
             }
 
         }
-
     }
 
     return (
