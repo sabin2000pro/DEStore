@@ -4,8 +4,7 @@ import axios from 'axios';
 const AccountingPage = () => {
     return (
         <div>
-            <h1>Accounting alysis</h1>
-
+            <h1>Accounting Analysis</h1>
 
             <button>View Placed Orders</button>
         </div>
