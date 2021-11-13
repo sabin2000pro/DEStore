@@ -1,0 +1,39 @@
+[
+    
+{
+    "product_ordered": "PS5",
+    "saleOffer": "Free Delivery",
+    "customer_name": "John Doe",
+    "order_address": "123 Fake Address",
+    "amountPaid": "480",
+    "datePurchased": "05/11/2021",
+    "quantity": 1,
+    "color": "white",
+    "description": "A nice PS5"
+},
+
+{
+    "product_ordered": "Apple Mouse 2",
+    "saleOffer": "Buy 1 get 1 free",
+    "customer_name": "Amy Doe Doe",
+    "order_address": "123456 Fake Address",
+    "amountPaid": "200.0",
+    "datePurchased": "03/10/2021",
+    "quantity": 1,
+    "color": "white",
+    "description": "A nice Apple Mouse"
+},
+
+{
+    "product_ordered": "PS3",
+    "saleOffer": "No charge",
+    "customer_name": "Mike Doe Boe",
+    "order_address": "1239 Fake Address",
+    "amountPaid": "100",
+    "datePurchased": "06/11/2021",
+    "quantity": 2,
+    "color": "white",
+    "description": "A nice vintage PS3"
+}
+
+]

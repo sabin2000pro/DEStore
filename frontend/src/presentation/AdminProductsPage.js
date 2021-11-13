@@ -45,7 +45,7 @@ const AdminProductsPage = () => {
           axios.post(`http://localhost:5950/api/v1/products`, {name: productName, image: productImage, description: productDescription, price: productPrice, priceDiscount: productPriceDiscount, quantity: productQuantity, saleOffer: productSaleOffer, colour: productColour}).then(data => {
                 const newProductData = data.data;
                 setNewProductData(newProductData);
-                
+
                 console.log(newProductData);
             })
 
@@ -112,6 +112,7 @@ const AdminProductsPage = () => {
             if(error) {
                 return console.log(error);
             }
+            
         }
     };
 

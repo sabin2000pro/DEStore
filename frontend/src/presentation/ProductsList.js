@@ -18,7 +18,7 @@ const ProductsList = () => { // Component to Render all of the products on the s
     const pages = new Array(numberOfPages).fill(null).map((v, i) => i); // Create an array of pages
 
     useEffect(() => { // useEffect hook to retrieve all the products
-        
+
         const fetchProducts = () => {
 
             return fetch(`http://localhost:5950/api/v1/products?page=${pageNumber}`).then((response) => response.json()).then(({total, products}) => {
@@ -51,8 +51,6 @@ const ProductsList = () => { // Component to Render all of the products on the s
         }).map((product, key) => ( // Map through the products
             
             <div className = "products" key = {key}>
-
-                <Link to = {{pathname: `/payment/${product._id}`, state: {product}} }>Finance Now</Link>
                 <h4>Product Name: {product.name}</h4>
 
                 <p>Product Description: {product.description}</p>
