@@ -113,7 +113,7 @@ module.exports.forgotPassword = asyncHandler(async (request, response, next) => 
  */
 
 module.exports.resetPassword = asyncHandler(async (request, response, next) => { // Middleware function to reset the Admin Password
-    try {
+
         const resetToken = request.params.resetToken; // Stores the reset token from the param
         const passwordBody = request.body.password; // The new password
         let passwordReset = false;
@@ -132,13 +132,6 @@ module.exports.resetPassword = asyncHandler(async (request, response, next) => {
         await admin.save(); // Save the admin to the database
         passwordReset = true;
         return response.status(created).json({success: true, data: "Password Reset Success"});
-    } 
-    
-    catch(error) {
-        if(error) {
-            return response.status(badRequest).json({message: error.toString()});
-        }
-    }
 });
 
 /**
@@ -151,7 +144,7 @@ module.exports.resetPassword = asyncHandler(async (request, response, next) => {
   * @returns next middleware function
  */
 
-module.exports.editAdmin = async (request, response, next) => { // Middleware function to edit an admin
+module.exports.editAdmin = asyncHandler(async (request, response, next) => { // Middleware function to edit an admin
     try {
         const newUsername = request.body.newUsername;
         const newEmail = request.body.newEmail;
@@ -173,7 +166,7 @@ module.exports.editAdmin = async (request, response, next) => { // Middleware fu
             return response.status(badRequest).json({message: error.toString()});
         }
     }
-}
+});
 
 /**
  * 
@@ -185,7 +178,7 @@ module.exports.editAdmin = async (request, response, next) => { // Middleware fu
   * @returns next middleware function
  */
 
-module.exports.getSingleAdmin = async (request, response, next) => { // Middleware function to get a single admin
+module.exports.getSingleAdmin = asyncHandler(async (request, response, next) => { // Middleware function to get a single admin
     try {
         const id = request.params.id;
         const admin = await Admin.findById(id).exec();
@@ -200,9 +193,9 @@ module.exports.getSingleAdmin = async (request, response, next) => { // Middlewa
         }
 
     }
-}
+});
 
-module.exports.getAllAdmins = async (request, response, next) => {
+module.exports.getAllAdmins = asyncHandler(async (request, response, next) => {
     try {
         const admins = await Admin.find();
 
@@ -214,7 +207,7 @@ module.exports.getAllAdmins = async (request, response, next) => {
             return response.status(badRequest).json({message: error.toString()});
         }
     }
-}
+});
 
 /**
  * 
@@ -226,20 +219,13 @@ module.exports.getAllAdmins = async (request, response, next) => {
   * @returns next middleware function
  */
 
-module.exports.deleteAdmin = async (request, response, next) => { // Middleware function to delete a single admin
-    try {
-        const id = request.params.id;
-        await Admin.findByIdAndDelete(id);
-
-        return response.status(deleted).json({message: 'Admin Deleted'});
-    } 
+module.exports.deleteAdmin = asyncHandler(async (request, response, next) => { // Middleware function to delete a single admin
     
-    catch(error) {
-        if(error) {
-            return response.status(badRequest).json({message: error.toString()});
-        }
-    }
-}
+    const id = request.params.id;
+    await Admin.findByIdAndDelete(id);
+
+    return response.status(deleted).json({message: 'Admin Deleted'});
+});
 
 /**
  * @param {*} admin: The admin data
