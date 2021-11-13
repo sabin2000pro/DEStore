@@ -23,7 +23,7 @@ const orderSchema = new mongoose.Schema({
    },
 
    amountPaid: {
-       type: Number,
+       type: String,
        required: [true, 'Specify the amount paid for the product']
    },
 
