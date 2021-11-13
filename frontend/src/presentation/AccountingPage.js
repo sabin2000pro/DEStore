@@ -8,8 +8,7 @@ const AccountingPage = () => {
 
         const getCustomerOrders = async () => {
             try {
-                // Send GET request to get all of the "fake orders"
-                const orders = await axios.get(``);
+               return await axios.get(``);
             }
             
             catch(error) {
