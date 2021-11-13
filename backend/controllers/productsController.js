@@ -4,6 +4,7 @@
 // Bugs? N/A
 
 const Product = require('../models/productModel');
+const asyncHandler = require('../middleware/asyncHandler');
 const User = require('../models/adminModel');
 const sendEmail = require('../utils/sendEmail');
 const ok = 200;

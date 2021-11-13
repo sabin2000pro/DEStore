@@ -1,10 +1,10 @@
 const Admin = require('../models/adminModel');
+const asyncHandler = require('./asyncHandler');
 const jwt = require('jsonwebtoken');
 const unauthorized = 401;
 
-module.exports.protectProducts = async (request, response, next) => { // Middleware function to only grant registered admins the right to create, update and delete products
+module.exports.protectProducts = asyncHandler(async (request, response, next) => { // Middleware function to only grant registered admins the right to create, update and delete products
 
-    try {
         let token; // The JSON web token
         const headers = request.headers.authorization; // Extract it from the header
 
@@ -25,13 +25,4 @@ module.exports.protectProducts = async (request, response, next) => { // Middlew
 
         request.admin = admin;
         return next();
-    }
-    
-    catch(error) {
-
-        if(error) {
-            return response.status(unauthorized).json("You are not authorized to reach this route");
-        }
-
-    }
-};
+});

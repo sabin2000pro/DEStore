@@ -6,6 +6,7 @@
 const Admin = require('../models/adminModel');
 const sendEmail = require('../utils/sendEmail');
 const asyncHandler = require('../middleware/asyncHandler');
+const ErrorResponse = require('../utils/errorResponse');
 const crypto = require('crypto');
 const ok = 200;
 const created = 201;
@@ -27,7 +28,7 @@ module.exports.register = asyncHandler(async (request, response, next) => { // R
     const {username, email, password} = request.body; // Extract Username, Email and Password From the body
 
     if(!username || !email || !password) { // If there is no username, email or password provided
-        return response.status(badRequest).json({message: 'Please make sure you provide the correct details before registering'});
+        return next(new ErrorResponse(`E-mail, Password or Username invalid, please re-enter data`, 400));
      }
 
      const newAdmin = new Admin({username, email, password}); // Create a new admin
@@ -198,6 +199,10 @@ module.exports.getSingleAdmin = asyncHandler(async (request, response, next) => 
 module.exports.getAllAdmins = asyncHandler(async (request, response, next) => {
     try {
         const admins = await Admin.find();
+
+        if(!admins) {
+            // Return error message
+        }
 
         return response.status(200).json(admins);
     } 
