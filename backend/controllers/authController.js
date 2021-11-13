@@ -46,8 +46,8 @@ module.exports.register = asyncHandler(async (request, response, next) => { // R
   * @returns next middleware function
  */
 
-module.exports.login = async (request, response, next) => {
-    try {
+module.exports.login = asyncHandler(async (request, response, next) => {
+     
         const {email, password} = request.body; // Extract E-mail and Password from the body
 
         if(!email || !password) {
@@ -67,16 +67,7 @@ module.exports.login = async (request, response, next) => {
         }
 
         return sendToken(admin, ok, response); // Send back JSON token. Used to log in the user
-    } 
-    
-    catch(error) {
-
-        if(error) {
-            return response.status(serverError).json({message: error.toString()});
-        }
-
-    }
-};
+});
 
 /**
  * 
@@ -88,10 +79,9 @@ module.exports.login = async (request, response, next) => {
   * @returns next middleware function
  */
 
-module.exports.forgotPassword = async (request, response, next) => { // Forgot Password Function
-    try {
-
-        const {email} = request.body; // Extract the e-mail from the body
+module.exports.forgotPassword = asyncHandler(async (request, response, next) => { // Forgot Password Function
+    
+       const {email} = request.body; // Extract the e-mail from the body
         const admin = await Admin.findOne({email}); // Find an admin by the e-mail address
 
         if(!email) { // If no e-mail found in the database
@@ -109,16 +99,8 @@ module.exports.forgotPassword = async (request, response, next) => { // Forgot P
         // Send E-mail using Nodemailer
         await sendEmail({to: admin.email, subject: "Password Reset Request", text: resetMessage});
         return response.status(ok).json({success: true, data: "E-mail sent"});
-    } 
-    
-    catch(error) {
 
-        if(error) {
-            return response.status(notFound).json({message: error.toString()});
-        }
-
-    }
-}
+});
 
 /**
  * 
@@ -130,7 +112,7 @@ module.exports.forgotPassword = async (request, response, next) => { // Forgot P
   * @returns next middleware function
  */
 
-module.exports.resetPassword = async (request, response, next) => { // Middleware function to reset the Admin Password
+module.exports.resetPassword = asyncHandler(async (request, response, next) => { // Middleware function to reset the Admin Password
     try {
         const resetToken = request.params.resetToken; // Stores the reset token from the param
         const passwordBody = request.body.password; // The new password
@@ -157,7 +139,7 @@ module.exports.resetPassword = async (request, response, next) => { // Middlewar
             return response.status(badRequest).json({message: error.toString()});
         }
     }
-}
+});
 
 /**
  * 
