@@ -16,7 +16,10 @@ const AccountingPage = () => {
             try {
                 return await axios.get(`http://localhost:5950/api/v1/orders`).then(response => {
                     const data = response.data.orders;
-                    setOrders(data);
+
+                    if(data) {
+                        setOrders(data);
+                    }
 
                 }).catch(err => {
                     if(err) {
