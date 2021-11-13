@@ -19,7 +19,7 @@ dotenv.config({path: 'config.env'});
 const port = process.env.PORT;
 const connectDB = require('./database/db.js');
 const app = express();
-
+const notFound = 404;
 // Routes
 const productRoutes = require('./routes/productRoutes');
 const authRoutes = require('./routes/authRoutes');
@@ -49,8 +49,8 @@ app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/payment', paymentRoutes);
 
 app.all('*', (request, response, next) => {
- response.status(404).json({message: "404 - Page not found"});
- return next();
+    response.status(notFound).json({message: "404 - Page not found"});
+    return next();
 })
 
 const server = app.listen(port, (error) => { // Creates the Server

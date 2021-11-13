@@ -156,7 +156,7 @@ module.exports.limitFields = async (request, response, next) => { // Function to
         }
 
         const products = await query;
-        return response.status(200).json({results: products.length, products});
+        return response.status(200).json({results: products.length, products, hasProducts: products.length > 0});
     } 
     
     catch(error) {

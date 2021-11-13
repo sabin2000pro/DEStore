@@ -30,6 +30,10 @@ const adminSchema = new mongoose.Schema({
         message: 'Password should not be left empty'
     },
 
+    role: {
+        type: String
+    },
+
     passwordResetToken: String, // The password reset token for the admin.
     passwordResetExpires: Date // Expiry date for the password
 });
