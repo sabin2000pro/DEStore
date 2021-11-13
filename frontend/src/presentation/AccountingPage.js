@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios';
 import '../App.css';
+import {Link, useHistory} from 'react-router-dom';
 
 const AccountingPage = () => {
-
+    let history = useHistory();
     const [orders, setOrders] = useState([]);
     const [displayed, setDisplay] = useState(false);
 
@@ -22,7 +23,6 @@ const AccountingPage = () => {
                         console.log(err);
                     }
                 })
-        
             }
             
             catch(error) {
@@ -32,16 +32,6 @@ const AccountingPage = () => {
             }
         };
 
-        // "product_ordered": "PS5",
-        // "saleOffer": "Free Delivery",
-        // "customer_name": "John Doe",
-        // "order_address": "123 Fake Address",
-        // "amountPaid": "£480.00",
-        // "datePurchased": "05/11/2021",
-        // "quantity": 1,
-        // "color": "white",
-        // "description": "A nice PS5"
-
     return (
         <div>
             <h1>Accounting Analysis</h1>
@@ -50,6 +40,8 @@ const AccountingPage = () => {
 
            {displayed ? orders.map((order, key) => {
                return <div className = "orders" key = {key}>
+                 <Link to = {{pathname: `/order/${order._id}`, state: {order}} }>View Order</Link>
+
                    <h3>Product: {order.product_ordered}</h3>
                    <h3>{order.customer_name}</h3>
                    <h3>Sale Offer: {order.saleOffer}</h3>
