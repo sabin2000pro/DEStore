@@ -12,6 +12,7 @@ const ResetPasswordPage = ({match}) => { // Reset Password Page Component
 
     const resetPasswordHandler = async (e) => { // Reset Password Function
         try {
+            
             e.preventDefault();
 
             if(password !== confirmPassword) {  // If passwords don't match
@@ -21,6 +22,7 @@ const ResetPasswordPage = ({match}) => { // Reset Password Page Component
                 setTimeout(() => {
                     setError("");
                 }, 5000);
+
                 return setError("Passwords don't match");
             }
 
@@ -39,7 +41,6 @@ const ResetPasswordPage = ({match}) => { // Reset Password Page Component
 
         }
     }
-
 
     return (
 
@@ -67,10 +68,9 @@ const ResetPasswordPage = ({match}) => { // Reset Password Page Component
 
                 <button type="submit">Reset Password</button>
 
-
             </form>
          </div>
     )
 };
 
-export default ResetPasswordPage;
+export default ResetPasswordPage; // Export the page component to reset password

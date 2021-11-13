@@ -25,7 +25,6 @@ const LoginPage = () => {
            return history.push("/");
        } 
        
-       
        catch(err) {
 
         if(err) {

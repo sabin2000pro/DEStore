@@ -18,6 +18,7 @@ const ProductsList = () => { // Component to Render all of the products on the s
     const pages = new Array(numberOfPages).fill(null).map((v, i) => i); // Create an array of pages
 
     useEffect(() => { // useEffect hook to retrieve all the products
+        
         const fetchProducts = () => {
 
             return fetch(`http://localhost:5950/api/v1/products?page=${pageNumber}`).then((response) => response.json()).then(({total, products}) => {
@@ -32,7 +33,8 @@ const ProductsList = () => { // Component to Render all of the products on the s
 
 
     return (
-        <div className = "App">
+
+    <div className = "App">
         <input className = "search__input" type = "text" placeholder = "Search Product" onChange = {(event) => setSearchTerm(event.target.value)}/>
         <h3>Page {pageNumber + 1}</h3>
 

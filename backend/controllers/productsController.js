@@ -55,22 +55,23 @@ module.exports.verifyStock = async (request, response, next) => { // Verifies th
         const lowStockMsg = `<h1>The quantity for the product ${name} is low in stock. More will be ordered soon. There are ${quantity} left in stock`;
         const outOfStockMsg = `<h1>Currently out of stock for the product ${name}. More stock will be ordered from the warehouse soon. </h1>`;
 
-            if(quantity <= 3) { // If quantity is less than 3
-                await sendEmail({to: admin.email, subject: "Low Stock", text: lowStockMsg});    
-            }  
+        if(quantity <= 3) { // If quantity is less than 3
+            await sendEmail({to: admin.email, subject: "Low Stock", text: lowStockMsg});    
+         }  
             
-            if(quantity === 0) { // If there is no stock
-                await sendEmail({to: admin.email, subject: "Out of stock", text: outOfStockMsg});    
-            }
+        if(quantity === 0) { // If there is no stock
+            await sendEmail({to: admin.email, subject: "Out of stock", text: outOfStockMsg});    
+        }
 
-            return response.status(created).json("E-mail Sent");
-        }   
+        return response.status(created).json("E-mail Sent");
+    }   
     
     catch(error) {
 
         if(error) {
             return response.status(notFound).json({error: error.toString()})
         }
+        
     }
 
     return next();
@@ -137,8 +138,8 @@ module.exports.limitFields = async (request, response, next) => { // Function to
 
         const queryObj = {...request.query}; // The query object
         const excludedFields = ['limit', 'fields'];
+
         const excludeFields = request.query.fields;
-        
         const page = request.query.page * 1 || 1; // The page from the request.query
         const limit = request.query.limit * 1 || 100; // The page limit
         const skip = (page - 1) * limit; // The previous page * limit
@@ -177,7 +178,7 @@ module.exports.limitFields = async (request, response, next) => { // Function to
 module.exports.getAllProducts = async (request, response, next) => { // Returns all of the products
     try {    
         const PAGE_SIZE = 5;
-        const page = parseInt(request.query.page || "0"); // Get the page from the request
+        const page = parseInt(request.query.page || "0");
 
         const total = await Product.countDocuments({}); // Count the number of documents
         const products = await Product.find({}).limit(PAGE_SIZE).skip(PAGE_SIZE * page); // Find all the products by limiting them
@@ -278,7 +279,6 @@ module.exports.editProduct = async (request, response, next) => { // Modifies a 
         if(error) {
             return response.status(serverError).json({message: 'Request Failed', error: error.toString()});
         }
-
     }
 };
 

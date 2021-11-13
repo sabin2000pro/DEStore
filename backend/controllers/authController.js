@@ -5,6 +5,7 @@
 
 const Admin = require('../models/adminModel');
 const sendEmail = require('../utils/sendEmail');
+const asyncHandler = require('../middleware/asyncHandler');
 const crypto = require('crypto');
 const ok = 200;
 const created = 201;
@@ -22,30 +23,18 @@ const serverError = 500;
  * @description: This middleware function allows admins to register an account with their username, email and password.
   * @returns next middleware function
  */
-module.exports.register = async (request, response, next) => { // Register a new Admin
-    try {
-        const {username, email, password} = request.body; // Extract Username, Email and Password From the body
-        let isSuccess = false;
+module.exports.register = asyncHandler(async (request, response, next) => { // Register a new Admin
+    const {username, email, password} = request.body; // Extract Username, Email and Password From the body
 
-        if(!username || !email || !password) { // If there is no username, email or password provided
-            return response.status(badRequest).json({message: 'Please make sure you provide the correct details before registering'});
-        }
+    if(!username || !email || !password) { // If there is no username, email or password provided
+        return response.status(badRequest).json({message: 'Please make sure you provide the correct details before registering'});
+     }
 
-        const newAdmin = new Admin({username, email, password}); // Create a new admin
-        await newAdmin.save(); // Save it to the database
-        isSuccess = true;
-
-        return sendToken(newAdmin, created, response); // Generate and send JWT
-    } 
+     const newAdmin = new Admin({username, email, password}); // Create a new admin
+     await newAdmin.save(); // Save it to the database
     
-    catch(error) {
-
-        if(error) {
-            return response.status(serverError).json({message: error.toString()});
-        }
-
-    }
-};
+    return sendToken(newAdmin, created, response); // Generate and send JWT
+});
 
 /**
  * 
@@ -101,6 +90,7 @@ module.exports.login = async (request, response, next) => {
 
 module.exports.forgotPassword = async (request, response, next) => { // Forgot Password Function
     try {
+
         const {email} = request.body; // Extract the e-mail from the body
         const admin = await Admin.findOne({email}); // Find an admin by the e-mail address
 
@@ -144,6 +134,7 @@ module.exports.resetPassword = async (request, response, next) => { // Middlewar
     try {
         const resetToken = request.params.resetToken; // Stores the reset token from the param
         const passwordBody = request.body.password; // The new password
+        let passwordReset = false;
 
         const passwordResetToken = crypto.createHash("sha256").update(resetToken).digest('hex'); // Create reset password token
         const admin = await Admin.findOne({passwordResetToken, passwordResetExpires: {$gt: Date.now()}});
@@ -152,11 +143,12 @@ module.exports.resetPassword = async (request, response, next) => { // Middlewar
             throw new Error('No Admin Found with that E-mail Address');
         }
 
-        admin.password = passwordBody;
-        admin.passwordResetToken = undefined;
-        admin.passwordResetExpires = undefined;
+        admin.password = passwordBody; // Update the password by setting the admin password to the new password
+        admin.passwordResetToken = undefined; // Set the reset token to undefined
+        admin.passwordResetExpires = undefined; // Clear out the expiry date of the token - no longer valid
 
         await admin.save(); // Save the admin to the database
+        passwordReset = true;
         return response.status(created).json({success: true, data: "Password Reset Success"});
     } 
     
@@ -230,7 +222,6 @@ module.exports.getSingleAdmin = async (request, response, next) => { // Middlewa
 
 module.exports.getAllAdmins = async (request, response, next) => {
     try {
-        const method = request.method;
         const admins = await Admin.find();
 
         return response.status(200).json(admins);
@@ -269,12 +260,12 @@ module.exports.deleteAdmin = async (request, response, next) => { // Middleware 
 }
 
 /**
- * 
- * @param {*} admin
- * @param {*} next 
+ * @param {*} admin: The admin data
+ * @param {*} statusCode: Represents the status code of the request
+ * @param {*} next: Next middleware function
  * @function sendToken()
  * @description: This function signs a unique JSON Web token when Store managers register and login
-  * @returns next middleware function
+  * @returns The response with the generated token
  */
 
 const sendToken = (admin, statusCode, response) => { // Sends back the JSON Web Token

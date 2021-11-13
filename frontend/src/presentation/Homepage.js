@@ -11,13 +11,15 @@ import axios from 'axios';
 const Homepage = () => { // Homepage React Component
     const [payments, setPayments] = useState([]);
     const [email, setEmail] = useState("");
+    let port = 5950;
 
     useEffect(() => { // Used for loyalty card
         return getAllPayments();
       }, [])
 
     const getAllPayments = async () => { // retrieves all the payments from the database
-        return await axios.get(`http://localhost:5950/api/v1/payment/getAllPayments`).then(response => {
+
+        return await axios.get(`http://localhost:${port}/api/v1/payment/getAllPayments`).then(response => {
                 const payments = response.data.payments;
                 const length = response.data.payments.length;
                 setPayments(payments);
@@ -25,15 +27,12 @@ const Homepage = () => { // Homepage React Component
                 if(length > 5) { // If there are more than 5 payments
                     alert(`You are have received a Loyalty Card. Enter your e-mail below`);
                 }
-
-            })
+        })
     }
    
     return (
       <div>
-          <form>
-
-          </form>
+         
       </div>
     )
 }

@@ -5,4 +5,3 @@ Content-Type: application/json
     "email": "test233@gmail.com",
     "password": "test23"
 }
-   

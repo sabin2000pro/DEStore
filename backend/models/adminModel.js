@@ -40,12 +40,12 @@ adminSchema.pre('save', async function(next) { // Hash Admin Password before sav
         return next();
     }
     
-    const salt = await bcrypt.getSalt(10);
+    const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt); // hash the password
 });
 
-adminSchema.methods.comparePasswords = async function(password) { // Method to compare passwords before signing in
-    return await bcrypt.compare(password, this.password); // Returns true or false if the passwords match
+adminSchema.methods.comparePasswords = function(password) { // Method to compare passwords before signing in
+    return bcrypt.compare(password, this.password); // Returns true or false if the passwords match
 }
 
 adminSchema.methods.getResetPasswordToken = function() { // Get the reset password token

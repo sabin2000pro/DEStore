@@ -15,6 +15,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
 dotenv.config({path: 'config.env'});
+
 const port = process.env.PORT;
 const connectDB = require('./database/db.js');
 const app = express();
@@ -63,6 +64,7 @@ const server = app.listen(port, (error) => { // Creates the Server
 });
 
 process.on('uncaughtException', (error, promise) => {
+
     if(error) {
         server.close();
         return process.exit(1);
