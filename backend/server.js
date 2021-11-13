@@ -23,6 +23,7 @@ const notFound = 404;
 // Routes
 const productRoutes = require('./routes/productRoutes');
 const authRoutes = require('./routes/authRoutes');
+const orderRoutes = require('./routes/orderRoutes');
 
 app.use(express.json());
 app.use(cors());
@@ -45,6 +46,7 @@ app.use(session({
 connectDB();
 app.use('/api/v1/products', productRoutes);
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/orders', orderRoutes);
 
 app.all('*', (request, response, next) => {
     response.status(notFound).json({message: "404 - Page not found"});
