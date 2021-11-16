@@ -55,6 +55,13 @@ describe('POST /api/v1/auth/login', () => {
     })
 });
 
+describe('Test Case - Logout Successful by clearing cookie', () => {
+    test('Should respond with 200 OK status code', async () => {
+        const response = await request(server).get('/api/v1/auth/logout').send();
+        return expect(response.status).toBe(200);
+    })
+})
+
 describe("POST - /api/v1/auth/forgotPassword", () => { // Test Case 5
     describe("Sends back a 200 OK STATUS CODE - Means the e-mail has been sent successfully", () => {
         test("Respond back with 200 OK Status Code", async () => {

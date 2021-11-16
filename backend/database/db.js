@@ -18,6 +18,7 @@ const connectDB = async () => { // Function that connects to the database
 
             if(conn.connection) {
                 console.log(`Successfully connected to Database`);
+                console.log(`Took (MS) ${performance.now() to connect }`)
                 connected = true;
             }
 
