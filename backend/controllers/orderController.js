@@ -13,6 +13,10 @@ module.exports.getOrderByID = asyncHandler(async(request, response, next) => {
     return response.status(200).json(order);
 });
 
+module.exports.editOrder = asyncHandler(async(request, response, next) => {
+    
+})
+
 module.exports.deleteOrder = asyncHandler(async(request, response, next) => {
 
-})
+});

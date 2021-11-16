@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
+import {saveAs} from 'file-saver';
+import axios from 'axios';
 
 const PerformancePage = () => { // Performance Analysis Page Component
     let history = useHistory();
@@ -21,14 +23,14 @@ const PerformancePage = () => { // Performance Analysis Page Component
     }
 
     const generatePerformanceReport = () => {
-        try {
+            axios.post('/create-pdf').then(() => axios.get('fetch-pdf', { responseType: 'blob' })).then((res) => {
 
-        } 
+            const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
+
+              saveAs(pdfBlob, 'newPdf.pdf');
+            })
         
-        catch(error) {
-
-        }
-    }
+            }
 
     return (
         <div>
@@ -36,7 +38,7 @@ const PerformancePage = () => { // Performance Analysis Page Component
 
             <div>
                 <h2>Generate Report Below</h2>
-                <button>Generate Performance Report</button>
+                <button onClick = {generatePerformanceReport}>Generate Performance Report</button>
             </div>
 
 

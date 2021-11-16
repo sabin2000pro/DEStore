@@ -30,8 +30,9 @@ const adminSchema = new mongoose.Schema({
         message: 'Password should not be left empty'
     },
 
-    role: {
-        type: String
+    roles: { // User Roles
+        type: String,
+        enum: ['user', 'creator', 'editor']
     },
 
     passwordResetToken: String, // The password reset token for the admin.
@@ -44,7 +45,7 @@ adminSchema.pre('save', async function(next) { // Hash Admin Password before sav
         return next();
     }
     
-    const salt = await bcrypt.genSalt(10);
+    const salt = await bcrypt.genSalt(ROUNDS);
     this.password = await bcrypt.hash(this.password, salt); // hash the password
 });
 

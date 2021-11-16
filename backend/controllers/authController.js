@@ -135,6 +135,16 @@ module.exports.resetPassword = asyncHandler(async (request, response, next) => {
         return response.status(created).json({success: true, data: "Password Reset Success"});
 });
 
+module.exports.logout = asyncHandler(async(request, response, next) => {
+     // Take the cookie and set it to null
+     response.cookie('token', 'none', {
+        expires: new Date(Date.now() + 10 * 1000),
+        httpOnly: true
+    });
+
+    return response.status(200).json({success: true, data: {}});
+});
+
 /**
  * 
  * @param {*} request - Receives client request
@@ -243,5 +253,16 @@ module.exports.deleteAdmin = asyncHandler(async (request, response, next) => { /
 
 const sendToken = (admin, statusCode, response) => { // Sends back the JSON Web Token
     const token = admin.getSignedToken(); // Get the signed token from the admin model
-    return response.status(statusCode).json({success: true, token});
+
+    const options = {
+        expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
+        httpOnly: true
+    }
+
+    if(process.env.NODE_ENV === 'production') {
+        options.secure = true;
+    }
+
+
+    return response.status(statusCode).cookie('token', token, options).json({success: true, token});
 }

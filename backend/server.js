@@ -7,6 +7,7 @@
 // GLOBAL MIDDLEWARE
 const express = require('express');
 const mongoSanitize = require('express-mongo-sanitize');
+const cookieParser = require('cookie-parser');
 const hpp = require('hpp');
 const session = require('express-session');
 const helm = require('helmet');
@@ -14,6 +15,8 @@ const xss = require('xss-clean');
 const cors = require('cors');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
+const pdf = require('html-pdf');
+const pdfReport = require('./reports/report');
 dotenv.config({path: 'config.env'});
 
 const port = process.env.PORT;
@@ -31,6 +34,7 @@ app.use(morgan('dev'));
 app.use(mongoSanitize());
 app.use(helm());
 app.use(hpp());
+app.use(cookieParser());
 
 app.use(xss());
 app.use(session({
@@ -47,6 +51,20 @@ connectDB();
 app.use('/api/v1/products', productRoutes);
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/orders', orderRoutes);
+
+app.post('/create-pdf', (req, res) => {
+    pdf.create(pdfReport(req.body), {}).toFile('report.pdf', (err) => {
+        if(err) {
+            res.send(Promise.reject());
+        }
+
+        res.send(Promise.resolve());
+    });
+});
+
+app.get('/fetch-pdf', (req, res) => {
+    res.sendFile(`${__dirname}/result.pdf`)
+})
 
 app.all('*', (request, response, next) => {
     response.status(notFound).json({message: "404 - Page not found"});
