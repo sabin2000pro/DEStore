@@ -128,12 +128,24 @@ describe('Test Case - Products missing name and description', () => { // Test Ca
  })
 
  describe('Test Case - Forgot Password Invalid Data Type', () => {
-    test('Should respond with a status code of 400', async () => {
+    test('Should respond with a status code of 500', async () => {
         const bodyData = [{"email": 349}]
 
         for(const body of bodyData) {
             const response = await request(server).post('/api/v1/auth/forgotPassword').send(body);
-            return expect(response.status).toBe(404);
+            return expect(response.status).toBe(500);
+        }
+
+    })
+});
+
+describe('Test Case - Forgot Password Invalid E-mail Address', () => {
+    test('Should respond with a status code of 500', async () => {
+        const bodyData = [{"email": "sabinlungu0000000@gmail.com"}]
+
+        for(const body of bodyData) {
+            const response = await request(server).post('/api/v1/auth/forgotPassword').send(body);
+            return expect(response.status).toBe(500);
         }
 
     })

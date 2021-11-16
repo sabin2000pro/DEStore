@@ -167,7 +167,6 @@ module.exports.getAllProducts = async (request, response, next) => { // Returns 
 
         const total = await Product.countDocuments({}); // Count the number of documents
         const products = await Product.find({}).limit(PAGE_SIZE).skip(PAGE_SIZE * page); // Find all the products by limiting them
-
         return response.status(ok).json({products, total: Math.ceil(total / PAGE_SIZE)});
     } 
     
@@ -255,6 +254,16 @@ module.exports.editProduct = async (request, response, next) => { // Modifies a 
             updatedProduct.quantity = newQty;
             updatedProduct.save();
 
+            if(updatedProduct.quantity === 0) {
+                const outStock = `<h1>Product not in stock anymore, more will be ordered from the warehouse soon.`;
+                sendEmail({to: "sabinlungu293@gmail.com", subject: "Out of Stock", text: outStock});    
+            }
+
+            if(updatedProduct.quantity <= 2) {
+                const lowStock = `<h1>Low stock for the product ${updatedProduct.name} - there are only ${updatedProduct.quantity} left in stock.`;
+                sendEmail({to: "sabinlungu293@gmail.com", subject: "Low Stock", text: lowStock});    
+            }
+           
             return response.send("Data Updated");
         }).clone().catch(err => {console.log(err)});
     } 

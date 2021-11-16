@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
+const {performance} = require('perf_hooks');
 const BYTES = 20;
 const ROUNDS = 10;
 
@@ -47,6 +48,8 @@ adminSchema.pre('save', async function(next) { // Hash Admin Password before sav
     
     const salt = await bcrypt.genSalt(ROUNDS);
     this.password = await bcrypt.hash(this.password, salt); // hash the password
+
+    console.log(`Execution time: ${performance.now()} ms`);
 });
 
 adminSchema.methods.comparePasswords = function(password) { // Method to compare passwords before signing in

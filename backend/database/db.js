@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const DB_URI = process.env.DB_URI; // The connection string
+const {performance} = require('perf_hooks');
 
 // Code Author: Sabin Constantin Lungu
 // Code Written on: 25/10/2021
@@ -18,7 +19,7 @@ const connectDB = async () => { // Function that connects to the database
 
             if(conn.connection) {
                 console.log(`Successfully connected to Database`);
-                console.log(`Took (MS) ${performance.now() to connect }`)
+                console.log(`Took ${performance.now()} MS to connect to the database}`)
                 connected = true;
             }
 
