@@ -88,27 +88,19 @@ module.exports.verifyStock = async (request, response, next) => { // Verifies th
   * @returns next middleware function
  */
 
-module.exports.validateQuantity = async (request, response, next) => { // Middleware function to be added before creating a product. Admin cannot add more than 5 quantities
-    try {
-        const {quantity} = request.body;
+module.exports.validateQuantity = asyncHandler(async (request, response, next) => { // Middleware function to be added before creating a product. Admin cannot add more than 5 quantities
 
-        if(quantity > 5) {
-            return response.status(badRequest).json("You cannot create more than 5 products at once");
-        }
-    } 
-    
-    catch(error) {
+    const {quantity} = request.body;
 
-        if(error) {
-            return response.status(404).json("An error validting the quantity")
-        }
+    if(quantity > 5) {
+        return response.status(badRequest).json("You cannot create more than 5 products at once");
     }
-
+    
     return next();
-}
+});
 
-module.exports.sortByPrice = async (request, response, next) => { // Sort Products By price
-    try {
+module.exports.sortByPrice = asyncHandler(async (request, response, next) => { // Sort Products By price
+ 
         const queryObj = {...request.query}; // Take out all of the request query objects
         const sort = request.query.sort; // Sort Query
 
@@ -123,16 +115,8 @@ module.exports.sortByPrice = async (request, response, next) => { // Sort Produc
         // Send Response
         const products = await query;
         return response.status(ok).json({results: products.length, products});
-    } 
-    
-    catch(error) {
 
-        if(error) {
-            return response.status(serverError).json({message: 'Request Failed', error});
-        }
-        
-    }
-}
+});
 
 module.exports.limitFields = async (request, response, next) => { // Function to limit fields
     try {

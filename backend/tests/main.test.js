@@ -9,7 +9,6 @@ const mongoose = require('mongoose');
 const server = require('../server');
 const Admin = require('../models/adminModel');
 const Product = require('../models/productModel');
-const Payment = require('../models/paymentModel');
 
 // * Test Passes
 beforeAll(async() => { // Test DB connection
@@ -75,24 +74,6 @@ describe('GET /admins', () => { // Test Case 3 - Returns all of the admins - TES
     })
 });
 
-describe('Test Case - GET: Returns all Payments', () => {
-    describe("Test Case - Get All Payments Should Return 200 OK Status Code", () => {
-        test("Payment Test - Return 200 OK Status Code", async () => {
-            const response = await request(server).get('/api/v1/payment/getAllPayments').send();
-            return expect(response.status).toBe(200);
-        })
-    })
-})
-
-// TEST CASE TO VERIFY THAT A PAYMENT CAN BE CREATED
-describe("Test Case - Create a Payment with name, card type, card number, expiry date and the code", () => {
-    describe("Should respond with a status code of 201 CREATED", () => {
-        test('Payment Test - Should Respond with 201 Created', async () => {
-            const response = await request(server).post('/api/v1/payment/createPayment').send({cardholderName: "Test Name", cardType: "VISA", cardNumber: "9009 1844 5675 9091", expiryDate: "03/11/2023", code: 944});
-            return expect(response.status).toBe(201);
-        })
-    })
-})
 
 // * Test Passes
 describe('Test Case - Admin REGISTER missing E-mail and password', () => { // Test Case 4 - Test Missing Admin E-mail and Password.
@@ -159,7 +140,7 @@ describe('Test Case - Admin Register - Invalid Username Data Type', () => {
             const response = await request(server).post('/api/v1/auth/register').send(body);
             return expect(response.status).toBe(400);
         }
-        
+
     })
 });
 
@@ -169,7 +150,7 @@ describe('Test Case - Admin Login - Invalid E-mail and Username Data Types', () 
 
         for(const body of bodyData) {
             const response = await request(server).post('/api/v1/auth/login').send(body);
-            return expect(response.status).toBe(429);
+            return expect(response.status).toBe(400);
         }
     })
 })

@@ -22,14 +22,9 @@ const sendEmail = (options) => { // Function to send e-mail
     };
 
    return transporter.sendMail(mailOptions, function(err, info) { // Send the e-mail
-        if(err) {
-            return console.log(err);
-        } 
+      
         
-        else {
-            emailSent = true;
-            return console.log(info);
-        }
+     
     })
 };
 

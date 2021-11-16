@@ -48,8 +48,8 @@ app.use(session({
   }));
 
   const limiter = rateLimit({
-   windowMs: 10 * 60 * 1000, // 10 Minutes
-   max: 3
+   windowMs: 20 * 60 * 1000, // 20 Minutes
+   max: 20
 });
 
 app.use(limiter);
@@ -95,6 +95,8 @@ process.on('uncaughtException', (error, promise) => {
         server.close();
         return process.exit(1);
     }
+
+
 });
 
-module.exports = server;
+module.exports = server; // Export server
