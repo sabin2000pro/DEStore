@@ -12,6 +12,7 @@ import ResetPasswordPage from './presentation/ResetPasswordPage';
 import AccountingPage from './presentation/AccountingPage';
 import ProductPage from './presentation/ProductPage';
 import PerformanceAnalysisPage from './presentation/PerformancePage';
+import FinancePage from './presentation/FinancePage';
 
 const App = () => { // Main App Component
   return (
@@ -42,6 +43,7 @@ const App = () => { // Main App Component
           <Route exact path = "/product/:id" component = {ProductPage} />
           <Route exact path = "/accounting" component = {AccountingPage} />
           <Route exact path = "/performanceanalysis" component = {PerformanceAnalysisPage} />
+          <Route exact path = "/enablingfinance/:id" component = {FinancePage} />
        </Switch>
 
     </div>

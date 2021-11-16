@@ -215,23 +215,14 @@ module.exports.getProduct = async (request, response, next) => { // Gets a singl
   * @returns next middleware function
  */
 
-module.exports.createProduct = async (request, response, next) => { // Middleware function to create a product
-    try {
+module.exports.createProduct = asyncHandler(async (request, response, next) => { // Middleware function to create a product
+ 
         const {name, image, description, price, priceDiscount, quantity, saleOffer, colour} = request.body; // Extract body data
         const newProduct = new Product({name, image, description, price, priceDiscount, quantity, saleOffer, colour}); // Create a new product with the corresponding data
 
         await newProduct.save();
         return response.status(created).json("Product Created");
-    } 
-    
-    catch(error) {
-
-        if(error) {
-            return response.status(serverError).json({message: 'Request Failed', cause: error.toString()});
-        }
-        
-    }
-};
+});
 
 /**
  * 
@@ -243,8 +234,8 @@ module.exports.createProduct = async (request, response, next) => { // Middlewar
   * @returns next middleware function
  */
 
-module.exports.editProduct = async (request, response, next) => { // Modifies a Product such as the price, description, URL
-    try {
+module.exports.editProduct = asyncHandler(async (request, response, next) => { // Modifies a Product such as the price, description, URL
+    
         const newPrice = request.body.newPrice;
         const newQty = request.body.newQty;
         const id = request.body.id;
@@ -254,7 +245,7 @@ module.exports.editProduct = async (request, response, next) => { // Modifies a 
             updatedProduct.quantity = newQty;
             updatedProduct.save();
 
-            if(updatedProduct.quantity === 0) {
+            if(updatedProduct.quantity === 0) { // If the quantity is 0
                 const outStock = `<h1>Product not in stock anymore, more will be ordered from the warehouse soon.`;
                 sendEmail({to: "sabinlungu293@gmail.com", subject: "Out of Stock", text: outStock});    
             }
@@ -264,17 +255,9 @@ module.exports.editProduct = async (request, response, next) => { // Modifies a 
                 sendEmail({to: "sabinlungu293@gmail.com", subject: "Low Stock", text: lowStock});    
             }
            
-            return response.send("Data Updated");
+            return response.status(200).send("Data Updated");
         }).clone().catch(err => {console.log(err)});
-    } 
-    
-    catch(error) {
-
-        if(error) {
-            return response.status(serverError).json({message: 'Request Failed', error: error.toString()});
-        }
-    }
-};
+});
 
 /**
  * 

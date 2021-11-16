@@ -112,7 +112,7 @@ const AdminProductsPage = () => {
             if(error) {
                 return console.log(error);
             }
-            
+
         }
     };
 
@@ -229,6 +229,8 @@ const AdminProductsPage = () => {
             <h5>In Stock</h5>
 
             <Link to = {{pathname: `/product/${product._id}`, state: {product}} }>View Product</Link>
+            <Link to = {{pathname: `/enablingfinance/${product._id}`, state: {product}} }>Finance Product</Link>
+
             <img src = {product.image} className = "product__img"></img>
             
          </div>
