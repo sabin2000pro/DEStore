@@ -137,7 +137,7 @@ module.exports.resetPassword = asyncHandler(async (request, response, next) => {
 
 module.exports.logout = asyncHandler(async(request, response, next) => {
      // Take the cookie and set it to null
-     response.cookie('token', 'none', {
+     response.cookie('token', undefined, {
         expires: new Date(Date.now() + 10 * 1000),
         httpOnly: true
     });

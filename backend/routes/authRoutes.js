@@ -18,6 +18,7 @@ const limiter = rateLimit({ // Options for rate limiting
 
 authRoutes.route('/register').post(limiter, authController.register);
 authRoutes.route('/login').post(limiter, authController.login);
+authRoutes.get('/logout', authController.logout);
 authRoutes.route('/getAdmins').get(authController.getAllAdmins);
 authRoutes.route('/deleteAdmin/:id').delete(authController.deleteAdmin);
 
