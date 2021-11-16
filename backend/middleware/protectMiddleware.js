@@ -11,6 +11,10 @@ module.exports.protectProducts = asyncHandler(async (request, response, next) =>
         if(headers && headers.startsWith("Bearer")) { // If the header starts with Bearer
             token = headers.split(' ')[1]; // Split the second index
         }
+
+        else if(request.cookies.token) {
+            token = request.cookies.token;
+        }
     
         if(!token) { // If no token is found
             return response.status(unauthorized).json("You are not authorized to access this route");
