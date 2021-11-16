@@ -12,6 +12,7 @@ module.exports.protectProducts = asyncHandler(async (request, response, next) =>
             token = headers.split(' ')[1]; // Split the second index
         }
 
+        // Otherwise use cookies
         else if(request.cookies.token) {
             token = request.cookies.token;
         }

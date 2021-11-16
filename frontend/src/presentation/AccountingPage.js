@@ -9,7 +9,7 @@ const AccountingPage = () => {
     const [displayed, setDisplay] = useState(false);
 
     useEffect(() => {
-        return getCustomerOrders()
+        return getCustomerOrders(); // Call function to get orders
     }, [])
 
         const getCustomerOrders = async () => {

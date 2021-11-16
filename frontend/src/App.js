@@ -13,6 +13,7 @@ import AccountingPage from './presentation/AccountingPage';
 import ProductPage from './presentation/ProductPage';
 import PerformanceAnalysisPage from './presentation/PerformancePage';
 import FinancePage from './presentation/FinancePage';
+import LoyaltyCardPage from './presentation/LoyaltyCardPage';
 
 const App = () => { // Main App Component
   return (
@@ -28,6 +29,7 @@ const App = () => { // Main App Component
         <li> <a href = "/adminlogin">Store Manager Login</a>  </li>
         <li><a href = "/accounting">Accounting</a></li>
         <li><a href = "/performanceanalysis">Performance Analysis</a></li>
+        <li><a href = "/loyaltycard">Claim Loyalty Card</a></li>
 
       </ul>
     </nav>
@@ -44,6 +46,7 @@ const App = () => { // Main App Component
           <Route exact path = "/accounting" component = {AccountingPage} />
           <Route exact path = "/performanceanalysis" component = {PerformanceAnalysisPage} />
           <Route exact path = "/enablingfinance/:id" component = {FinancePage} />
+          <Route exact path = "/loyaltycard" component = {LoyaltyCardPage} />
        </Switch>
 
     </div>
