@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const {performance} = require('perf_hooks');
 const BYTES = 20;
-const ROUNDS = 10;
+var ROUNDS = 10;
 
 // Code Author: Sabin Constantin Lungu
 // Code Written on: 25/10/2021
