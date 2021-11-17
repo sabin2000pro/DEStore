@@ -12,8 +12,8 @@ const Product = require('../models/productModel');
 
 // * Test Passes
 beforeAll(async() => { // Test DB connection
- const url = 'mongodb+srv://sabin2000:123mini123@cluster0.sjkmj.mongodb.net/destore?retryWrites=true&w=majority';
- return await mongoose.connect(url);
+    const url = 'mongodb+srv://sabin2000:123mini123@cluster0.sjkmj.mongodb.net/destore?retryWrites=true&w=majority';
+    return await mongoose.connect(url);
 });
 
 // * Test Passes

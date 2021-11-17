@@ -232,17 +232,16 @@ module.exports.getProduct = async (request, response, next) => { // Gets a singl
  * @param {*} request - Receives client request
  * @param {*} response - Server responds
  * @param {*} next 
- * @function createProduct()
+ * @function createProduct() - Middleware function that creates a new product on the server by passing it JSON data in the body
  * @description: This function verifies the request body before submitting the data
   * @returns next middleware function
  */
 
 module.exports.createProduct = asyncHandler(async (request, response, next) => { // Middleware function to create a product
- 
         const {name, image, description, price, priceDiscount, quantity, saleOffer, colour} = request.body; // Extract body data
         const newProduct = new Product({name, image, description, price, priceDiscount, quantity, saleOffer, colour}); // Create a new product with the corresponding data
 
-        await newProduct.save();
+        await newProduct.save(); // Save the product in the database
         return response.status(created).json("Product Created");
 });
 

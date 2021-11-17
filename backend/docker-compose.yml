@@ -10,7 +10,7 @@ services:
     volumes: 
       - /app/node_modules
       - .:/app
-      
+
   mongo:
     image: mongo
     restart: always
