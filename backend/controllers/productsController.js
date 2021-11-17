@@ -99,6 +99,18 @@ module.exports.validateQuantity = asyncHandler(async (request, response, next) =
     return next();
 });
 
+
+/**
+ * 
+ * @param {*} request - Receives client request
+ * @param {*} response - Server responds
+ * @param {*} next 
+ * @function getAllProducts() -> Retrieves all products from the database
+ * @description: This function is used to retrieve all of the stored products in the database
+  * @returns next middleware function
+ */
+
+
 module.exports.sortByPrice = asyncHandler(async (request, response, next) => { // Sort Products By price
  
         const queryObj = {...request.query}; // Take out all of the request query objects
@@ -109,7 +121,7 @@ module.exports.sortByPrice = asyncHandler(async (request, response, next) => { /
 
         if(sort) { // IF there is asort
             const sortBy = request.query.sort.split(',').join(' ');
-            query = query.sort(sortBy);
+            query = query.sort(sortBy); // Sort by the specificed query
         }
 
         // Send Response
@@ -117,6 +129,16 @@ module.exports.sortByPrice = asyncHandler(async (request, response, next) => { /
         return response.status(ok).json({results: products.length, products});
 
 });
+
+/**
+ * 
+ * @param {*} request - Receives client request
+ * @param {*} response - Server responds
+ * @param {*} next 
+ * @function limitFields() -> Limits the number of fields that can be retrieved on the back-end
+ * @description: This function is used to limit the number of products that can be retrieved in the system (back-end only)
+  * @returns next middleware function
+ */
 
 module.exports.limitFields = async (request, response, next) => { // Function to limit fields
     try {
@@ -236,17 +258,17 @@ module.exports.createProduct = asyncHandler(async (request, response, next) => {
 
 module.exports.editProduct = asyncHandler(async (request, response, next) => { // Modifies a Product such as the price, description, URL
     
-        const newPrice = request.body.newPrice;
+      //  const newPrice = request.body.newPrice;
         const newQty = request.body.newQty;
         const id = request.body.id;
 
         await Product.findById(id, (err, updatedProduct) => {
-            updatedProduct.price = newPrice;
+            //updatedProduct.price = newPrice;
             updatedProduct.quantity = newQty;
             updatedProduct.save();
 
             if(updatedProduct.quantity === 0) { // If the quantity is 0
-                const outStock = `<h1>Product not in stock anymore, more will be ordered from the warehouse soon.`;
+                const outStock = `<h1>The Product ${updatedProduct.name} not in stock anymore, more will be ordered from the warehouse soon.`;
                 sendEmail({to: "sabinlungu293@gmail.com", subject: "Out of Stock", text: outStock});    
             }
 
@@ -255,7 +277,7 @@ module.exports.editProduct = asyncHandler(async (request, response, next) => { /
                 sendEmail({to: "sabinlungu293@gmail.com", subject: "Low Stock", text: lowStock});    
             }
            
-            return response.status(200).send("Data Updated");
+            return response.status(ok).send("Data Updated");
         }).clone().catch(err => {console.log(err)});
 });
 

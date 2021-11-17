@@ -34,7 +34,6 @@ const AdminProductsPage = () => {
             setNumberOfPages(total);            
         });
     }
-        
         return fetchAdminProducts();
 
     }, [pageNumber]);
@@ -57,9 +56,11 @@ const AdminProductsPage = () => {
         } 
         
         catch(error) {
+            
             if(error) {
-                console.log(error);
+                return console.log(error);
             }
+
         }
     };
 
