@@ -12,19 +12,22 @@ const AccountingPage = () => {
         return getCustomerOrders(); // Call function to get orders
     }, [])
 
-        const getCustomerOrders = async () => {
+        const getCustomerOrders = async () => { // Function that gets customer orders
             try {
-                return await axios.get(`http://localhost:5950/api/v1/orders`).then(response => {
-                    const data = response.data.orders;
 
-                    if(data) {
+                return await axios.get(`http://localhost:5950/api/v1/orders`).then(response => {
+                    const data = response.data.orders; // Extract the order data
+
+                    if(data) { // If there is data present
                         setOrders(data);
                     }
 
                 }).catch(err => {
+                    
                     if(err) {
                         console.log(err);
                     }
+                    
                 })
             }
             

@@ -242,6 +242,11 @@ module.exports.deleteAdmin = asyncHandler(async (request, response, next) => { /
     return response.status(deleted).json({message: 'Admin Deleted'});
 });
 
+module.exports.deleteAdmins = asyncHandler(async(request, response, next) => {
+    await Admin.deleteMany();
+    return response.status(204).json("Admins Deleted From Database");
+})
+
 /**
  * @param {*} admin: The admin data
  * @param {*} statusCode: Represents the status code of the request

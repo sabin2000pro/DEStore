@@ -47,6 +47,11 @@ const orderSchema = new mongoose.Schema({
    description: {
        type: String,
        required: [true, 'please specify the description of the product']
+   },
+
+   product: {
+       type: mongoose.Schema.ObjectId,
+       ref: "Product"
    }
 
 });

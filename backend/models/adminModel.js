@@ -36,6 +36,11 @@ const adminSchema = new mongoose.Schema({
         enum: ['user', 'creator', 'editor']
     },
 
+    product: {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: "Product"
+    },
+
     passwordResetToken: String, // The password reset token for the admin.
     passwordResetExpires: Date // Expiry date for the password
 });

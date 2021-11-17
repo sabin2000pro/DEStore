@@ -57,8 +57,12 @@ const productSchema = new mongoose.Schema({ // The Product Description
 
     colour: {
         type: String
+    },
+
+    admin: {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: "Admin"
     }
-    
 
 });
 

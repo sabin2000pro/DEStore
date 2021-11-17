@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Header = () => {
+const Header = () => { // Header component for DE-Store
     return (
         <div>
             

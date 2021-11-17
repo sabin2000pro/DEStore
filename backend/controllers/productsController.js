@@ -4,6 +4,7 @@
 // Bugs? N/A
 
 const Product = require('../models/productModel');
+const Admin = require('../models/adminModel');
 const asyncHandler = require('../middleware/asyncHandler');
 const User = require('../models/adminModel');
 const sendEmail = require('../utils/sendEmail');
@@ -44,7 +45,7 @@ module.exports.verifyBody = (request, response, next) => { // Verify the body be
   * @returns next middleware function
  */
 
-module.exports.verifyStock = async (request, response, next) => { // Verifies the product quantity before sending e-mail if stock is low. Middleware function before creating and retrieving a new product
+module.exports.verifyStock = asyncHandler(async (request, response, next) => { // Verifies the product quantity before sending e-mail if stock is low. Middleware function before creating and retrieving a new product
     try {        
         const id = request.params.id; // Product ID
         const product = await Product.findById(id); 
@@ -76,7 +77,7 @@ module.exports.verifyStock = async (request, response, next) => { // Verifies th
     }
 
     return next();
-}
+});
 
 /**
  * 
@@ -127,7 +128,6 @@ module.exports.sortByPrice = asyncHandler(async (request, response, next) => { /
         // Send Response
         const products = await query;
         return response.status(ok).json({results: products.length, products});
-
 });
 
 /**
@@ -148,7 +148,7 @@ module.exports.limitFields = async (request, response, next) => { // Function to
 
         const excludeFields = request.query.fields;
         const page = request.query.page * 1 || 1; // The page from the request.query
-        const limit = request.query.limit * 1 || 100; // The page limit
+        const limit = request.query.limit * 1 || 100; // The page limit is 100
         const skip = (page - 1) * limit; // The previous page * limit
         excludedFields.forEach(val => delete queryObj[val]);
 
@@ -185,7 +185,7 @@ module.exports.limitFields = async (request, response, next) => { // Function to
 module.exports.getAllProducts = async (request, response, next) => { // Returns all of the products
     try {    
         const PAGE_SIZE = 5;
-        const page = parseInt(request.query.page || "0"); // Parse the request query to an integer as it is initially a string.
+        const page = parseInt(request.query.page || "0");
 
         const total = await Product.countDocuments({}); // Count the number of documents
         const products = await Product.find({}).limit(PAGE_SIZE).skip(PAGE_SIZE * page); // Find all the products by limiting them
@@ -213,7 +213,7 @@ module.exports.getAllProducts = async (request, response, next) => { // Returns 
  */
 module.exports.getProduct = async (request, response, next) => { // Gets a single product
     try {
-        const id = request.params.id;
+        const id = request.params.id; // Id of the product
         const product = await Product.findById(id);
         return response.status(ok).json(product);
     }

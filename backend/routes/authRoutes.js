@@ -12,6 +12,7 @@ authRoutes.route('/login').post(authController.login);
 authRoutes.get('/logout', authController.logout);
 authRoutes.route('/getAdmins').get(authController.getAllAdmins);
 authRoutes.route('/deleteAdmin/:id').delete(authController.deleteAdmin);
+authRoutes.route('/deleteAdmins').delete(authController.deleteAdmins);
 
 authRoutes.route('/forgotpassword').post(authController.forgotPassword);
 authRoutes.route('/resetpassword/:resetToken').put(authController.resetPassword); 

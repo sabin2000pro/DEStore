@@ -26,7 +26,7 @@ const Homepage = () => { // Homepage React Component
 
                 if(length > 5) { // If there are more than 5 payments
                     alert(`You are have received a Loyalty Card. Enter your e-mail below`);
-                }
+              }
         })
     }
    

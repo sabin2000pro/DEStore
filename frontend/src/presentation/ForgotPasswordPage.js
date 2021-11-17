@@ -9,7 +9,8 @@ const ForgotPasswordPage = () => {
 
     const forgotPasswordHandler = async (e) => { // Forgot Password Handler Function
         try {
-            e.preventDefault();
+
+            e.preventDefault(); // Prevent form re-submission
 
             const {data} = await axios.post(`http://localhost:5950/api/v1/auth/forgotpassword`, {email});
             setSuccess(data.data);
