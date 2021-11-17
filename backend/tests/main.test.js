@@ -49,7 +49,7 @@ describe('POST /api/v1/auth/register', () => { // Test Case 3
 describe('POST /api/v1/auth/login', () => {
     describe("Login a new admin with e-mail and password", () => { // Test Case 4
         test("Should respond with a 200 OK Status Code", async () => {
-            const response = await request(server).post('/api/v1/auth/login').send({email: "testagain@gmail.com", password: "testagain"});
+            const response = await request(server).post('/api/v1/auth/login').send({email: "adminman@gmail.com", password: "123mini123lol"});
             return expect(response.status).toBe(200);
         })
     })
@@ -65,7 +65,7 @@ describe('Test Case - Logout Successful by clearing cookie', () => {
 describe("POST - /api/v1/auth/forgotPassword", () => { // Test Case 5
     describe("Sends back a 200 OK STATUS CODE - Means the e-mail has been sent successfully", () => {
         test("Respond back with 200 OK Status Code", async () => {
-            const response = await request(server).post('/api/v1/auth/forgotPassword').send({email: "sabinlungu200@gmail.com"});
+            const response = await request(server).post('/api/v1/auth/forgotPassword').send({email: "adminman@gmail.com"});
             return expect(response.status).toBe(200);
         })
     })
