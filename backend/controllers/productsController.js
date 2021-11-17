@@ -177,7 +177,7 @@ module.exports.limitFields = async (request, response, next) => { // Function to
  * @param {*} request - Receives client request
  * @param {*} response - Server responds
  * @param {*} next 
- * @function getAllProducts() -> Retrieves all products from the database
+ * @function getAllProducts() -> Retrieves all products from the database by paginating the products. Displays 5 products per page by parsing the request query to an integer and counting the number of documents in the database
  * @description: This function is used to retrieve all of the stored products in the database
   * @returns next middleware function
  */
@@ -185,7 +185,7 @@ module.exports.limitFields = async (request, response, next) => { // Function to
 module.exports.getAllProducts = async (request, response, next) => { // Returns all of the products
     try {    
         const PAGE_SIZE = 5;
-        const page = parseInt(request.query.page || "0");
+        const page = parseInt(request.query.page || "0"); // Parse the request query to an integer as it is initially a string.
 
         const total = await Product.countDocuments({}); // Count the number of documents
         const products = await Product.find({}).limit(PAGE_SIZE).skip(PAGE_SIZE * page); // Find all the products by limiting them
@@ -206,7 +206,7 @@ module.exports.getAllProducts = async (request, response, next) => { // Returns 
  * @param {*} request - Receives client request
  * @param {*} response - Server responds
  * @param {*} next 
- * @function getProduct() -> Retrieves all of the products from the database
+ * @function getProduct() -> Retrieves a single product from the database by passing it an ID in the URL
  * @type: Asynchronous Function
  * @description: This function verifies the request body before submitting the data
   * @returns next middleware function
