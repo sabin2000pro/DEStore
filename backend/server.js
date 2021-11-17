@@ -8,7 +8,6 @@
 const express = require('express');
 const mongoSanitize = require('express-mongo-sanitize');
 const cookieParser = require('cookie-parser');
-const rateLimit = require('express-rate-limit');
 const hpp = require('hpp');
 const session = require('express-session');
 const helm = require('helmet');
@@ -47,12 +46,6 @@ app.use(session({
     }
   }));
 
-  const limiter = rateLimit({
-   windowMs: 20 * 60 * 1000, // 20 Minutes
-   max: 20
-});
-
-app.use(limiter);
 
   // Call function to connect to the database
 connectDB();
