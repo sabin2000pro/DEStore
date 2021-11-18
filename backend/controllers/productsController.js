@@ -106,11 +106,10 @@ module.exports.validateQuantity = asyncHandler(async (request, response, next) =
  * @param {*} request - Receives client request
  * @param {*} response - Server responds
  * @param {*} next 
- * @function getAllProducts() -> Retrieves all products from the database
+ * @function sortByPrice() - Sorts the products in either ascending or descending order. The query objects are extracted from the request and they are parsed into JSON format. If a sort query is found then send a sort query
  * @description: This function is used to retrieve all of the stored products in the database
   * @returns next middleware function
  */
-
 
 module.exports.sortByPrice = asyncHandler(async (request, response, next) => { // Sort Products By price
  
@@ -140,15 +139,15 @@ module.exports.sortByPrice = asyncHandler(async (request, response, next) => { /
   * @returns next middleware function
  */
 
-module.exports.limitFields = async (request, response, next) => { // Function to limit fields
-    try {
-
-        const queryObj = {...request.query}; // The query object
-        const excludedFields = ['limit', 'fields'];
-
+module.exports.limitFields = asyncHandler(async (request, response, next) => { // Function to limit fields
+    
+        const queryObj = {...request.query};
         const excludeFields = request.query.fields;
+        const excludedFields = ['limit', 'fields']; // Fields to exclude out
+
         const page = request.query.page * 1 || 1; // The page from the request.query
         const limit = request.query.limit * 1 || 100; // The page limit is 100
+
         const skip = (page - 1) * limit; // The previous page * limit
         excludedFields.forEach(val => delete queryObj[val]);
 
@@ -157,20 +156,13 @@ module.exports.limitFields = async (request, response, next) => { // Function to
         query = query.skip(skip).limit(limit);
 
         if(excludeFields) { // If there is a limit parameter
-            const fields = request.query.fields.split(',').join(" ");
+            const fields = request.query.fields.split(',').join(" "); // Split them by a comma and join by space
             query = query.select(fields);
         }
 
         const products = await query;
-        return response.status(200).json({results: products.length, products, hasProducts: products.length > 0});
-    } 
-    
-    catch(error) {
-        if(error) {
-            return response.status(serverError).json({message: 'Request Failed', error: error.toString()});
-        }
-    }
-}
+        return response.status(ok).json({results: products.length, products, hasProducts: products.length > 0});
+});
 
 /**
  * 
@@ -182,24 +174,15 @@ module.exports.limitFields = async (request, response, next) => { // Function to
   * @returns next middleware function
  */
 
-module.exports.getAllProducts = async (request, response, next) => { // Returns all of the products
-    try {    
-        const PAGE_SIZE = 5;
-        const page = parseInt(request.query.page || "0");
+module.exports.getAllProducts = asyncHandler(async (request, response, next) => { // Returns all of the products
+   
+        const PAGE_SIZE = 5; // 5 products per page
+        const page = parseInt(request.query.page || "0"); // Convert the request query into a string
 
         const total = await Product.countDocuments({}); // Count the number of documents
         const products = await Product.find({}).limit(PAGE_SIZE).skip(PAGE_SIZE * page); // Find all the products by limiting them
         return response.status(ok).json({products, total: Math.ceil(total / PAGE_SIZE)});
-    } 
-    
-    catch(error) {
-
-        if(error) {
-            return response.status(serverError).json({message: 'Request Failed', error});
-        }
-
-    }
-};
+});
 
 /**
  * 
@@ -211,21 +194,12 @@ module.exports.getAllProducts = async (request, response, next) => { // Returns 
  * @description: This function verifies the request body before submitting the data
   * @returns next middleware function
  */
-module.exports.getProduct = async (request, response, next) => { // Gets a single product
-    try {
-        const id = request.params.id; // Id of the product
-        const product = await Product.findById(id);
-        return response.status(ok).json(product);
-    }
+module.exports.getProduct = asyncHandler(async (request, response, next) => { // Gets a single product
     
-    catch(error) {
-        
-        if(error) {
-            return response.status(serverError).json({message: 'Request Failed', error});
-        }
-        
-    }
-};
+    const id = request.params.id; // Id of the product
+    const product = await Product.findById(id);
+    return response.status(ok).json(product);
+});
 
 /**
  * 

@@ -55,19 +55,19 @@ module.exports.login = asyncHandler(async (request, response, next) => {
             return response.status(badRequest).json({message: "Please provide your e-mail and password before logging in"});
         }
 
-        const admin = await Admin.findOne({email}).select('+password'); // Find an admin by the e-mail
+        const admin = await Admin.findOne({email}).select('+password'); 
 
         if(!admin) {
             return response.status(badRequest).json({message: 'No admin found with that e-mail address'});
         }
 
-        const isPasswordMatch = await admin.comparePasswords(password); // Returns true or false if passwords match or not
+        const isPasswordMatch = await admin.comparePasswords(password); 
 
         if(!isPasswordMatch) { // If passwords don't match
             return response.status(badRequest).json({message: "Passwords do not match. Check your entries"});
         }
 
-        return sendToken(admin, ok, response); // Send back JSON token. Used to log in the user
+        return sendToken(admin, ok, response); 
 });
 
 /**
@@ -75,7 +75,7 @@ module.exports.login = asyncHandler(async (request, response, next) => {
  * @param {*} request - Receives client request
  * @param {*} response - Server responds
  * @param {*} next 
- * @function forgotPassword()
+ * @function forgotPassword() - Middleware function invoked when admin forgets password. The function 
  * @description: This function verifies the request body before submitting the data
   * @returns next middleware function
  */
@@ -117,7 +117,6 @@ module.exports.resetPassword = asyncHandler(async (request, response, next) => {
 
         const resetToken = request.params.resetToken; // Stores the reset token from the param
         const passwordBody = request.body.password; // The new password
-        let passwordReset = false;
 
         const passwordResetToken = crypto.createHash("sha256").update(resetToken).digest('hex'); // Create reset password token
         const admin = await Admin.findOne({passwordResetToken, passwordResetExpires: {$gt: Date.now()}});
@@ -128,9 +127,9 @@ module.exports.resetPassword = asyncHandler(async (request, response, next) => {
 
         admin.password = passwordBody; // Update the password by setting the admin password to the new password
         admin.passwordResetToken = undefined; // Set the reset token to undefined
-        admin.passwordResetExpires = undefined; // Clear out the expiry date of the token - no longer valid
+        admin.passwordResetExpires = undefined;
 
-        await admin.save(); // Save the admin to the database
+        await admin.save(); 
         passwordReset = true;
         return response.status(created).json({success: true, data: "Password Reset Success"});
 });
