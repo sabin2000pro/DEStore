@@ -83,7 +83,7 @@ module.exports.login = asyncHandler(async (request, response, next) => {
 module.exports.forgotPassword = asyncHandler(async (request, response, next) => { // Forgot Password Function
     
        const {email} = request.body; // Extract the e-mail from the body
-        const admin = await Admin.findOne({email}); // Find an admin by the e-mail address
+       const admin = await Admin.findOne({email}); // Find an admin by the e-mail address
 
         if(!email) { // If no e-mail found in the database
             return response.status(notFound).json({message: 'E-mail could not be sent. No admin found with that e-mail address'});
@@ -100,7 +100,6 @@ module.exports.forgotPassword = asyncHandler(async (request, response, next) => 
         // Send E-mail using Nodemailer
         await sendEmail({to: admin.email, subject: "Password Reset Request", text: resetMessage});
         return response.status(ok).json({success: true, data: "E-mail sent"});
-
 });
 
 /**
@@ -116,7 +115,7 @@ module.exports.forgotPassword = asyncHandler(async (request, response, next) => 
 module.exports.resetPassword = asyncHandler(async (request, response, next) => { // Middleware function to reset the Admin Password
 
         const resetToken = request.params.resetToken; // Stores the reset token from the param
-        const passwordBody = request.body.password; // The new password
+        const passwordBody = request.body.password; // The new password in the body of the request
 
         const passwordResetToken = crypto.createHash("sha256").update(resetToken).digest('hex'); // Create reset password token
         const admin = await Admin.findOne({passwordResetToken, passwordResetExpires: {$gt: Date.now()}});
@@ -136,12 +135,12 @@ module.exports.resetPassword = asyncHandler(async (request, response, next) => {
 
 module.exports.logout = asyncHandler(async(request, response, next) => {
      // Take the cookie and set it to null
-     response.cookie('token', undefined, {
+      response.cookie('token', undefined, {
         expires: new Date(Date.now() + 10 * 1000),
         httpOnly: true
     });
 
-    return response.status(200).json({success: true, data: {}});
+    return response.status(ok).json({success: true, data: {}});
 });
 
 /**
@@ -266,7 +265,6 @@ const sendToken = (admin, statusCode, response) => { // Sends back the JSON Web 
     if(process.env.NODE_ENV === 'production') {
         options.secure = true;
     }
-
-
+    
     return response.status(statusCode).cookie('token', token, options).json({success: true, token});
 }
