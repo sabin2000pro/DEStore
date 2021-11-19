@@ -3,6 +3,16 @@ const asyncHandler = require('./asyncHandler');
 const jwt = require('jsonwebtoken');
 const unauthorized = 401;
 
+/**
+ * 
+ * @param {*} request - Receives client request
+ * @param {*} response - Server responds
+ * @param {*} next 
+ * @function protect() - Resets the password of the admin.
+ * @description: This function verifies the request body before submitting the data
+  * @returns next middleware function
+ */
+
 module.exports.protectProducts = asyncHandler(async (request, response, next) => { // Middleware function to only grant registered admins the right to create, update and delete products
 
         let token; // The JSON web token
@@ -31,3 +41,9 @@ module.exports.protectProducts = asyncHandler(async (request, response, next) =>
         request.admin = admin;
         return next();
 });
+
+module.exports.authorize = (...roles) => { // Authorize users on specific roles
+    return (request, response, next) => {
+
+    }
+}

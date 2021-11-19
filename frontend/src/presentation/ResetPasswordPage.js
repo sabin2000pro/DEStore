@@ -26,7 +26,7 @@ const ResetPasswordPage = ({match}) => { // Reset Password Page Component
                 return setError("Passwords don't match");
             }
 
-            const {data} = await axios.put(`http://localhost:5950/api/v1/auth/resetpassword/${match.params.resetToken}`, {password});
+            const {data} = await axios.put(`http://localhost:5950/api/v1/auth/resetpassword/${match.params.resetToken}`, {password}); // Send put request to the back-end with the reset token and new password
             console.log(data.data);
 
             setSuccess(data.data);

@@ -13,7 +13,6 @@ const created = 201;
 const deleted = 204;
 const badRequest = 400;
 const notFound = 404;
-const serverError = 500;
 
 /**
  * 
@@ -42,7 +41,7 @@ module.exports.register = asyncHandler(async (request, response, next) => { // R
  * @param {*} request - Receives client request
  * @param {*} response - Server responds
  * @param {*} next 
- * @function login()
+ * @function login() - Back-end middleware function that allows an admin to login with e-mail and password. Before logging in, an admin is retrieved by e-mail and the passwords are compared to make sure they match, if passwords do not match, then an error is returned
  * @description: This function logs in a user to the application
   * @returns next middleware function
  */
@@ -75,7 +74,7 @@ module.exports.login = asyncHandler(async (request, response, next) => {
  * @param {*} request - Receives client request
  * @param {*} response - Server responds
  * @param {*} next 
- * @function forgotPassword() - Middleware function invoked when admin forgets password. The function 
+ * @function forgotPassword() - Middleware function invoked when admin forgets password. The function finds an admin by e-mail and generates a reset password token that is sent by e-mail to the admin
  * @description: This function verifies the request body before submitting the data
   * @returns next middleware function
  */
@@ -85,13 +84,13 @@ module.exports.forgotPassword = asyncHandler(async (request, response, next) => 
        const {email} = request.body; // Extract the e-mail from the body
        const admin = await Admin.findOne({email}); // Find an admin by the e-mail address
 
-        if(!email) { // If no e-mail found in the database
+        if(!email) {
             return response.status(notFound).json({message: 'E-mail could not be sent. No admin found with that e-mail address'});
         }
 
-        const resetToken = admin.getResetPasswordToken(); // Extract the password reset token from the model
+        const resetToken = admin.getResetPasswordToken(); 
         await admin.save();
-        const resetURL = `http://localhost:3000/passwordreset/${resetToken}`; // The Reset Password URL LINK
+        const resetURL = `http://localhost:3000/passwordreset/${resetToken}`; 
 
         const resetMessage = `<h1> You have requested a new password reset</h1>
             <p> Please go to this link to reset your password </p>
@@ -107,7 +106,7 @@ module.exports.forgotPassword = asyncHandler(async (request, response, next) => 
  * @param {*} request - Receives client request
  * @param {*} response - Server responds
  * @param {*} next 
- * @function verifyBody()
+ * @function resetPassword() - Resets the password of the admin.
  * @description: This function verifies the request body before submitting the data
   * @returns next middleware function
  */
@@ -132,6 +131,16 @@ module.exports.resetPassword = asyncHandler(async (request, response, next) => {
         passwordReset = true;
         return response.status(created).json({success: true, data: "Password Reset Success"});
 });
+
+/**
+ * 
+ * @param {*} request - Receives client request
+ * @param {*} response - Server responds
+ * @param {*} next 
+ * @function logout() - Logs out an admin by clearing the JSON WEB TOKEN in the cookie. 
+ * @description: This function verifies the request body before submitting the data
+  * @returns next middleware function
+ */
 
 module.exports.logout = asyncHandler(async(request, response, next) => {
      // Take the cookie and set it to null
@@ -249,7 +258,7 @@ module.exports.deleteAdmins = asyncHandler(async(request, response, next) => {
  * @param {*} admin: The admin data
  * @param {*} statusCode: Represents the status code of the request
  * @param {*} next: Next middleware function
- * @function sendToken()
+ * @function sendToken() - Retrieves the generated JSON web token from the admin model and stores it in the cookie that has an expiration
  * @description: This function signs a unique JSON Web token when Store managers register and login
   * @returns The response with the generated token
  */
@@ -265,6 +274,6 @@ const sendToken = (admin, statusCode, response) => { // Sends back the JSON Web 
     if(process.env.NODE_ENV === 'production') {
         options.secure = true;
     }
-    
+
     return response.status(statusCode).cookie('token', token, options).json({success: true, token});
 }
