@@ -75,12 +75,15 @@ describe('Testing Suite for DE-Store', () => {
         cy.visit('http://localhost:3000/forgotpassword');
     })
 
-    it.only('Forgot Password Page Tests', () => {
+    it('Forgot Password Page Tests', () => {
         cy.visit('http://localhost:3000/forgotpassword');
         cy.contains('Forgot Password').should('exist');
         cy.url().should('include', '/forgotpassword');
         cy.get('form[method=POST]').should('exist');
         cy.get('.forgot__box').get('label[for=email]').contains('E-mail Address').should('exist');
+        cy.get('button[type=submit]').click();
+        cy.get('label[for=email]').type('email@testemail.com').should('exist');
+
     })
 
 })
