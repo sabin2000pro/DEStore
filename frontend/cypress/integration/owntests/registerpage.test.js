@@ -7,6 +7,11 @@ describe('Test Suite 1', () => {
         cy.contains('Homepage');
     });
 
+    it('View Products page Tests', () => {
+        cy.visit('http://localhost:3000/productslist');
+        cy.contains('View Products').click().should('exist');
+    })
+
     it('Register Page Tests', () => { // Test that page has existing title
         cy.visit('http://localhost:3000/register');
         cy.contains('Store Manager Registration').should('have.text', 'Store Manager Registration');
