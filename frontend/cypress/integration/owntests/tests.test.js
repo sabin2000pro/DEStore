@@ -41,7 +41,7 @@ describe('Testing Suite for DE-Store', () => {
     });
 
     it('Register Page Typing Tests Should Work Fine', () => {
-
+        cy.visit('http://localhost:3000/register');
     });
 
     it('Login Page Typing Tests Should Work Fine', () => {
