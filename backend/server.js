@@ -62,7 +62,7 @@ const server = app.listen(port, (error) => { // Creates the Server
     }
 
     else {
-        console.log(`Could not listen for requests on port ${port}`);
+        console.log(`Could for requests on port ${port}`);
     }
 });
 
