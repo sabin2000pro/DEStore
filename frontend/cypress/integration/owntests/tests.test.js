@@ -42,6 +42,8 @@ describe('Testing Suite for DE-Store', () => {
 
     it('Register Page Typing Tests Should Work Fine', () => {
         cy.visit('http://localhost:3000/register');
+        cy.get('label').should('exist');
+        cy.get('.username__box').get('label').contains('Username').should('exist');
     });
 
     it('Login Page Typing Tests Should Work Fine', () => {

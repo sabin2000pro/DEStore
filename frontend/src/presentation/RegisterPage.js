@@ -61,7 +61,7 @@ const RegisterPage = () => { // Register Account Page Component
             <h1 className = "register__txt">Store Manager Registration</h1>
             <form onSubmit = {registerHandler}>
 
-                <div>
+                <div className = "username__box">
                     <label htmlFor = "username">Username:</label>
                     <input required id = "username" type = "text" placeholder = "Enter Username" value = {username} onChange = {(e) => {setUsername(e.target.value)}} />
                 </div>
