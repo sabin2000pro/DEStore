@@ -57,6 +57,13 @@ describe('Sort products in Descending Order', () => {
     })
 })
 
+describe('Limit 5 Products', () => {
+    test('Should respond back with a 200 OK Status Code and 5 products', async () => {
+        const response = await request(server).get('/api/v1/products/limitFields?limit=5').send();
+        return expect(response.status).toBe(ok);
+    })
+})
+
 describe('POST /api/v1/auth/login', () => {
     describe("Login a new admin with e-mail and password", () => { // Test Case 4
         test("Should respond with a 200 OK Status Code", async () => {
