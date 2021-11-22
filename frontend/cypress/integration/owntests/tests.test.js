@@ -44,6 +44,7 @@ describe('Testing Suite for DE-Store', () => {
         cy.visit('http://localhost:3000/register');
         cy.get('label').should('exist');
         cy.get('.username__box').get('label').contains('Username').should('exist');
+        cy.get('.email__box').get('label').contains('E-mail Address').should('exist');
     });
 
     it('Login Page Typing Tests Should Work Fine', () => {
@@ -64,7 +65,6 @@ describe('Testing Suite for DE-Store', () => {
         cy.contains('DE-Store Orders').should('have.text', 'DE-Store Orders')
 
         cy.contains('View Placed Orders').click();
-        cy.contains('Sale Offer').should('exist');
     })
 
 })
