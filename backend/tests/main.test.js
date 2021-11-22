@@ -41,9 +41,9 @@ describe('POST /api/v1/auth/login', () => {
 
 describe('Test Case - Logout Successful by clearing cookie', () => {
     test('Should respond with 200 OK status code', async () => {
-        const response = await request(server).get('/api/v1/auth/logout').send();
+        const response = await request(server).get('/api/v1/auth/logout').send(); // Send a GET request to logout
         return expect(response.status).toBe(ok);
-    })
+    });
 })
 
 describe("POST - /api/v1/auth/forgotPassword", () => { // Test Case 5
