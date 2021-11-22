@@ -73,7 +73,6 @@ module.exports.verifyStock = asyncHandler(async (request, response, next) => { /
         if(error) {
             return response.status(notFound).json({error: error.toString()})
         }
-        
     }
 
     return next();
@@ -141,7 +140,7 @@ module.exports.sortByPrice = asyncHandler(async (request, response, next) => { /
 
 module.exports.limitFields = asyncHandler(async (request, response, next) => { // Function to limit fields
     
-        const queryObj = {...request.query};
+        const queryObj = {...request.query}; // Extract request query objects
         const excludeFields = request.query.fields;
         const excludedFields = ['limit', 'fields']; // Fields to exclude out
 
@@ -176,12 +175,12 @@ module.exports.limitFields = asyncHandler(async (request, response, next) => { /
 
 module.exports.getAllProducts = asyncHandler(async (request, response, next) => { // Returns all of the products
    
-        const PAGE_SIZE = 5; // 5 products per page
-        const page = parseInt(request.query.page || "0"); // Convert the request query into a string
+    const PAGE_SIZE = 5; // 5 products per page
+    const page = parseInt(request.query.page || "0");
 
-        const total = await Product.countDocuments({}); // Count the number of documents
-        const products = await Product.find({}).limit(PAGE_SIZE).skip(PAGE_SIZE * page); // Find all the products by limiting them
-        return response.status(ok).json({products, total: Math.ceil(total / PAGE_SIZE)});
+    const total = await Product.countDocuments({});
+    const products = await Product.find({}).limit(PAGE_SIZE).skip(PAGE_SIZE * page); // Find all the products by limiting them
+    return response.status(ok).json({products, total: Math.ceil(total / PAGE_SIZE)});
 });
 
 /**
@@ -206,17 +205,17 @@ module.exports.getProduct = asyncHandler(async (request, response, next) => { //
  * @param {*} request - Receives client request
  * @param {*} response - Server responds
  * @param {*} next 
- * @function createProduct() - Middleware function that creates a new product on the server by passing it JSON data in the body
+ * @function createProduct() - Middleware function that creates a new product on the server by passing it JSON data in the body. A POST request is sent to the server
  * @description: This function verifies the request body before submitting the data
   * @returns next middleware function
  */
 
 module.exports.createProduct = asyncHandler(async (request, response, next) => { // Middleware function to create a product
-        const {name, image, description, price, priceDiscount, quantity, saleOffer, colour} = request.body; // Extract body data
-        const newProduct = new Product({name, image, description, price, priceDiscount, quantity, saleOffer, colour}); // Create a new product with the corresponding data
+    const {name, image, description, price, priceDiscount, quantity, saleOffer, colour} = request.body; // Extract body data
+    const newProduct = new Product({name, image, description, price, priceDiscount, quantity, saleOffer, colour}); // Create a new product with the corresponding data
 
-        await newProduct.save(); // Save the product in the database
-        return response.status(created).json("Product Created");
+    await newProduct.save(); // Save the product in the database
+    return response.status(created).json("Product Created");
 });
 
 /**
@@ -231,12 +230,12 @@ module.exports.createProduct = asyncHandler(async (request, response, next) => {
 
 module.exports.editProduct = asyncHandler(async (request, response, next) => { // Modifies a Product such as the price, description, URL
     
-       // const newPrice = request.body.newPrice;
+        const newPrice = request.body.newPrice;
         const newQty = request.body.newQty;
         const id = request.body.id;
 
         await Product.findById(id, (err, updatedProduct) => {
-            //updatedProduct.price = newPrice;
+            updatedProduct.price = newPrice;
             updatedProduct.quantity = newQty;
             updatedProduct.save();
 
@@ -259,31 +258,22 @@ module.exports.editProduct = asyncHandler(async (request, response, next) => { /
  * @param {*} request - Receives client request
  * @param {*} response - Server responds
  * @param {*} next 
- * @function verifyBody()
+ * @function deleteProduct() - SENDS a DELETE request to delete the product
  * @description: This function verifies the request body before submitting the data
   * @returns next middleware function
  */
 
-module.exports.deleteProduct = async (request, response, next) => { // Function that deletes a product
-    try {
+module.exports.deleteProduct = asyncHandler(async (request, response, next) => { // Function that deletes a product
         const id = request.params.id;
         const product = await Product.findByIdAndRemove(id).exec();
 
         const admin = await User.findOne(); // Find a user by e-mail address
-        let {quantity, name} = product;
+        let {quantity} = product;
 
         quantity--;
         const productDeletedMsg = `<h1>The product ${product} has been deleted from the inventory </h1>`;
         await sendEmail({to: admin, subject: "Product Deleted", text: productDeletedMsg});    
 
         return response.status(deleted).send(`Product Deleted - Quantity of this product is now ${quantity}`);
-    } 
-    
-    catch(error) {
 
-        if(error) {
-            return response.status(serverError).json({message: 'Request Failed', error: error.toString()});
-        }
-
-    }
-};
+});

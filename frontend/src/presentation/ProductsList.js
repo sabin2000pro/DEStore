@@ -27,10 +27,9 @@ const ProductsList = () => { // Component to Render all of the products on the s
                 return console.log(products);
             });
         }
-
        return fetchProducts();
-    }, [pageNumber]);
 
+    }, [pageNumber]);
 
     return (
 

@@ -113,7 +113,7 @@ module.exports.forgotPassword = asyncHandler(async (request, response, next) => 
 
 module.exports.resetPassword = asyncHandler(async (request, response, next) => { // Middleware function to reset the Admin Password
 
-        const resetToken = request.params.resetToken; // Stores the reset token from the param
+        const resetToken = request.params.resetToken;
         const passwordBody = request.body.password; // The new password in the body of the request
 
         const passwordResetToken = crypto.createHash("sha256").update(resetToken).digest('hex'); // Create reset password token

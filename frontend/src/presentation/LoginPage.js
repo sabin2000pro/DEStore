@@ -21,7 +21,7 @@ const LoginPage = () => {
            e.preventDefault();
            const {data} = await axios.post(`http://localhost:5950/api/v1/auth/login`, {email, password});
            
-           localStorage.setItem("authToken", data.token);
+           localStorage.setItem("authToken", data.token); // Store the token in local storage
            return history.push("/");
        } 
        
@@ -29,8 +29,8 @@ const LoginPage = () => {
 
         if(err) {
             return console.error(err);
+        } 
         }
-       }
     }
 
     return (
@@ -52,8 +52,7 @@ const LoginPage = () => {
 
                 <button type = "submit">Login </button>
                 <span>Need an account ? <Link to = "/register">Register Account</Link></span>
-
-
+                
             </form>
         </div>
     )

@@ -27,29 +27,10 @@ describe('GET /products', () => { // Test Case 1
     })
 });
 
-// * Test Passes
-describe('POST /products', () => { // Test Case 2
-    describe('Create a product given the name, image, description, price, quantity, saleOffer and colour', () => {
-        test("Should respond with a 201 status code", async () => {
-            const response = await request(server).post('/api/v1/products').send({name: "Test Product 6", "image": "https://i.ebayimg.com/images/g/PTgAAOSwWnpdNGeL/s-l500.jpg", "description": "A nice product", "price": 600.99, "quantity": 3, "saleOffer": "Buy 1 get 1 free", "colour": "Black"});
-            return expect(response.status).toBe(201);
-        })
-    })
-});
-
-describe('POST /api/v1/auth/register', () => { // Test Case 3
-    describe('Registering a new admin with e-mail, username and password', () => {
-        test("Should respond with a 201 created status code", async () => {
-            const response = await request(server).post('/api/v1/auth/register').send({username: "newtestlol", email: "newtestloll@gmail.com", password: "newtestloll"});
-            return expect(response.status).toBe(201);
-        })
-    })
-});
-
 describe('POST /api/v1/auth/login', () => {
     describe("Login a new admin with e-mail and password", () => { // Test Case 4
         test("Should respond with a 200 OK Status Code", async () => {
-            const response = await request(server).post('/api/v1/auth/login').send({email: "adminman@gmail.com", password: "123mini123lol"});
+            const response = await request(server).post('/api/v1/auth/login').send({email: "adminadmin@gmail.com", password: "123mini123"});
             return expect(response.status).toBe(200);
         })
     })
@@ -107,12 +88,14 @@ describe('Test Case - Admin LOGIN Missing E-mail And Password Log in', () => {
 
 describe('Test Case - Forgot Password Missing E-mail', () => {
     test("Should Respond with a Status Code of 400", async () => {
+        const notFound = 404;
         const bodyData = [{}];
 
-        for(const body of bodyData) {
+        for(const body of bodyData) { // Loop through the data
             const response = await request(server).post('/api/v1/auth/forgotPassword').send(body);
-            return expect(response.status).toBe(404);
+            return expect(response.status).toBe(notFound);
         }
+
     })
 });
 
@@ -129,11 +112,12 @@ describe('Test Case - Products missing name and description', () => { // Test Ca
 
  describe('Test Case - Forgot Password Invalid Data Type', () => {
     test('Should respond with a status code of 500', async () => {
-        const bodyData = [{"email": 349}]
+        const bodyData = [{"email": 349}];
+        const serverError = 500;
 
         for(const body of bodyData) {
             const response = await request(server).post('/api/v1/auth/forgotPassword').send(body);
-            return expect(response.status).toBe(500);
+            return expect(response.status).toBe(serverError);
         }
 
     })

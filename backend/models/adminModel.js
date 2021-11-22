@@ -54,7 +54,6 @@ adminSchema.pre('save', async function(next) { // Hash Admin Password before sav
     const salt = await bcrypt.genSalt(ROUNDS);
     this.password = await bcrypt.hash(this.password, salt); // hash the password
 
-    console.log(`Execution time: ${performance.now()} ms`);
 });
 
 adminSchema.methods.comparePasswords = function(password) { // Method to compare passwords before signing in

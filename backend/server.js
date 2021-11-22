@@ -72,8 +72,6 @@ process.on('uncaughtException', (error, promise) => {
         server.close();
         return process.exit(1);
     }
-
-
 });
 
 module.exports = server; // Export server

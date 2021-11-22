@@ -200,7 +200,6 @@ const AdminProductsPage = () => {
 
             <div>
                 <h1>Price Control</h1>
-
                 <label for = "editPrice">Edit Price:  </label>
                 <input type = "number" placeholder = "Enter New Price" onChange = {(e) => setNewPrice(e.target.value)} />
                 <button onClick = {() => updatePrice(product._id)} type = "submit">Edit Price</button>

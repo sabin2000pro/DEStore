@@ -42,8 +42,10 @@ module.exports.protectProducts = asyncHandler(async (request, response, next) =>
         return next();
 });
 
-module.exports.authorize = (...roles) => { // Authorize users on specific roles
+module.exports.authorize = (...roles) => {
     return (request, response, next) => {
+        if(!roles.includes(request.user.roles)) {
 
+        }
     }
 }
