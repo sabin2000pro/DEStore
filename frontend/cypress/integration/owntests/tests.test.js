@@ -1,6 +1,6 @@
 /// <reference types = "cypress" />
 
-describe('Test Suite 1', () => {
+describe('Testing Suite for DE-Store', () => {
 
     it('Homepage Tests', () => {
         cy.visit('http://localhost:3000/');
@@ -46,6 +46,9 @@ describe('Test Suite 1', () => {
 
     it('Login Page Typing Tests Should Work Fine', () => {
         cy.visit('http://localhost:3000/adminlogin');
+        cy.get('.email__label').type('email@testemail.com');
+        cy.get('.password__label').type('password');
+        cy.contains('Login').should('exist');
     })
 
     it('View Products Page Link Works', () => {

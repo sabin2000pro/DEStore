@@ -39,12 +39,12 @@ const LoginPage = () => {
             <form onSubmit = {loginHandler}>
 
                 <div>
-                    <label for = "email">E-mail Address</label>
+                    <label className = "email__label" for = "email">E-mail Address</label>
                     <input type = "email" required id = "email" placeholder = "Enter E-mail" value = {email} onChange = {(e) => {setEmail(e.target.value)}} tabIndex = {1} />
                 </div>
 
                 <div>
-                    <label for = "password">Password </label>
+                    <label className = "password__label" for = "password">Password </label>
                     <input type = "password" required id = "password" placeholder = "Enter Password" value = {password} onChange = {(e) => {setPassword(e.target.value)}} />
                 </div>
 
