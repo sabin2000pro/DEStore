@@ -23,7 +23,6 @@ const RegisterPage = () => { // Register Account Page Component
         if(localStorage.getItem("authToken")) { // If there is a token in local storage
             return history.push("/adminlogin"); // Redirect user to login
         }
-
     }
  
     const registerHandler = async (e) => { // Function to Register User

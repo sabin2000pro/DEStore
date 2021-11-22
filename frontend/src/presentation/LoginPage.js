@@ -50,9 +50,9 @@ const LoginPage = () => {
 
                 <a href = "/forgotpassword"> Forgot Password ? Reset Here </a>
 
-                <button type = "submit">Login </button>
+                <button type = "submit">Login</button>
                 <span>Need an account ? <Link to = "/register">Register Account</Link></span>
-                
+
             </form>
         </div>
     )
