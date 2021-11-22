@@ -67,4 +67,8 @@ describe('Testing Suite for DE-Store', () => {
         cy.contains('View Placed Orders').click();
     })
 
+    it('Visit /forgotpassword', () => {
+        cy.visit('http://localhost:3000/forgotpassword');
+    })
+
 })
