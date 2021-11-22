@@ -33,7 +33,7 @@ services:
   tests:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     volumes:
       - /app/node_modules
       - .:/app
