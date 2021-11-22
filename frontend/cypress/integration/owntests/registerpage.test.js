@@ -23,10 +23,16 @@ describe('Test Suite 1', () => {
     it('Login page Tests', () => {
         cy.visit('http://localhost:3000/adminlogin');
         cy.contains('Register Account').should('exist');
-        cy.contains('E-mail Address').should('exist');
         cy.contains('Forgot Password ? Reset Here').should('exist');
         cy.get('button').should('exist');
         cy.contains('Login').click();
-    })
+
+    });
+
+    it('Login Page Link Tests', () => {
+        cy.visit('http://localhost:3000/adminlogin');
+        cy.url().should('include', '/adminlogin');
+
+    });
 
 })
