@@ -39,8 +39,11 @@ const ForgotPasswordPage = () => {
         {success && <span>{success}</span>}
 
         <form method = "POST" onSubmit = {forgotPasswordHandler}>
+         <div className = "forgot__box">
             <label for = "email">E-mail Address: </label>
             <input type = "email" required id = "email" placeholder = "Enter E-mail Address" onChange = {(e) => {setEmail(e.target.value)}} />
+        </div>
+           
 
             <button type="submit">Send Email</button>
         </form>

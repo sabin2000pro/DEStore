@@ -48,6 +48,7 @@ describe('Testing Suite for DE-Store', () => {
         cy.get('.email__box').get('label').contains('E-mail Address').should('exist');
         cy.get('.email__label').type('email@testemail.com');
         cy.get('.password__box').get('label[for=password]').contains('Password').should('exist');
+        cy.get('.confirm__passwordbox').get('label[for=confirmpassword]').contains('Confirm Password').should('exist');
     });
 
     it('Login Page Typing Tests Should Work Fine', () => {
@@ -72,6 +73,14 @@ describe('Testing Suite for DE-Store', () => {
 
     it('Visit /forgotpassword', () => {
         cy.visit('http://localhost:3000/forgotpassword');
+    })
+
+    it.only('Forgot Password Page Tests', () => {
+        cy.visit('http://localhost:3000/forgotpassword');
+        cy.contains('Forgot Password').should('exist');
+        cy.url().should('include', '/forgotpassword');
+        cy.get('form[method=POST]').should('exist');
+        cy.get('.forgot__box').get('label[for=email]').contains('E-mail Address').should('exist');
     })
 
 })
