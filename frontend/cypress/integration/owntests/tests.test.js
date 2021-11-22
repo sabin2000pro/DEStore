@@ -2,9 +2,8 @@
 
 describe('Test Suite 1', () => {
 
-    it('We have correct page title', () => {
-        cy.visit('http://localhost:3000');
-        cy.contains('Homepage');
+    it('Homepage Tests', () => {
+        cy.visit('http://localhost:3000/');
     });
 
     it('View Products page Tests', () => {
@@ -23,7 +22,6 @@ describe('Test Suite 1', () => {
         cy.get('.register__txt').should('exist');
 
         cy.get('label').should('exist');
-        cy.get('input').should('exist');
         cy.get('.input__fields').should('exist');
     })
 
@@ -32,6 +30,7 @@ describe('Test Suite 1', () => {
         cy.contains('Register Account').should('exist');
         cy.contains('Forgot Password ? Reset Here').should('exist');
         cy.get('button').should('exist');
+        cy.log('Going to Login');
         cy.contains('Login').click();
 
     });
@@ -44,6 +43,15 @@ describe('Test Suite 1', () => {
     it('View Products Page Link Works', () => {
         cy.visit('http://localhost:3000/productslist');
         cy.url().should('include', '/productslist')
+    });
+
+    it('Accounting Page Tests', () => {
+        cy.visit('http://localhost:3000/accounting');
+        cy.contains('Accounting Analysis').should('exist');
+        cy.contains('DE-Store Orders').should('have.text', 'DE-Store Orders')
+
+        cy.contains('View Placed Orders').click();
+        cy.contains('Sale Offer').should('exist');
     })
 
 })
