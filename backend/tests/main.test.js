@@ -10,6 +10,9 @@ const server = require('../server');
 const Admin = require('../models/adminModel');
 const Product = require('../models/productModel');
 
+const ok = 200;
+const badRequest = 400;
+
 // * Test Passes
 beforeAll(async() => { // Test DB connection
     const url = 'mongodb+srv://sabin2000:123mini123@cluster0.sjkmj.mongodb.net/destore?retryWrites=true&w=majority';
@@ -22,7 +25,7 @@ describe('GET /products', () => { // Test Case 1
         test('Should respond with a 200 status code', async () => {
 
             const response = await request(server).get('/api/v1/products').send(); // Send over the request to the server
-            return expect(response.status).toBe(200); // Send back response
+            return expect(response.status).toBe(ok); // Send back response
         })
     })
 });
@@ -31,7 +34,7 @@ describe('POST /api/v1/auth/login', () => {
     describe("Login a new admin with e-mail and password", () => { // Test Case 4
         test("Should respond with a 200 OK Status Code", async () => {
             const response = await request(server).post('/api/v1/auth/login').send({email: "adminadmin@gmail.com", password: "123mini123"});
-            return expect(response.status).toBe(200);
+            return expect(response.status).toBe(ok);
         })
     })
 });
@@ -39,7 +42,7 @@ describe('POST /api/v1/auth/login', () => {
 describe('Test Case - Logout Successful by clearing cookie', () => {
     test('Should respond with 200 OK status code', async () => {
         const response = await request(server).get('/api/v1/auth/logout').send();
-        return expect(response.status).toBe(200);
+        return expect(response.status).toBe(ok);
     })
 })
 
@@ -47,7 +50,7 @@ describe("POST - /api/v1/auth/forgotPassword", () => { // Test Case 5
     describe("Sends back a 200 OK STATUS CODE - Means the e-mail has been sent successfully", () => {
         test("Respond back with 200 OK Status Code", async () => {
             const response = await request(server).post('/api/v1/auth/forgotPassword').send({email: "adminman@gmail.com"});
-            return expect(response.status).toBe(200);
+            return expect(response.status).toBe(ok);
         })
     })
 })
@@ -57,7 +60,7 @@ describe('GET /admins', () => { // Test Case 3 - Returns all of the admins - TES
     describe('Should return all of the Admins in the database', () => {
         test('Admin Test - Should response with a 200 status code', async () => {
             const response = await request(server).get('/api/v1/auth/getAdmins').send();
-            return expect(response.status).toBe(200);
+            return expect(response.status).toBe(ok);
         })
     })
 });
@@ -70,7 +73,7 @@ describe('Test Case - Admin REGISTER missing E-mail and password', () => { // Te
 
         for (const body of bodyData) { // For every value in the body data array of objects
             const response = await request(server).post('/api/v1/auth/register').send(body);
-            return expect(response.status).toBe(400);
+            return expect(response.status).toBe(badRequest);
         }
     })
 });
@@ -81,14 +84,13 @@ describe('Test Case - Admin LOGIN Missing E-mail And Password Log in', () => {
 
         for(const body of bodyData) {
             const response = await request(server).post('/api/v1/auth/login').send(body);
-            return expect(response.status).toBe(400);
+            return expect(response.status).toBe(badRequest);
         }
     })
 })
 
 describe('Test Case - Forgot Password Missing E-mail', () => {
-    test("Should Respond with a Status Code of 400", async () => {
-        const notFound = 404;
+    test("Should Respond with a Status Code of 404", async () => {
         const bodyData = [{}];
 
         for(const body of bodyData) { // Loop through the data
@@ -100,7 +102,7 @@ describe('Test Case - Forgot Password Missing E-mail', () => {
 });
 
 describe('Test Case - Products missing name and description', () => { // Test Case 5
-    test("Should respond with a status code of 400", async () => {
+    test("Should respond with a status code of 404", async () => {
         const bodyData = [{}];
 
         for(const body of bodyData) {
@@ -113,7 +115,6 @@ describe('Test Case - Products missing name and description', () => { // Test Ca
  describe('Test Case - Forgot Password Invalid Data Type', () => {
     test('Should respond with a status code of 500', async () => {
         const bodyData = [{"email": 349}];
-        const serverError = 500;
 
         for(const body of bodyData) {
             const response = await request(server).post('/api/v1/auth/forgotPassword').send(body);
@@ -150,10 +151,11 @@ describe('Test Case - Admin Register - Invalid Username Data Type', () => {
 describe('Test Case - Admin Login - Invalid E-mail and Username Data Types', () => {
     test('Should respond with a 400 Bad Request Status Code', async () => {
         const bodyData = [{"email": 123, "password": 555}];
+        const badRequest = 400;
 
         for(const body of bodyData) {
             const response = await request(server).post('/api/v1/auth/login').send(body);
-            return expect(response.status).toBe(400);
+            return expect(response.status).toBe(badRequest);
         }
     })
 })
