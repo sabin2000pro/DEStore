@@ -23,6 +23,7 @@ describe('Testing Suite for DE-Store', () => {
 
         cy.get('label').should('exist');
         cy.get('.input__fields').should('exist');
+        cy.get('button[type=submit]').click();
     })
 
     it('Login page Tests', () => {
@@ -30,6 +31,7 @@ describe('Testing Suite for DE-Store', () => {
         cy.contains('Register Account').should('exist');
         cy.contains('Forgot Password ? Reset Here').should('exist');
         cy.get('button').should('exist');
+        cy.get('button[type=submit]').click();
         cy.log('Going to Login');
         cy.contains('Login').click();
     });
@@ -45,6 +47,7 @@ describe('Testing Suite for DE-Store', () => {
         cy.get('.username__box').get('label').contains('Username').should('exist');
         cy.get('.email__box').get('label').contains('E-mail Address').should('exist');
         cy.get('.email__label').type('email@testemail.com');
+        cy.get('.password__box').get('label[for=password]').contains('Password').should('exist');
     });
 
     it('Login Page Typing Tests Should Work Fine', () => {

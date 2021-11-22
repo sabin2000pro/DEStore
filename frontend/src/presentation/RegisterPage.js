@@ -71,12 +71,12 @@ const RegisterPage = () => { // Register Account Page Component
                     <input className = "input__fields" required id = "email" type = "email" placeholder = "Enter E-mail Address" value = {email} onChange = {(e) => {setEmail(e.target.value)}} />
                 </div>
 
-                <div>
+                <div className = "password__box">
                     <label htmlFor = "password">Password</label>
                     <input type = "password" required id = "password" placeholder = "Enter Password" value = {password} onChange = {(e) => {setPassword(e.target.value)}} />
                 </div>
 
-                <div>
+                <div className = "confirm__passwordbox">
                     <label htmlFor = "confirmpassword">Confirm Password </label>
                     <input type = "password" required id = "confirmpassword" placeholder = "Re-Enter Password" value = {confirmPassword} onChange = {(e) => {setConfirmPassword(e.target.value)}} />
                  </div>
