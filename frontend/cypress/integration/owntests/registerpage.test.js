@@ -9,7 +9,9 @@ describe('Test Suite 1', () => {
 
     it('View Products page Tests', () => {
         cy.visit('http://localhost:3000/productslist');
-        cy.contains('View Products').click().should('exist');
+        cy.contains('View Products').click();
+        cy.get('.search__input').should('exist');
+        cy.get('.search__input');
     })
 
     it('Register Page Tests', () => { // Test that page has existing title
@@ -37,7 +39,11 @@ describe('Test Suite 1', () => {
     it('Login Page Link Tests', () => {
         cy.visit('http://localhost:3000/adminlogin');
         cy.url().should('include', '/adminlogin');
-
     });
+
+    it('View Products Page Link Works', () => {
+        cy.visit('http://localhost:3000/productslist');
+        cy.url().should('include', '/productslist')
+    })
 
 })
