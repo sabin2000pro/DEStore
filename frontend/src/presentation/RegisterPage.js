@@ -67,7 +67,7 @@ const RegisterPage = () => { // Register Account Page Component
                 </div>
 
                 <div className = "email__box">
-                    <label htmlFor = "email">E-mail Address</label>
+                    <label className = "email__label" htmlFor = "email">E-mail Address</label>
                     <input className = "input__fields" required id = "email" type = "email" placeholder = "Enter E-mail Address" value = {email} onChange = {(e) => {setEmail(e.target.value)}} />
                 </div>
 

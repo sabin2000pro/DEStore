@@ -32,7 +32,6 @@ describe('Testing Suite for DE-Store', () => {
         cy.get('button').should('exist');
         cy.log('Going to Login');
         cy.contains('Login').click();
-
     });
 
     it('Login Page Link Tests', () => {
@@ -40,11 +39,12 @@ describe('Testing Suite for DE-Store', () => {
         cy.url().should('include', '/adminlogin');
     });
 
-    it('Register Page Typing Tests Should Work Fine', () => {
+    it('Register Page Tests II', () => {
         cy.visit('http://localhost:3000/register');
         cy.get('label').should('exist');
         cy.get('.username__box').get('label').contains('Username').should('exist');
         cy.get('.email__box').get('label').contains('E-mail Address').should('exist');
+        cy.get('.email__label').type('email@testemail.com');
     });
 
     it('Login Page Typing Tests Should Work Fine', () => {
