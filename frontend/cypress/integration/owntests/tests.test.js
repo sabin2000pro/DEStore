@@ -13,7 +13,7 @@ describe('Testing Suite for DE-Store', () => {
         cy.get('.search__input');
     })
 
-    it('Register Page Tests', () => { // Test that page has existing title
+    it('Register Page Tests Set I', () => { // Test that page has existing title
         cy.visit('http://localhost:3000/register');
         cy.contains('Store Manager Registration').should('have.text', 'Store Manager Registration');
         
@@ -26,7 +26,7 @@ describe('Testing Suite for DE-Store', () => {
         cy.get('button[type=submit]').click();
     })
 
-    it('Login page Tests', () => {
+    it('Login page Tests', () => { // Login Page Tests
         cy.visit('http://localhost:3000/adminlogin');
         cy.contains('Register Account').should('exist');
         cy.contains('Forgot Password ? Reset Here').should('exist');
@@ -41,7 +41,7 @@ describe('Testing Suite for DE-Store', () => {
         cy.url().should('include', '/adminlogin');
     });
 
-    it('Register Page Tests II', () => {
+    it('Register Page Tests Set II', () => {
         cy.visit('http://localhost:3000/register');
         cy.get('label').should('exist');
         cy.get('.username__box').get('label').contains('Username').should('exist');
@@ -83,7 +83,10 @@ describe('Testing Suite for DE-Store', () => {
         cy.get('.forgot__box').get('label[for=email]').contains('E-mail Address').should('exist');
         cy.get('button[type=submit]').click();
         cy.get('label[for=email]').type('email@testemail.com').should('exist');
+    })
 
+    it('Clear Local Storage', () => {
+        cy.clearLocalStorage();
     })
 
 })

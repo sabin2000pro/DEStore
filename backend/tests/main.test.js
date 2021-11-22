@@ -12,6 +12,8 @@ const Product = require('../models/productModel');
 
 const ok = 200;
 const badRequest = 400;
+const notFound = 404;
+const serverError = 500;
 
 // * Test Passes
 beforeAll(async() => { // Test DB connection
@@ -29,6 +31,31 @@ describe('GET /products', () => { // Test Case 1
         })
     })
 });
+
+describe('Updating a Product by sending PUT request', () => {
+    test('Should respond with a 200 OK Status Code - UPDATE PRODUCT', async () => {
+        const bodyData = [{id: "61938f592ee53fc5c53f8527", newQty: 3}];
+
+        for(const body of bodyData) {
+            const response = await request(server).put(`/api/v1/products/:id`).send(body);
+            return expect(response.status).toBe(ok);
+        }
+    })
+})
+
+describe('Sort Products in Ascending Order', () => {
+    test('Should respond with 200 OK Status Code and Prices in Ascending Order', async () => {
+        const response = await request(server).get('/api/v1/products/sortByPrice?sort=price').send();
+        return expect(response.status).toBe(ok);
+    })
+});
+
+describe('Sort products in Descending Order', () => {
+    test('Should respond with 200 OK Status Code and the Prices in Descending Order', async () => {
+        const response = await request(server).get('/api/v1/products/sortByPrice?sort=-price').send();
+        return expect(response.status).toBe(ok);
+    })
+})
 
 describe('POST /api/v1/auth/login', () => {
     describe("Login a new admin with e-mail and password", () => { // Test Case 4

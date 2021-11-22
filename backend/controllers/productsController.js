@@ -230,12 +230,12 @@ module.exports.createProduct = asyncHandler(async (request, response, next) => {
 
 module.exports.editProduct = asyncHandler(async (request, response, next) => { // Modifies a Product such as the price, description, URL
     
-        const newPrice = request.body.newPrice;
+       // const newPrice = request.body.newPrice;
         const newQty = request.body.newQty;
         const id = request.body.id;
 
         await Product.findById(id, (err, updatedProduct) => {
-            updatedProduct.price = newPrice;
+          //  updatedProduct.price = newPrice;
             updatedProduct.quantity = newQty;
             updatedProduct.save();
 
