@@ -56,8 +56,8 @@ adminSchema.pre('save', async function(next) { // Hash Admin Password before sav
 
 });
 
-adminSchema.methods.comparePasswords = function(password) { // Method to compare passwords before signing in
-    return bcrypt.compare(password, this.password); // Returns true or false if the passwords match
+adminSchema.methods.comparePasswords = async function(password) { // Method to compare passwords before signing in
+    return await bcrypt.compare(password, this.password); // Returns true or false if the passwords match
 }
 
 adminSchema.methods.getResetPasswordToken = function() { // Get the reset password token
