@@ -40,6 +40,14 @@ describe('Test Suite 1', () => {
         cy.url().should('include', '/adminlogin');
     });
 
+    it('Register Page Typing Tests Should Work Fine', () => {
+
+    });
+
+    it('Login Page Typing Tests Should Work Fine', () => {
+        cy.visit('http://localhost:3000/adminlogin');
+    })
+
     it('View Products Page Link Works', () => {
         cy.visit('http://localhost:3000/productslist');
         cy.url().should('include', '/productslist')
