@@ -88,9 +88,9 @@ module.exports.forgotPassword = asyncHandler(async (request, response, next) => 
             return response.status(notFound).json({message: 'E-mail could not be sent. No admin found with that e-mail address'});
         }
 
-        const resetToken = admin.getResetPasswordToken(); 
-        await admin.save();
-        const resetURL = `http://localhost:3000/passwordreset/${resetToken}`; 
+        const resetToken = admin.getResetPasswordToken(); // Get the generated reset token
+        await admin.save(); // Save the admin
+        const resetURL = `http://localhost:3000/passwordreset/${resetToken}`; // Create the reset URL & message
 
         const resetMessage = `<h1> You have requested a new password reset</h1>
             <p> Please go to this link to reset your password </p>

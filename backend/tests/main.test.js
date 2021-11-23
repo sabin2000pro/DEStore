@@ -141,7 +141,7 @@ describe('Test Case - Products missing name and description', () => { // Test Ca
 
         for(const body of bodyData) {
             const response = await request(server).post('/api/v1/products').send(body);
-            return expect(response.status).toBe(404);
+            return expect(response.status).toBe(notFound);
         }
     })
  })
@@ -176,7 +176,7 @@ describe('Test Case - Admin Register - Invalid Username Data Type', () => {
 
         for(const body of bodyData) {
             const response = await request(server).post('/api/v1/auth/register').send(body);
-            return expect(response.status).toBe(400);
+            return expect(response.status).toBe(badRequest);
         }
 
     })
@@ -185,7 +185,6 @@ describe('Test Case - Admin Register - Invalid Username Data Type', () => {
 describe('Test Case - Admin Login - Invalid E-mail and Username Data Types', () => {
     test('Should respond with a 400 Bad Request Status Code', async () => {
         const bodyData = [{"email": 123, "password": 555}];
-        const badRequest = 400;
 
         for(const body of bodyData) {
             const response = await request(server).post('/api/v1/auth/login').send(body);

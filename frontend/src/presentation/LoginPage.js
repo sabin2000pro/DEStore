@@ -29,7 +29,8 @@ const LoginPage = () => {
 
         if(err) {
             return console.error(err);
-        } 
+         } 
+         
         }
     }
 

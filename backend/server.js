@@ -58,11 +58,11 @@ app.all('*', (request, response, next) => {
 
 const server = app.listen(port, (error) => { // Creates the Server
     if(!error) {
-        console.log(`Listening for requests on port ${port}`);
+        return console.log(`Listening for requests on port ${port}`);
     }
 
     else {
-        console.log(`Could for requests on port ${port}`);
+        return console.error(`Could for requests on port ${port}`);
     }
 });
 
