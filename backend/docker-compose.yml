@@ -5,10 +5,10 @@ services:
   backend:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile # Dockerfile to run
     ports: 
       - "5950:5950"
-    volumes: 
+    volumes: # Volumes for web application to auto reload
       - /app/node_modules
       - .:/app
 

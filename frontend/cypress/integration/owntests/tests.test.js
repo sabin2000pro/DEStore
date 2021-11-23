@@ -1,4 +1,5 @@
 /// <reference types = "cypress" />
+// Cypress E2E Tests
 
 describe('Testing Suite for DE-Store', () => {
 
@@ -26,14 +27,14 @@ describe('Testing Suite for DE-Store', () => {
         cy.get('button[type=submit]').click();
     })
 
-    it('Login page Tests', () => { // Login Page Tests
+    it('Login page Tests', () => { // Login Page Set of Tests
         cy.visit('http://localhost:3000/adminlogin');
         cy.contains('Register Account').should('exist');
         cy.contains('Forgot Password ? Reset Here').should('exist');
         cy.get('button').should('exist');
-        cy.get('button[type=submit]').click();
+        cy.get('button[type=submit]').click(); // Click on a submit button
         cy.log('Going to Login');
-        cy.contains('Login').click();
+        cy.contains('Login').click(); // Clicks on login button.
     });
 
     it('Login Page Link Tests', () => {
@@ -85,6 +86,7 @@ describe('Testing Suite for DE-Store', () => {
         cy.get('label[for=email]').type('email@testemail.com').should('exist');
     })
 
+    // Clears local storage
     it('Clear Local Storage', () => {
         cy.clearLocalStorage();
     })
