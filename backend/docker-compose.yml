@@ -15,7 +15,7 @@ services:
   #: Docker service for the database. Parameters: Image, Restart, Ports, Volumes, Environment and Healthcheck
   database:
     image: mongo
-    restart: always
+    restart: always #: Always restart the database if an error occurs
     ports:
       - 27017:27017
     volumes:
@@ -23,7 +23,7 @@ services:
         source: mongodb_data_volume
         target: /data/db
 
-    environment:
+    environment: # MongoDB environment, specifies the username and password from the environment variables in config.env
       MONGO_INITDB_ROOT_USERNAME: process.env.MONGO_USERNAME
       MONGO_INITDB_ROOT_PASSWORD: process.env.MONGO_PASSWORD
     healthcheck:
@@ -32,7 +32,7 @@ services:
       timeout: 10s
       retries: 5
 
-  tests:
+  tests: # Tests Service
     build:
       context: .
       dockerfile: Dockerfile
